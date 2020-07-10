@@ -1,3 +1,1198 @@
 <html>
 
+<head>
+    <meta name="viewport" content="width=device-width" name="theme-color" content="#4285f4">
+    <link rel="shortcut icon" href="https://scontent-atl3-1.xx.fbcdn.net/v/t1.0-9/66105070_2606484239385650_1488724510487085056_n.jpg?_nc_cat=106&_nc_oc=AQnx7XRzS47pDYNv0h-dDfqV4kE07czctw5Vm7DOCPn0EMJa2QGEbh-PAJWE2tmrGyo&_nc_ht=scontent-atl3-1.xx&oh=6f6b09b8d92c3007c254fd5ba07f45d7&oe=5DA91A9C"
+    type="image/x-icon" />
+
+</head>
+ 
+<body >
+    <style>
+        body {
+            background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+            font-size: 30px;
+        }
+        #todo {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            transition: overflow-y 0.5s ease;
+        }
+        #ifr {
+            width: 100%;
+            height: 75%;
+            background: white;
+            border-radius: 15px;
+            display: none;
+        }
+        #ifrs {
+            width: 100%;
+            // height: 40%;
+            font-size: 25px;
+            border-radius: 15px;
+        }
+        .btns {
+            color: white;
+            font-weight: bold;
+            margin: 5px;
+            border-radius: 5px;
+            background: #000070;
+            font-size: 15px;
+            // font-weight: bold;
+            width: 45%;
+            height: 8%;
+        }
+        #ed {
+            background: rgba(0, 255, 0, .5);
+            color: white;
+            position: absolute;
+            top: 90%;
+            bottom: right: 5%;
+        }
+        #divrep {
+            font-size: 18px;
+            //position: absolute;
+            bottom: 2%;
+            width: 100%;
+            // height: 85%;
+            // background: white;
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: none;
+            border-radius: 15px;
+            padding: 5%;
+        }
+        #lirep {
+            background: black;
+            color: white;
+            width: 83%;
+            // height: 40%;
+            font-size: 16px;// font repertorio
+            font-weight: bold;
+            border-radius: 15px;
+            padding: 5%;
+            border-color: white;
+            border-style: double;
+            border-width: 10px;
+        }
+        .songs {
+            color: #50ff50;
+            font-weight: bold;
+            font-size: 25px;
+        }
+        .songsdone {
+            color: #50ff50;
+            font-weight: bold;
+            font-size: 25px;
+        }
+        .cind {
+            // color: #0ff000;
+            background: green;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        #titulo {
+            color: #0ff000;
+            background: blue;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        #logo {
+            position: absolute;
+            top: 1%;
+            right: 1%;
+            background: url(logo.jpg);
+            background-size: 100% 100%;
+            color: #ffffff;
+            font-weight: bold;
+            width: 48px;
+            height: 48px;
+            font-size: 30px;
+            border-radius: 8px;
+            // box-shadow: inset 0 0 20px #ffffff;
+            background-color: black;
+            // opacity: .65;
+            visibility: visible;
+        }
+        #ppr {
+            background: #0000FF;
+            color: #ffffff;
+            font-size:22px;
+            border-radius:100px;
+             box-shadow: inset 5px -5px 30px #000020, inset -5px 5px 30px #000088;
+            
+        }
+        #dle {
+            color: white;
+            display: none;
+            width: 95%;
+            height: 98%;
+            position: absolute;
+            padding: 20px;
+           // overflow: auto;
+            background: black;
+            border: solid;
+        }
+        #le {
+            padding: 15px;
+            color: black;
+            font-size: 17px;
+            width: 90%;
+            height: 90%;
+         //   overflow: auto;
+            
+           // border-style: solid;
+           border-radius:5px;
+            font-weight: bold;
+            background: #ffff;
+        //   box-shadow:inset 0 0 30px 4px #6666ff;
+          scroll-behavior: smooth;
+        }
+        #clle {
+            position: absolute;
+            bottom:42px;
+            left: 0%;
+            width:60%;
+            
+       
+            height:80px;
+            border-radius:10px;
+            background:rgba(0,150,0,.50);//#00aa00;
+            color:#ffffff;
+            font-size:20px;
+            font-weight:bold;
+            border-style:double;
+             box-shadow:inset 0 0 5px 1px #66aa66;   
+        }
+         #inicsld {
+            position: absolute;
+            bottom: 42px;
+            right: 42px;
+            width:80px;
+            height:80px;
+            border-radius:10px;
+            background:rgba(0,150,0,.50);//#00aa00;
+            color:#ffffff;
+            font-size:20px;
+            font-weight:bold;
+            border-style:double;
+                    box-shadow:inset 0 0 5px 1px #66aa66; 
+        }  
+ 
+        
+        #mainrep{
+             font-size:18px;
+            background:#aa0000;
+        }
+        #ref{
+            position:absolute;
+            background:transparent;
+            top:9%;
+            right:0%;
+            border:none;
+            font-size:36px;
+           // width:32px;
+           // height:30px;
+        }
+    #settings-dlg{
+        overflow:auto;
+        text-align:center;
+  position: absolute;
+  width:90%;
+  height: 90%;
+  background:coral;
+  color:blue;
+  font-size: 20px;
+  font-weight: bold;
+  left: 5%;
+  top: 5%;
+ // padding: 30px;
+  display: none;
+  text-align: center;
+  border-style:double;
+  border-radius:10px;
+
+
+}
+.btnsset{
+    font-size:20px;
+ color:blue;
+ margin: 20px;
+   text-align:center;
+}
+.divpicks{
+    border:solid;fornt-size:10px;
+    padding:15px;
+    color:white;
+    width:80%;
+     text-align:center;  
+}
+#bottonInic{
+    height:30%;
+    width: 60%;
+    color:white;
+    background:rgb(52, 109, 175);
+    border-radius:35px;
+    box-shadow: ;
+    font-size:35px;
+    font-weight:bold;
+    box-shadow: -15px 15px 26px  #335033, inset 10px -10px 7px #0c1fd1, inset -10px 10px 7px #1eb6e4bb;
+ 
+    </style>
+    <div id="dle">
+
+        <textarea id="le" readonly onscroll="movescroll(this.scrollHeight,this.scrollTop)" ></textarea  >
+        <button id="clle" onclick='x.src="";einicsld.style.background="rgba(0,150,0,.50)";einicsld.style.display="block";ele.value="";ele.scrollTo(0, 0);edle.style.display="none";clearInterval(scintervalo)'>Close</button>
+        <button id="inicsld"  onclick='clearInterval(scintervalo);inicScrolling();'>Start</button>
+   
+   
+    </div>  
+   <button id="logo" onclick="showsettings()">&#9881;</button>
+     <button id="ref" onclick="x.src='';sortear('');edc.scrollTop = 0;">&#9851;</button>
+ 
+    <div id="todo">
+ 
+
+        <form method="get" action="http://www.google.com/search" target="_blank" style="border:2px dotted white;padding:4px;width:80%;">
+
+            <div>
+                <table border="0" align="center" cellpadding="0">
+                    <tr>
+                        <td>
+                            <input id="barra" type="text" name="q" oninput="sortear(this.value)" style=" font-size:20px;width:65%;" placeholder="Write a song..." />
+                            <input id="srch" type="submit" '_blank' style="display:none" />
+                            <button onclick="getletra()" style=" background:red;color:white;width:30%;font-size:20px;border-radius:10px;">Letra</button>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </form>
+
+
+
+        <div id="ctrls">
+            <button class="btns"  id="ppr" onclick='opendoc( "repPrac")'>. *NOTES* .</button>
+            <button id="mainrep" class=btns onclick='opendoc( "rep")'>. Repertorio .</button>
+            <button class="btns" onclick='opendoc( "open rep")'>Repertorio Mix.</button>
+         <button class="btns" onclick='sortearTocada()'>Repertorio Tocada</button>  
+
+        </div>
+        <div id=ifrs>
+
+
+
+            <div id="dsr">
+
+                <form action="http://google.com/search" target="_blank" style="display:none">
+                    <input name="q" oninput="sortear(this.value)">
+                    <input type="submit">
+                </form>
+
+
+
+            </div>
+        </div>
+        <iframe id="ifr"></iframe>
+
+        <div id="divrep"></div>
+        <div id="bclas"></div>
+        <p id="titulo"></p>
+        <div id="lirep">
+
+        </div>
+    </div>
+   <div id="settings-dlg">
+        <button class="btest" onclick="testmode();">*Test Mode*</button>
+ <button class="btnsset" onclick="resetTocada();">*Recet Tocada*</button>
+   <button class="btnsset" onclick="settingUpTocada()">Set a Tocada</button>
+   
+<br>
+
+
+    <button id="bottonInic" class="btnsset" onclick="inicTocada()">Empesar<br><label id="hh">Primer Hora</label></button>  
+    <br>
+    <button id="finish" class="btnsset" onclick="finish()">Terminar Tocada</button>  
+    <br>
+  
+<button id="bchfont" onclick="ChFont()" class="btnsset">Change Font Size</button><br>
+
+<button class="btnsset" onclick="closesettings()">Close Dialoge</button>
+
+
+
+</div>
+
+  
+<audio id="myAudio">
+    <source src="" type="audio/ogg">
+  </audio>
+  <button onclick="playAudio()" type="button">Play Audio</button>
+  <button onclick="pauseAudio()" type="button">Pause Audio</button> 
+ 
+    <script>
+    
+  window.onerror = function(){
+   return true;
+} 
+    
+    songs=[];
+    
+ var x = document.getElementById("myAudio"); 
+//x.setAttribute("src","https://docs.google.com/uc?export=open&id=1ERqTEKUU8JSLNgu-jULjAhhc-cdSuoJP");//https://static.wixstatic.com/mp3/4ee8f5_21f59bb654b34bb3b2f2dcf7bc933e2c.mp3
+//x.onloadstart= x.play(); ;
+function playAudio() { 
+ 
+ //caballo r15
+  
+ //arriba de 120
+// x.setAttribute("src","https://docs.google.com/uc?export=open&id=1ERqTEKUU8JSLNgu-jULjAhhc-cdSuoJP");//https://static.wixstatic.com/mp3/4ee8f5_21f59bb654b34bb3b2f2dcf7bc933e2c.mp3
+ 
+    //https://drive.google.com/file/d/1ERqTEKUU8JSLNgu-jULjAhhc-cdSuoJP/view?usp=sharing
+
+    //https://drive.google.com/file/d/1ERD26G8OQyrhaqvqq4ygIlB_hfkc3lca/view?usp=sharing
+  x.play().catch(e => e);; 
+} 
+
+function pauseAudio() { 
+  x.pause(); 
+//  https://drive.google.com/file/d/1DSNLcV5TbEfIQbGZireAhcVkPpU0EwrM/view?usp=sharing
+  //loadText("https://docs.google.com/uc?export=open&id=1PFhTcFsxpArtGco0yZzr4FDT2bOFqBG9CO_o32d9_Ss",function(r){alert(r)})
+// x.setAttribute("src","https://docs.google.com/uc?export=open&id=1DSNLcV5TbEfIQbGZireAhcVkPpU0EwrM");//https://static.wixstatic.com/mp3/4ee8f5_21f59bb654b34bb3b2f2dcf7bc933e2c.mp3
+  
+} 
+
+/*
+        "https://drive.google.com/uc?id=XXXX&authuser=0&export=download"
+https://docs.google.com/uc?export=open&id=XXXXXXXXXXXXXXXXXXXXXXX  //Esta es la forma correcta de encontrar los files.
+
+
+*/
+    
+    
+    /*
+    
+                <button class=btns onclick='opendoc( "https://drive.google.com/open?id=1jo-7vKtsLhIWWlNNqy-MgARqIt6Y1bL3m73-4f-9KY0")'>Rep. drive</button>
+            <button class=btns onclick='opendoc( "https://drive.google.com/open?id=1f3sDKsDlnt5yPVbVyndd3dfS1QKSaDXYF7MIYCr54ZY")'>Agenda</button>
+            <button class=btns onclick='opendoc( "https://drive.google.com/open?id=1mFV419VmfUa6nL5j-NIHnrUEVdztQ4VETjjx3mQnTrU")'>Contrato</button>
+    <button id="bottonInic" class="btnsset" onclick="inic2()">Empesar<br>2 + Hora</button><br>
+    
+    
+    */
+        //https://drive.google.com/open?id=1t2D5wteARfH44uZRRxjV2166gUQcP5f4-eWeP70fTxw
+ 
+  
+  function loadparam(){
+    ;  
+  }
+ 
+ 
+ var Tocada="";
+var horast=1;
+var timewarning, timeout, timeover,test=false;
+ 
+ 
+        var repstate = true;
+        var total = []
+        var btit = true;
+        var Letras=""; 
+        loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Letras.txt", function(r) {Letras=r;});
+ 
+ 
+       esettings = document.getElementById("settings-dlg");
+ 
+   var tocadas=localStorage.getItem("tocadas");
+        ele = document.getElementById("le");
+        edle = document.getElementById("dle");
+   
+        edc = document.getElementById("todo")
+         doc = ifr.contentWindow.document;
+        etitulo = document.getElementById("titulo");
+        ectrls = document.getElementById("ctrls");
+        eli = document.getElementById("lirep")
+         repmix = "";
+        esrch = document.getElementById('srch');
+        ebarra = document.getElementById('barra');
+         //  eedventana = document.getElementById('edventana');
+        edivrep = document.getElementById('divrep');
+        efr = document.getElementById("ifr")
+         arindex = [];
+        arsongs = [];
+
+         //    loadText('https://drive.google.com/open?id=1VU-tkhVUVDJke1m49YNcJiAfbnN_ZDYHEGxckW20KZM',function(r){alert(r.indexOf("libreta"))})
+         //////////////////////////////////////
+        loadText('https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/RepertorioOriginal.txt', function(cont) {
+            etitulo.innerHTML = ". . . Repertorio:"
+            var cc = cont.split("/clases")
+            cmi = cc[0].split("\n"),
+                arcmi = [],
+                cid = [],
+                cclas = [],
+                rca = [],
+                rto = [],
+                rsongs = [],
+                rcl = [];
+            orremix = cc[1].split("\n")
+            // oremix = [];
+            //class
+            for (i = 0; i < cmi.length; i++) {
+                if (cmi[i].indexOf("-") > 0) {
+                    arcmi.push(cmi[i].replace(/(\r\n|\n|\r)/gm, ""))
+                    var f = cmi[i].split("-");
+                    cclas.push(f[1]); //clase
+                    cid.push(f[0]); //letra
+                }
+            }
+            
+            ////////////////////////////////////////////
+            for (i = 0; i < orremix.length; i++) {
+                if (orremix[i].indexOf("-") > 0) {
+                    total.push(orremix[i]); //selecciona las canciones
+                    //   if(i==orremix.length-1); // alert(total.length);
+                }
+                //  
+            }
+            ////kj
+            etitulo.innerHTML = ". . . Repertorio: " + total.length + " Songs";
+            ////////////////////////////////////////////////
+            for (i = 0; i < orremix.length; i++) {
+                //  if(orremix[i].indexOf("*")>=0) alert(orremix[i])
+                if (orremix[i].indexOf("-") > 0 || orremix[i].indexOf("*") >= 0) {
+                    if (orremix[i].indexOf("*") >= 0) {
+                        arindex.push([rca.length, orremix[i]]);
+                 //       alert(orremix[i])
+                      //  eli.appendChild(crnode(orremix[i]));
+             ////////    CHANGE MADE RIGHT HERE          
+                      
+                     eli.appendChild(crtitulos(orremix[i]));
+                    } else {
+                        var f = orremix[i].split("-");
+                       var ste=new song();
+                       ste.titulo=f[0];
+                        ste.tono=f[1];
+                   //    alert(f);
+                       var aaa=getClases(f[2].split(" "))
+                         ste.clase=aaa.main;
+                      ste.subclases=aaa.subs;
+                     //  ste.link=f[3].replace(/~/g,"-");
+                       if(f[3]!=undefined){
+                           alert(f[3]) 
+                           ste.link="https://docs.google.com/uc?export=open&id="+f[3].replace(/~/g,"-");
+                       alert(x.src+"\n"+ste.link)
+      //               alert(JSON.stringify(ste))
+                       }
+                        songs.push(ste);
+               //         alert(songs)
+                        
+                     //   alert(f)
+                        var ca = f[2].split(" "),
+                            tt = "";
+                        var ff = [];
+                        //clases
+                        for (ii = 0; ii < ca.length; ii++) {
+                            var ind = cid.indexOf(ca[ii]);
+                            if (ind >= 0) {
+                                //alert(cclas[ind])
+                                ff.push(cclas[ind]);
+                            }
+                        }
+                        /* hacer la rutina para cambiar letras por normbres de clases
+                 
+                */
+                        rca.push(f[0]);
+                        rto.push(f[1]);
+                        rcl.push(ff);
+                        
+                        ////////    CHANGE MADE RIGHT HERE
+                     //   eli.appendChild(crnode(f[0], f[1], ff));
+                     eli.appendChild(crnode2(ste))
+                    }
+                }
+            }
+            //   alert(arindex);
+            createbtns(cclas)
+            //   preparesongs()     
+        });
+
+        function setclasesmix(repertorio) {
+            var cl = [],
+                rp = [],
+                clt = "";
+            for (i = 0; i < repertorio.length; i++) {
+                if (repertorio[i] != "undefined" || repertorio[i] != "" || repertorio[i] != " ") {
+                    rp = repertorio[i].split("-");
+                    //alert(rp)
+                    if (rp != "" || rp != null || rp != undefinef) clt += rp[2] + " "
+                }
+            }
+            //  alert(clt);
+            return cl;
+        }
+         ///////////////////////////////////////   
+        function opendoc(op) {
+            doc.close();
+            //alert(op);
+            //   eedventana.href = op; //eedventana.click();
+            if (op.indexOf("https") >= 0) {
+                var re = prompt("Write your password");
+                var d = new Date().toString();
+                var m = d.split(" ");
+                d = "andy " + m[1] + " " + m[2];
+                d = d.toUpperCase();
+                re = re.toUpperCase();
+                if (d === re) {
+                    eli.style.display = "none";
+                    ifr.style.display = "block";
+                    edivrep.style.display = "none";
+                    ifr.src = op;
+                } else {
+                    alert("Wrong Pasword");
+                    //   edivrep.style.display = "block";
+                    edivrep.style.display = "block";
+                    ifr.style.display = "none";
+                    eli.style.display = "block";
+                }
+            } else {
+                // 
+                if (op === "repPrac") {
+                    loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/RepPractica.txt", function(r) {
+                        alert(r)
+                    });
+                } else {
+                    if (op === "open rep") {
+                        //ebarra.value="";
+                        //  sortear("")
+                        edivrep.style.display = "block";
+                        ifr.style.display = "none";
+                        eli.style.display = "block";
+                        // repstate= false;
+                    }
+                    if (op === "rep") {
+                        //    repstate=true;
+                        edivrep.style.display = "block";
+                        ifr.style.display = "none";
+                        eli.style.display = "block";
+                        sortear("");
+                    }
+                    // else repstate=false;
+                }
+            }
+        }
+
+        function getletra() {
+            showletra(ebarra.value)
+        }
+
+        function getletra() {
+           showletra(ebarra.value)
+       }
+
+       function showletra2(cancion) { //Corrido de Roberto Gastelum
+   //  var tc=cancion.toUpperCase();
+    var tc=cancion.titulo.toUpperCase();
+          var tl=Letras.toUpperCase();
+          var aas=tl.indexOf("*" + tc);
+      //     var as = Letras.indexOf("*" + cancion.titulo);
+                as=aas
+           if (as >= 0) {
+   if(cancion.link!= undefined) x.setAttribute("src",cancion.link);
+               edle.style.display = "block";
+               var vt = Letras.slice(as, Letras.indexOf("*", as + 1));
+               var vt = Letras.slice(as, Letras.indexOf("*", as + 1));
+               le.value = vt;
+               sch = ele.offsetHeight * 1;
+               scy = 0;
+//               tiempo = vt.slice(vt.indexOf("...") + 3, vt.indexOf("...", vt.indexOf("...") + 1)) * 1000 * 60;
+//               delay = vt.slice(vt.lastIndexOf("...") + 3, vt.indexOf("\n", vt.indexOf("...") + 1)) * 1000;
+                var par= vt.slice(vt.indexOf("(")+1 , vt.indexOf(")"));
+                par=par.split(",");
+               tiempo = par[0]* 1000 * 60;
+               dilay = par[1] * 1000;
+        //        alert(par.toString());
+           } else {
+               ebarra.value = cancion.titulo + " letra";
+               //   window.open(ebarra.value, '_blank');
+               esrch.click()
+               ebarra.value = "";
+           }
+
+       }
+        
+
+
+       function showletra(cancion) { //Corrido de Roberto Gastelum
+     var tc=cancion.toUpperCase();
+          var tl=Letras.toUpperCase();
+          var aas=tl.indexOf("*" + tc);
+           var as = Letras.indexOf("*" + cancion);
+                as=aas
+           if (as >= 0) {
+              
+
+               edle.style.display = "block";
+               var vt = Letras.slice(as, Letras.indexOf("*", as + 1));
+               var vt = Letras.slice(as, Letras.indexOf("*", as + 1));
+               le.value = vt;
+               sch = ele.offsetHeight * 1;
+               scy = 0;
+//               tiempo = vt.slice(vt.indexOf("...") + 3, vt.indexOf("...", vt.indexOf("...") + 1)) * 1000 * 60;
+//               delay = vt.slice(vt.lastIndexOf("...") + 3, vt.indexOf("\n", vt.indexOf("...") + 1)) * 1000;
+                var par= vt.slice(vt.indexOf("(")+1 , vt.indexOf(")"));
+                par=par.split(",");
+               tiempo = par[0]* 1000 * 60;
+               dilay = par[1] * 1000;
+        //        alert(par.toString());
+           } else {
+               ebarra.value = cancion + " letra";
+               //   window.open(ebarra.value, '_blank');
+               esrch.click()
+               ebarra.value = "";
+           }
+
+       }
+        
+        function loadText(file, callback) {
+            fetch(file).then(response => response.text()).then((data) => {
+                callback(data); //
+            })
+        }
+
+        function createbtns(li) {
+            for (i = 0; i < li.length; i++) {
+                var bt = document.createElement('button');
+                bt.innerHTML = li[i];
+                bt.setAttribute('onclick', "addca('" + li[i] + "')");
+                bt.setAttribute("class", "btns")
+                edivrep.appendChild(bt);
+            }
+        }
+
+        function addca(cl) {
+            //     alert(cl); 
+            var ch = eli.children;
+            if (cl === "") {
+                cl = ". . . Repertorio: " + total.length + " Songs";
+                for (i = 0; i < ch.length; i++) {
+                    ch[i].style.display = "";
+                }
+            } else {
+                if (cl != undefined) {
+                    for (i = 0; i < ch.length; i++) {
+                        if (ch[i].song != undefined) {
+                            if (ch[i].clase.indexOf(cl) >= 0) {
+                                ch[i].style.display = "";
+                            } else {
+                                if (ch[i].title != undefined) ch[i].style.display = "none";
+                            }
+                        } else {
+                            ch[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+            edc.scrollTop = 200;
+            etitulo.innerHTML = cl ;//+ " . . ."; ". . . " +
+        }
+
+        function preparesongs() {
+            var ix = arindex[0][0] * 1,
+                ixx = 0;
+            // alert(arindex.length);
+            for (i = 0; i < rca.length; i++) {
+                var node = document.createElement("LI");
+                var textnode = document.createElement('p');
+                textnode.innerHTML = rca[i] + "    . . . . Tono " + rto[i];
+                textnode.setAttribute('onclick', 'this.style.color="#00ff00";showletra("' + rca[i] + '")');
+                node.appendChild(textnode);
+                node.estado = true;
+                node.index = i;
+                node.clase = rcl[i];
+                node.songname = rca[i];
+                node.tono = rto
+                if (ix === i) {
+                    var t = document.createElement("p");
+                    t.setAttribute("class", "cind");
+                    t.innerHTML = arindex[ixx][1];
+                    t.titulo = arindex[ixx][1];
+                    t.visible = true;
+                    ixx++;
+                    if (arindex.length > ixx) ix = arindex[ixx][0];
+                    eli.appendChild(t);
+                }
+                eli.appendChild(node);
+                //   rsongs.push(node);
+            }
+            //          alert(rsongs[10].estado);
+            //   
+        }
+
+function crnode2(song) {
+
+
+                var node = document.createElement("LI");
+                var di = "<font color='#00ffff'> _ </font>";
+                di = "";
+  //        node.setAttribute('onclick', ' setaudio("'+song.link+'");  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play()');}
+
+
+                node.innerHTML = di + song.titulo + di+" . . . " + song.tono; //
+     if(song.link.length>11){
+         node.setAttribute('onclick', 'x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play().catch(e => e);');}
+        else {
+            node.setAttribute('onclick', 'this.style.color="#00ff00";showletra("' + song.titulo + '");');
+        }
+                node.estado = true;
+                node.index = i;
+                node.clase = song.clase;
+                node.song = song.titulo;
+                node.tono = song.titulo;
+                if (song.subclases.indexOf("practica") >= 0) {
+                    node.style.color = "#ff0";
+                }
+                if (song.subclases.indexOf("repertorio tocada") >= 0) {
+                //    node.style.color = "#0ff";
+                }
+                return node;
+      
+        }
+
+      function crtitulos(song) {
+            if (song.indexOf("*") === 0) {
+                var t = document.createElement("p");
+                t.setAttribute("class", "cind");
+                t.innerHTML = song;
+                t.name = "cltit"
+                return t;
+            } else {/*
+
+                var node = document.createElement("LI");
+                var di = "<font color='#00ffff'> _ </font>";
+                di = "";
+ 
+                node.innerHTML = di + song + di+" . . . " + to; //
+
+                node.setAttribute('onclick', 'this.style.color="#00ff00";showletra("' + song + '")');
+                node.estado = true;
+                node.index = i;
+                node.clase = cl;
+                node.song = song;
+                node.tono = to;
+                if (cl.indexOf("practica") >= 0) {
+                    node.style.color = "#ff0";
+                }
+                if (cl.indexOf("repertorio tocada") >= 0) {
+                //    node.style.color = "#0ff";
+                }
+                return node;*/
+            }
+        }
+
+
+        function crnode(song, to, cl) {
+            if (song.indexOf("*") === 0) {
+                var t = document.createElement("p");
+                t.setAttribute("class", "cind");
+                t.innerHTML = song;
+                t.name = "cltit"
+                return t;
+            } else {
+
+                var node = document.createElement("LI");
+                var di = "<font color='#00ffff'> _ </font>";
+                di = "";
+ 
+                node.innerHTML = di + song + di+" . . . " + to; //
+
+                node.setAttribute('onclick', 'this.style.color="#00ff00";showletra("' + song + '")');
+                node.estado = true;
+                node.index = i;
+                node.clase = cl;
+                node.song = song;
+                node.tono = to;
+                if (cl.indexOf("practica") >= 0) {
+                    node.style.color = "#ff0";
+                }
+                if (cl.indexOf("repertorio tocada") >= 0) {
+                //    node.style.color = "#0ff";
+                }
+                return node;
+            }
+        }
+
+        function update(v) {
+            //   alert(v+"ffffff");
+        }
+
+        function sortear(filter) {
+            if (filter === "") {
+                addca("");
+                ectrls.style.display = "";
+               edivrep.style.display = "";
+            } else {
+                settot(false)
+                ectrls.style.display = "none";
+                edivrep.style.display = "none";
+                var ul, li, a, i, txtValue;
+                filter = filter.toUpperCase(); //input.value.toUpperCase();
+                ul = eli;
+                li = ul.getElementsByTagName("li");
+                for (i = 0; i < li.length; i++) {
+                    txtValue = li[i].textContent || li[i].innerText;
+                    var aa = txtValue.split(" . .");
+                    txtValue = aa[0];
+                 //   app.ShowPopup(li[i].clase);
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        li[i].style.display = "";
+                        if (txtValue != ""); //ebarra.value=txtValue;
+                        else; //ebarra.value="";
+                    } else {
+                        li[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        function settot(op) {
+            //getElementsByClassName()
+            var a = document.getElementsByClassName("cind");
+            if (op) {
+                if (!a[0].visible) {
+                    //activarlas 
+                    for (i = 0; i < a.length; i++) {
+                        a[i].style.display = "";
+                        a[0].visible = true
+                    }
+                } else return;
+            } else {
+                if (a[0].style.display === "") {
+                    //desactivarlas
+                    for (i = 0; i < a.length; i++) {
+                        a[i].style.display = "none"
+                        a[0].visible = false
+                    }
+                }
+            }
+        }
+        var sch=ele.offsetHeight*1,scy=0,scintervalo=null,tiempo=500*60,sctiempo=0,iti=0,einicsld=document.getElementById("inicsld");
+    function  movescroll(h,y){
+        sch=h;
+        scy=y;
+    //    app.ShowPopup(h+"\n\n"+y+"\n\n"+ele.offsetHeight);
+        
+    }
+    dilay=4000;
+    function inicScrolling() {
+         document.getElementById("clle").focus();
+      einicsld.style.background = "rgba(150,0,0,.50)";
+         setTimeout(function(){
+      sctiempo = (tiempo-dilay) / (ele.scrollHeight - ele.offsetHeight);//    //-sch+1  //alert(tiempo+"\n\n"+ele.scrollHeight+"\n"+sch+"\n"+sctiempo)
+      it = 0;
+ 
+      var tinic = new Date().getTime() * 1;
+      var tprog = null;
+ 
+      var dint = new Date().getTime() * 1;
+      scintervalo = setInterval(function() {
+          tprog = new Date().getTime() * 1;
+
+          var dif = tprog - tinic; //alert(dif);
+          var s = new Date().getTime() * 1 - dint;//alert("s="+s);
+          if (s > sctiempo/2) {
+              if(einicsld.style="block"){     einicsld.style.display="none";}
+            // app.ShowPopup(s);
+              dint = new Date().getTime() * 1;//alert("dint="+dint);
+              it += 1;
+              ele.scrollTop += .5;
+          }
+          if (dif > tiempo-dilay) {
+              einicsld.style.background = "rgba(0,150,0,.50)";
+               einicsld.style.display="block";
+              clearInterval(scintervalo);
+          }
+      }, 10);
+        },dilay);
+  }
+  
+  
+  function sortearTocada() {
+  li = eli.getElementsByTagName("li");    
+     for (i = 0; i < li.length; i++) {
+         if (li[i].clase.indexOf('repertorio tocada') == -1) {
+             li[i].style.display = "none";
+         }
+         else {
+             li[i].style.display = "block";
+         }
+     }
+
+ }
+ function ChFont(){
+ 
+ var x = prompt("Font Size:\n\nRecommended Enter a Value\nFrom 20 to 35", "20");
+ var s = parseInt(x);
+document.getElementById("lirep").style.fontSize = s+"px";
+
+      
+  }
+  function showsettings(){
+      
+      
+    esettings.style.display="block";
+         document.getElementById("hh").innerHTML=horast+"a. Hora";
+ 
+    
+  }
+  function closesettings(){
+      esettings.style.display="none"
+  }
+ tiempodetocar=60*60*1000;  
+ //tiempodetocar= 12000;
+ 
+  function inic2(){
+      tiempodetocar=45*60*1000;
+  tiempodetocar= 7500;    
+      inicTocada();
+  }
+  
+  
+  function inicTocada() { 
+   ///////////////////   
+   
+   if(test) alert("you are in test mode");
+   
+           clearTimeout(timeout);
+     clearTimeout(timeover);
+     clearTimeout(timewarning);
+     
+     
+     ////////
+      if(horast>1) tiempodetocar=45*60*1000;
+      else  tiempodetocar=60*60*1000;  
+      if(test) tiempodetocar=tiempodetocar= 7500;
+    //  else tiempodetocar=45*60*1000;
+     
+  if(Tocada=="" != Tocada==null){
+         alert("preciona primero 'set tocada' y pon las horas")
+  }
+  else{
+      if(test) tiempodetocar= 12000;
+   //   else tiempodetocar=60*60*1000; 
+      horast++;
+      document.body.style.background = "linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)";
+   eli.style.background = "black";
+    var d = new Date();
+    var hinic = d.getHours();
+    var minic = d.getMinutes();
+    sinic = hinic + ":" + minic;
+         if(localStorage.getItem("inicio")==="") {
+       
+    localStorage.setItem("inicio", sinic);
+    localStorage.setItem("horastocadas","1");
+    
+}
+else{
+
+    timewarning=setTimeout(function() {
+        document.body.style.background = "orange";
+      //  var rr=localStorage.getItem("horastocadas")*1+1;
+        localStorage.setItem("horastocadas",horast);
+
+      
+    }, tiempodetocar - 5000);
+ 
+  //  }, tiempodetocar - (5*60*1000));
+    
+  timeout=setTimeout(function() {
+          document.body.style.background = "red";
+    }, tiempodetocar);
+    
+    timeover=setTimeout(function() {
+
+        eli.style.background = "red";
+//    }, tiempodetocar +  (2.5*60*1000))
+ }, tiempodetocar +  2000)
+
+    closesettings()
+
+    var toc = localStorage.getItem("inicio");
+    if (toc != null) {} else {
+
+    }
+}
+  }
+}
+
+
+  function tocada(){
+
+this.date="";
+this.start="";
+this.timeinic=0;
+this.iniciarTocada=function(){
+ //    this.timeinic=new Date();
+}
+this.setTocada=function(){
+  //  this.date=prompt("Type Fecha de tocada",new Date());
+    this.horas=prompt("cuantas horas?");
+ //   this.horadeinic=prompt("a que hora inicia?");
+ //   this.phone=prompt("Type Costumer Phone Number");
+ //   this.direccion=prompt("Type La adress de la tocada")
+
+ //   this.costumername=prompt("Type costumer name");
+    this.precio=prompt("Type el precio por hora");
+     this.informacion=prompt("Type Informacion extra si hay"); 
+     
+     alert("Cuando estes listo preciona el boton de 'Iniciar Primer Hora");
+
+}
+this.phone="";
+this.costumername="";
+this.direccion="";
+this.horas=0;
+this.precio=0;
+this.horadeinic=0;
+this.informacion="";
+this.horasTocadas=0;
+
+  }
+  function settingUpTocada(){
+      
+      Tocada=localStorage.getItem("Tocadainfo");
+      if(Tocada==null || Tocada=="" || Tocada==undefined){
+    clearTimeout(timeout);
+     clearTimeout(timeover);
+     clearTimeout(timewarning);  
+      
+      Tocada=new tocada(); 
+    Tocada.setTocada(); 
+    var str=JSON.stringify(Tocada)+"~";
+    localStorage.setItem("Tocadainfo",str)
+ }
+ else{
+     var r=confirm("It is a Tocada allready in Process. Do you want to set a new Tocada?");
+     if(r) {localStorage.removeItem("Tocadainfo"); sttingUpTocada();}
+     else alert("Ok I get it, Just continue with actual tocada");
+ }
+  }
+  
+function resetTocada(){//confirm("Press a button!");
+
+    if(confirm("Are your sure?,\n The information of the tocada will be deleted")){
+        localStorage.removeItem("Tocadainfo")
+        localStorage.removeItem("tocadas")
+      localStorage.removeItem("inicio")
+     localStorage.removeItem("horastocadas");
+     horast=1;
+     Tocada="";
+     clearTimeout(timeout);
+     clearTimeout(timeover);
+     clearTimeout(timewarning);
+           document.body.style.background = "linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)";
+   eli.style.background = "black";
+closesettings();
+    }
+
+
+}
+  function finish(){
+      if(confirm("Areyousure?")){
+          var ht=localStorage.getItem("horastocadas");
+         // var ht=horast-1;
+         var Tocada=JSON.parse(localStorage.getItem("Tocadainfo"));
+          var cantidad=ht*Tocada.precio*1;
+          alert("Total de horas tocadas ="+ht+"\n\nA "+Tocada.precio*1+"\n\nEl Total es: "+cantidad);
+    closesettings();
+    
+      }
+      
+  }
+  function testmode(){ 
+    //  
+      if(test){alert("test mode is off");
+      test=false;
+              resetTocada();
+          }
+          else{
+        if(confirm("you are going to test mode")){
+            test=true;
+            resetTocada();
+  }
+  }
+  }
+  
+  function song(){
+      this.titulo="";
+      this.tono="";
+      this.clase="";
+      this.subclases=[];
+      this.letra="";
+      this.duracion=0;
+      this.link="";
+      
+      
+  }
+  function getClaseName(c) {
+      var ret;
+      var i = cid.indexOf(c[0]);
+//      alert(cclas[i]);
+  //    alert(cclas)
+      if (i >= 0) return cclas[i];
+
+      //    else return "";
+  }
+
+  function getClases(ar) {
+     var cm = {
+          main: "",
+          subs: []
+      };
+     
+ //     alert(ar);
+      var er=getClaseName(ar[0]);// alert(er);
+      cm.main =er ;
+     
+      for (var i = 1; i < ar.length; i++) {
+         if(ar[i]!="") cm.subs.push(getClaseName(ar[i]))
+      }
+  //    alert(JSON.stringify(cm));
+
+      return cm;
+  /**/
+
+  }
+ //454
+ function setaudio(a){
+
+try{
+      if(a!="" && a!=undefined && a.length>10){
+           x.currentTime = 0;
+       //    alert(a);
+           
+      //   if(x.src.indexOf("file")<0) x.setAttribute("src",a); 
+      //   else  alert(x.src);
+      }
+}
+catch(e){
+    alert(e);
+}
+ }
+ 
+  function loadDoc(url) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", url, false);
+  xhttp.send();
+  return xhttp.responseXML;  
+}   
+ 
+ 
+    </script>
+
+</body>
+
+
+
+
 </html>
