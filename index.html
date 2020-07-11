@@ -247,11 +247,14 @@
 }
 .cbaudio{
     color:white;
-    height:5%;
+    height:80px;
+    width: 80px;
     position:absolute;
-    background-color: crimson;
-    top:2%;
-    border-radius: 150px;
+    background-color: rgba(0, 212, 255, .40);
+    top:25%;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
  
 }
 #bpl{
@@ -351,8 +354,8 @@ right: 5%;
     <source src="" type="audio/ogg">
   </audio>
   <div id="audctrls">
-  <button id="bpl" class="cbaudio" onclick="x.play().catch(e => e);">Play Audio</button>
-  <button  id="bpa" class="cbaudio" onclick="x.pause();">Pause Audio</button> 
+  <button id="bpl" class="cbaudio" onclick="x.play().catch(e => e);">Play</button>
+  <button  id="bpa" class="cbaudio" onclick="x.pause();">Pause</button> 
  </div>
     <script>
     
