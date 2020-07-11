@@ -239,18 +239,38 @@
     font-size:35px;
     font-weight:bold;
     box-shadow: -15px 15px 26px  #335033, inset 10px -10px 7px #0c1fd1, inset -10px 10px 7px #1eb6e4bb;
+}
+#audctrls{
+    width:100%;
+    height:auto;
+   // display: none;
+}
+.cbaudio{
+    color:white;
+    height:5%;
+    position:absolute;
+    background-color: crimson;
+    top:2%;
+    border-radius: 150px;
  
+}
+#bpl{
+left:5%;
+}
+#bpa{
+right: 5%;
+}
     </style>
     <div id="dle">
 
         <textarea id="le" readonly onscroll="movescroll(this.scrollHeight,this.scrollTop)" ></textarea  >
-        <button id="clle" onclick='x.src="";einicsld.style.background="rgba(0,150,0,.50)";einicsld.style.display="block";ele.value="";ele.scrollTo(0, 0);edle.style.display="none";clearInterval(scintervalo)'>Close</button>
+        <button id="clle" onclick='eactrls.style.display="none";x.src="";einicsld.style.background="rgba(0,150,0,.50)";einicsld.style.display="block";ele.value="";ele.scrollTo(0, 0);edle.style.display="none";clearInterval(scintervalo)'>Close</button>
         <button id="inicsld"  onclick='clearInterval(scintervalo);inicScrolling();'>Start</button>
    
    
     </div>  
    <button id="logo" onclick="showsettings()">&#9881;</button>
-     <button id="ref" onclick="x.src='';sortear('');edc.scrollTop = 0;">&#9851;</button>
+     <button id="ref" onclick="eactrls.style.display='none';x.src='';sortear('');edc.scrollTop = 0;">&#9851;</button>
  
     <div id="todo">
  
@@ -330,9 +350,10 @@
 <audio id="myAudio">
     <source src="" type="audio/ogg">
   </audio>
-  <button onclick="playAudio()" type="button">Play Audio</button>
-  <button onclick="pauseAudio()" type="button">Pause Audio</button> 
- 
+  <div id="audctrls">
+  <button id="bpl" class="cbaudio" onclick="x.play().catch(e => e);">Play Audio</button>
+  <button  id="bpa" class="cbaudio" onclick="x.pause();">Pause Audio</button> 
+ </div>
     <script>
     
   window.onerror = function(){
@@ -346,44 +367,14 @@
 //x.onloadstart= x.play(); ;
 function playAudio() { 
  
- //caballo r15
-  
- //arriba de 120
-// x.setAttribute("src","https://docs.google.com/uc?export=open&id=1ERqTEKUU8JSLNgu-jULjAhhc-cdSuoJP");//https://static.wixstatic.com/mp3/4ee8f5_21f59bb654b34bb3b2f2dcf7bc933e2c.mp3
- 
-    //https://drive.google.com/file/d/1ERqTEKUU8JSLNgu-jULjAhhc-cdSuoJP/view?usp=sharing
-
-    //https://drive.google.com/file/d/1ERD26G8OQyrhaqvqq4ygIlB_hfkc3lca/view?usp=sharing
   x.play().catch(e => e);; 
 } 
 
 function pauseAudio() { 
   x.pause(); 
-//  https://drive.google.com/file/d/1DSNLcV5TbEfIQbGZireAhcVkPpU0EwrM/view?usp=sharing
-  //loadText("https://docs.google.com/uc?export=open&id=1PFhTcFsxpArtGco0yZzr4FDT2bOFqBG9CO_o32d9_Ss",function(r){alert(r)})
-// x.setAttribute("src","https://docs.google.com/uc?export=open&id=1DSNLcV5TbEfIQbGZireAhcVkPpU0EwrM");//https://static.wixstatic.com/mp3/4ee8f5_21f59bb654b34bb3b2f2dcf7bc933e2c.mp3
-  
+
 } 
-
-/*
-        "https://drive.google.com/uc?id=XXXX&authuser=0&export=download"
-https://docs.google.com/uc?export=open&id=XXXXXXXXXXXXXXXXXXXXXXX  //Esta es la forma correcta de encontrar los files.
-
-
-*/
-    
-    
-    /*
-    
-                <button class=btns onclick='opendoc( "https://drive.google.com/open?id=1jo-7vKtsLhIWWlNNqy-MgARqIt6Y1bL3m73-4f-9KY0")'>Rep. drive</button>
-            <button class=btns onclick='opendoc( "https://drive.google.com/open?id=1f3sDKsDlnt5yPVbVyndd3dfS1QKSaDXYF7MIYCr54ZY")'>Agenda</button>
-            <button class=btns onclick='opendoc( "https://drive.google.com/open?id=1mFV419VmfUa6nL5j-NIHnrUEVdztQ4VETjjx3mQnTrU")'>Contrato</button>
-    <button id="bottonInic" class="btnsset" onclick="inic2()">Empesar<br>2 + Hora</button><br>
-    
-    
-    */
-        //https://drive.google.com/open?id=1t2D5wteARfH44uZRRxjV2166gUQcP5f4-eWeP70fTxw
- 
+//https://docs.google.com/uc?export=open&id=1ERqTEKUU8JSLNgu-jULjAhhc-cdSuoJP");//https://static.wixstatic.com/mp3/4ee8f5_21f59bb654b34bb3b2f2dcf7bc933e2c.mp3
   
   function loadparam(){
     ;  
@@ -407,7 +398,8 @@ var timewarning, timeout, timeover,test=false;
    var tocadas=localStorage.getItem("tocadas");
         ele = document.getElementById("le");
         edle = document.getElementById("dle");
-   
+        eactrls = document.getElementById("audctrls");
+ 
         edc = document.getElementById("todo")
          doc = ifr.contentWindow.document;
         etitulo = document.getElementById("titulo");
@@ -742,7 +734,7 @@ function crnode2(song) {
 
                 node.innerHTML = di + song.titulo + di+" . . . " + song.tono; //
      if(song.link.length>11){
-         node.setAttribute('onclick', 'x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play().catch(e => e);');}
+         node.setAttribute('onclick', 'eactrls.style.display="block";x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play().catch(e => e);');}
         else {
             node.setAttribute('onclick', 'this.style.color="#00ff00";showletra("' + song.titulo + '");');
         }
