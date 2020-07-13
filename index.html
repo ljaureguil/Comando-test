@@ -202,7 +202,7 @@
   position: absolute;
   width:90%;
   height: 90%;
-  background:coral;
+  background:rgba(0, 212, 255, .60);
   color:blue;
   font-size: 20px;
   font-weight: bold;
@@ -232,13 +232,13 @@
 #bottonInic{
     height:30%;
     width: 60%;
-    color:white;
-    background:rgb(52, 109, 175);
+    color:black;
+//    background:rgb(50, 218, 100);
     border-radius:35px;
     box-shadow: ;
     font-size:35px;
     font-weight:bold;
-    box-shadow: -15px 15px 26px  #335033, inset 10px -10px 7px #0c1fd1, inset -10px 10px 7px #1eb6e4bb;
+ //   box-shadow: -15px 15px 26px  #503333, inset 10px -10px 7px #1f0cd1, inset -10px 10px 7px #b61ee4bb;
 }
 #audctrls{
     position:absolute;
@@ -269,6 +269,16 @@ left:0%;
 }
 #bpa{
 right: 0%;
+}
+#timerh{
+    color: white;
+ width: 100%;
+ height: auto;
+  font-size: 40px;
+padding: 20px;
+border-style: double;
+border-radius: 10px;
+border-width: .5px;
 }
     </style>
     <div id="dle">
@@ -343,8 +353,18 @@ right: 0%;
 <br>
 
 
-    <button id="bottonInic" class="btnsset" onclick="inicTocada()">Empesar<br><label id="hh">Primer Hora</label></button>  
+   <div id="timerh">
+       <p color="white">Timer:</p>
+       <br>
+    <button id="bottonInic" class="btnsset" onclick="inicTocada(1)">1st. Hora</button>  
     <br>
+    <button id="bottonInic" class="btnsset" onclick="inicTocada(2)">2a. Hora +++</button>  
+
+ 
+
+
+   </div>
+<br>
     <button id="finish" class="btnsset" onclick="finish()">Terminar Tocada</button>  
     <br>
   
@@ -746,7 +766,10 @@ function crnode2(song) {
 
                 node.innerHTML = di + song.titulo + di+" . . . " + song.tono; //
      if(song.link.length>11){
-         node.setAttribute('onclick', 'eactrls.style.top="35%";x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play().catch(e => e);');}
+ //para clientes        node.setAttribute('onclick', 'eactrls.style.top="35%";x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play().catch(e => e);');}
+       //para practica
+         node.setAttribute('onclick', 'eactrls.style.top="35%";x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");');}
+
         else {
             node.setAttribute('onclick', 'this.style.color="#00ff00";showletra("' + song.titulo + '");');
         }
@@ -947,7 +970,7 @@ document.getElementById("lirep").style.fontSize = s+"px";
       
       
     esettings.style.display="block";
-         document.getElementById("hh").innerHTML=horast+"a. Hora";
+    //     document.getElementById("hh").innerHTML=horast+"a. Hora";
  
     
   }
@@ -955,16 +978,8 @@ document.getElementById("lirep").style.fontSize = s+"px";
       esettings.style.display="none"
   }
  tiempodetocar=60*60*1000;  
- //tiempodetocar= 12000;
- 
-  function inic2(){
-      tiempodetocar=45*60*1000;
-  tiempodetocar= 7500;    
-      inicTocada();
-  }
-  
-  
-  function inicTocada() { 
+   
+  function inicTocada(h) { 
    ///////////////////   
    
    if(test) alert("you are in test mode");
@@ -973,13 +988,19 @@ document.getElementById("lirep").style.fontSize = s+"px";
      clearTimeout(timeover);
      clearTimeout(timewarning);
      
-     
+  /*   
      ////////
       if(horast>1) tiempodetocar=45*60*1000;
       else  tiempodetocar=60*60*1000;  
       if(test) tiempodetocar=tiempodetocar= 7500;
     //  else tiempodetocar=45*60*1000;
-     
+  */   
+
+  if(h>1) tiempodetocar=45*60*1000;
+      else  tiempodetocar=60*60*1000;  
+      if(test) tiempodetocar=tiempodetocar= 7500;
+
+
   if(Tocada=="" != Tocada==null){
          alert("preciona primero 'set tocada' y pon las horas")
   }
