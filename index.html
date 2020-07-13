@@ -230,11 +230,11 @@
      text-align:center;  
 }
 #bottonInic{
-    height:30%;
-    width: 60%;
+    height:220px;
+    width: 220px;
     color:black;
 //    background:rgb(50, 218, 100);
-    border-radius:35px;
+    border-radius:50%;
     box-shadow: ;
     font-size:35px;
     font-weight:bold;
@@ -242,7 +242,7 @@
 }
 #audctrls{
     position:absolute;
-    width:100%;
+    width:98%;
     height:auto;
        top:35%;
        transition:  top ease-in-out 2s;
@@ -357,7 +357,7 @@ border-width: .5px;
        <p color="white">Timer:</p>
        <br>
     <button id="bottonInic" class="btnsset" onclick="inicTocada(1)">1st. Hora</button>  
-    <br>
+    
     <button id="bottonInic" class="btnsset" onclick="inicTocada(2)">2a. Hora +++</button>  
 
  
@@ -385,6 +385,7 @@ border-width: .5px;
   <button  id="bpa" class="cbaudio" onclick="x.pause();">&#9612;&#9612;</button> 
  </div>
     <script>
+        //769  crnode2() para hacer el cambio tocada a cliente
     
   window.onerror = function(){
    return true;
