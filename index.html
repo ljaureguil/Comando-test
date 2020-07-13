@@ -241,22 +241,26 @@
     box-shadow: -15px 15px 26px  #335033, inset 10px -10px 7px #0c1fd1, inset -10px 10px 7px #1eb6e4bb;
 }
 #audctrls{
+    position:absolute;
     width:100%;
     height:auto;
-    display: none;
+       top:50%;
+       transition:  top ease-in-out 2s;
+ //   display: none;
 }
 .cbaudio{
     color:red;
     height:255px;
-    width: 55px;
+    width: 40px;
     position:absolute;
     background-color: rgba(0, 212, 255, .40);
-    bottom:50%;
-    border-radius: 5px;
-    font-size: 15px;
+ 
+    border-radius: 25px;
+    font-size: 16px;
     font-weight: bolder;
     -webkit-text-stroke: 0.80px #f50707;
--webkit-text-fill-color: #FFFFFF
+-webkit-text-fill-color: #FFFFFF;
+ 
 
  
 }
@@ -270,13 +274,13 @@ right: 0%;
     <div id="dle">
 
         <textarea id="le" readonly onscroll="movescroll(this.scrollHeight,this.scrollTop)" ></textarea  >
-        <button id="clle" onclick='eactrls.style.display="none";x.src="";einicsld.style.background="rgba(0,150,0,.50)";einicsld.style.display="block";ele.value="";ele.scrollTo(0, 0);edle.style.display="none";clearInterval(scintervalo)'>Close</button>
+        <button id="clle" onclick='eactrls.style.top="-50%";x.src="";einicsld.style.background="rgba(0,150,0,.50)";einicsld.style.display="block";ele.value="";ele.scrollTo(0, 0);edle.style.display="none";clearInterval(scintervalo)'>Close</button>
         <button id="inicsld"  onclick='clearInterval(scintervalo);inicScrolling();'>Start</button>
    
    
     </div>  
    <button id="logo" onclick="showsettings()">&#9881;</button>
-     <button id="ref" onclick="eactrls.style.display='none';x.src='';sortear('');edc.scrollTop = 0;">&#9851;</button>
+     <button id="ref" onclick="eactrls.style.top='-50%';x.src='';sortear('');edc.scrollTop = 0;">&#9851;</button>
  
     <div id="todo">
  
@@ -357,8 +361,8 @@ right: 0%;
     <source src="" type="audio/ogg">
   </audio>
   <div id="audctrls">
-  <button id="bpl" class="cbaudio" onclick="x.play().catch(e => e);">Play</button>
-  <button  id="bpa" class="cbaudio" onclick="x.pause();">Pause</button> 
+  <button id="bpl" class="cbaudio" onclick="x.play().catch(e => e);">&#9658;</button>
+  <button  id="bpa" class="cbaudio" onclick="x.pause();">&#9612;&#9612;</button> 
  </div>
     <script>
     
@@ -405,6 +409,8 @@ var timewarning, timeout, timeover,test=false;
         ele = document.getElementById("le");
         edle = document.getElementById("dle");
         eactrls = document.getElementById("audctrls");
+
+        eactrls.style.top="-50%";
  
         edc = document.getElementById("todo")
          doc = ifr.contentWindow.document;
@@ -740,7 +746,7 @@ function crnode2(song) {
 
                 node.innerHTML = di + song.titulo + di+" . . . " + song.tono; //
      if(song.link.length>11){
-         node.setAttribute('onclick', 'eactrls.style.display="block";x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play().catch(e => e);');}
+         node.setAttribute('onclick', 'eactrls.style.top="50%";x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play().catch(e => e);');}
         else {
             node.setAttribute('onclick', 'this.style.color="#00ff00";showletra("' + song.titulo + '");');
         }
