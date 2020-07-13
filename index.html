@@ -244,7 +244,7 @@
     position:absolute;
     width:100%;
     height:auto;
-       top:50%;
+       top:35%;
        transition:  top ease-in-out 2s;
  //   display: none;
 }
@@ -746,7 +746,7 @@ function crnode2(song) {
 
                 node.innerHTML = di + song.titulo + di+" . . . " + song.tono; //
      if(song.link.length>11){
-         node.setAttribute('onclick', 'eactrls.style.top="50%";x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play().catch(e => e);');}
+         node.setAttribute('onclick', 'eactrls.style.top="35%";x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play().catch(e => e);');}
         else {
             node.setAttribute('onclick', 'this.style.color="#00ff00";showletra("' + song.titulo + '");');
         }
