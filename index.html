@@ -386,10 +386,27 @@ border-width: .5px;
  </div>
     <script>
         //769  crnode2() para hacer el cambio tocada a cliente
+//    loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Canc.txt",function(r){alert(r)})
     
   window.onerror = function(){
    return true;
 } 
+var arlinks=[];
+var txlinks="";
+loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Canc.txt",function(r){
+arlinks=r.split("\n");
+//alert(txlinks);
+//alert(arlinks.length)
+arlinks=arlinks.filter(function(ar){return ar !="" && ar !=undefined});
+//alert(arlinks)
+txlinks=arlinks.toString();
+//alert(arlinks.length)
+//
+
+inicprs()
+
+});
+
     
     songs=[];
     
@@ -449,7 +466,7 @@ var timewarning, timeout, timeover,test=false;
 
          //    loadText('https://drive.google.com/open?id=1VU-tkhVUVDJke1m49YNcJiAfbnN_ZDYHEGxckW20KZM',function(r){alert(r.indexOf("libreta"))})
          //////////////////////////////////////
-        loadText('https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/RepertorioOriginal.txt', function(cont) {
+     function inicprs(){   loadText('https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/RepertorioOriginal.txt', function(cont) {
             etitulo.innerHTML = ". . . Repertorio:"
             var cc = cont.split("/clases")
             cmi = cc[0].split("\n"),
@@ -493,7 +510,8 @@ var timewarning, timeout, timeover,test=false;
              ////////    CHANGE MADE RIGHT HERE          
                       
                      eli.appendChild(crtitulos(orremix[i]));
-                    } else {
+                    } 
+                    else {
                         var f = orremix[i].split("-");
                        var ste=new song();
                        ste.titulo=f[0];
@@ -502,20 +520,13 @@ var timewarning, timeout, timeover,test=false;
                        var aaa=getClases(f[2].split(" "))
                          ste.clase=aaa.main;
                       ste.subclases=aaa.subs;
-                     //  ste.link=f[3].replace(/~/g,"-");
-                       if(f[3]!=undefined){
-                      //     alert(f[3]) 
-                           ste.link="https://docs.google.com/uc?export=open&id="+f[3].replace(/~/g,"-");
-
-                           
-                //       alert(x.src+"\n"+ste.link)
-      //               alert(JSON.stringify(ste))
-                       }
+                //  alert(ste.titulo);
+                 //      if(f[3]!=undefined){ste.link="https://docs.google.com/uc?export=open&id="+f[3].replace(/~/g,"-");}
+                   ste.link=getlink(ste.titulo);
+           //     if(ste.link.indexOf("http")>0)   alert(ste.link)
+  //         alert(ste.link)
                         songs.push(ste);
-               //         alert(songs)
-                        
-                     //   alert(f)
-                        var ca = f[2].split(" "),
+                         var ca = f[2].split(" "),
                             tt = "";
                         var ff = [];
                         //clases
@@ -543,6 +554,7 @@ var timewarning, timeout, timeover,test=false;
             createbtns(cclas)
             //   preparesongs()     
         });
+     }
 
         function setclasesmix(repertorio) {
             var cl = [],
@@ -766,12 +778,17 @@ function crnode2(song) {
 
 
                 node.innerHTML = di + song.titulo + di+" . . . " + song.tono; //
-     if(song.link.length>11){
+     if(song.link.indexOf("http")>=0){
+ //        alert("con link "+song.link)
  //para clientes        node.setAttribute('onclick', 'eactrls.style.top="35%";x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play().catch(e => e);');}
        //para practica
-         node.setAttribute('onclick', 'eactrls.style.top="35%";x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");');}
-
+         node.setAttribute('onclick', 'eactrls.style.top="35%";x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");');
+           node.innerHTML = di + song.titulo + di+" . <font color='#00ffff'>&#9193;</font> . " + song.tono;//+"<font color='#00ff00'>&#9835;</font>"; //
+       
+       
+         }
         else {
+  //          alert("sin link,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,")
             node.setAttribute('onclick', 'this.style.color="#00ff00";showletra("' + song.titulo + '");');
         }
                 node.estado = true;
@@ -785,6 +802,7 @@ function crnode2(song) {
                 if (song.subclases.indexOf("repertorio tocada") >= 0) {
                 //    node.style.color = "#0ff";
                 }
+              
                 return node;
       
         }
@@ -1208,15 +1226,58 @@ catch(e){
 }
  }
  
+function getlink(c){
+ //   alert(c)
+  if(txlinks.indexOf(c)>=0){
+
+   //   alert(txlinks.indexOf(c))
+      for(var iw=0;iw<arlinks.length;iw++){  
+ //         alert(arlinks[iw])
+          if(arlinks[iw].indexOf(c)>=0 && arlinks[iw].indexOf("https://drive.google.com/file/d/")>=0){/* */
+      //        alert("goog\n\n"+arlinks[i].indexOf(c))
+              var pp=arlinks[iw].split("https://drive.google.com/file/d/");
+            //  alert(pp)
+              pp=pp[1].split("/view?usp=sharing");
+           //   alert("ffffffffffffffff\n"+pp)
+              pp="https://docs.google.com/uc?export=open&id="+pp[0]
+      //        alert(pp);
+      iw=arlinks.length
+              return pp;
+
+         
+          }
+        
+      }
+return "";
+  }
+  else return "";
+
+}
+
+
+
+
+
+
+ 
+ 
+ /*
   function loadDoc(url) {
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", url, false);
   xhttp.send();
   return xhttp.responseXML;  
 }   
+ */
+ 
+ 
+ 
+ 
  
  
     </script>
+
+
 
 </body>
 
