@@ -41,8 +41,8 @@
             background: #000070;
             font-size: 15px;
             // font-weight: bold;
-            width: 45%;
-            height: 8%;
+            width: 95%;
+            height: 5%;
         }
         #ed {
             background: rgba(0, 255, 0, .5);
@@ -319,10 +319,8 @@ border-width: .5px;
 
 
         <div id="ctrls">
-            <button class="btns"  id="ppr" onclick='opendoc( "repPrac")'>. *NOTES* .</button>
-            <button id="mainrep" class=btns onclick='opendoc( "rep")'>. Repertorio .</button>
-            <button class="btns" onclick='opendoc( "open rep")'>Repertorio Mix.</button>
-         <button class="btns" onclick='sortearTocada()'>Repertorio Tocada</button>  
+             <button class="btns" onclick='opendoc( "open rep")'>Repertorio Mix.</button>
+
 
         </div>
         <div id=ifrs>
@@ -781,13 +779,13 @@ function crnode2(song) {
   //        node.setAttribute('onclick', ' setaudio("'+song.link+'");  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play()');}
 
 
-                node.innerHTML = di + song.titulo + di+" . . . " + song.tono; //
+                node.innerHTML = di + song.titulo + di;//+" . . . " + song.tono; //
      if(song.link.indexOf("http")>=0){
  //        alert("con link "+song.link)
  //para clientes        node.setAttribute('onclick', 'eactrls.style.top="35%";x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play().catch(e => e);');}
        //para practica
          node.setAttribute('onclick', 'eactrls.style.top="35%";x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play().catch(e => e);');
-           node.innerHTML = di + song.titulo + di+" . <font color='#00ffff'>&#9193;</font> . " + song.tono;//+"<font color='#00ff00'>&#9835;</font>"; //
+           node.innerHTML = di + song.titulo + di+" . . . <font color='#00ffff'>&#9193;</font>";// + song.tono;//+"<font color='#00ff00'>&#9835;</font>"; //
        
        
          }
