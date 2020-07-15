@@ -469,7 +469,7 @@ var timewarning, timeout, timeover,test=false;
          //    loadText('https://drive.google.com/open?id=1VU-tkhVUVDJke1m49YNcJiAfbnN_ZDYHEGxckW20KZM',function(r){alert(r.indexOf("libreta"))})
          //////////////////////////////////////
      function inicprs(){   loadText('https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/RepertorioOriginal.txt', function(cont) {
-            etitulo.innerHTML = ". . . Repertorio:"
+            etitulo.innerHTML = "Repertorio:"
             var cc = cont.split("/clases")
             cmi = cc[0].split("\n"),
                 arcmi = [],
@@ -500,7 +500,7 @@ var timewarning, timeout, timeover,test=false;
                 //  
             }
             ////kj
-            etitulo.innerHTML = ". . . Repertorio: " + total.length + " Songs";
+            etitulo.innerHTML = "Repertorio: " + total.length + "+ Songs";
             ////////////////////////////////////////////////
             for (i = 0; i < orremix.length; i++) {
                 //  if(orremix[i].indexOf("*")>=0) alert(orremix[i])
@@ -715,7 +715,7 @@ var timewarning, timeout, timeover,test=false;
             //     alert(cl); 
             var ch = eli.children;
             if (cl === "") {
-                cl = ". . . Repertorio: " + total.length + " Songs";
+                cl = "Repertorio: " + total.length + "+ Songs";
                 for (i = 0; i < ch.length; i++) {
                     ch[i].style.display = "";
                 }
