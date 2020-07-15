@@ -41,8 +41,8 @@
             background: #000070;
             font-size: 15px;
             // font-weight: bold;
-            width: 95%;
-            height: 5%;
+            width: 45%;
+            height: 8%;
         }
         #ed {
             background: rgba(0, 255, 0, .5);
@@ -245,8 +245,8 @@
     width:60x;
     height:60%;
        top:35%;
-       right:-30%;
-       transition:  right ease-in-out 2s;
+       right:0%;
+       transition:  top ease-in-out 2s;
  //   display: none;
 }
 .cbaudio{
@@ -288,13 +288,13 @@ border-width: .5px;
     <div id="dle">
 
         <textarea id="le" readonly onscroll="movescroll(this.scrollHeight,this.scrollTop)" ></textarea  >
-        <button id="clle" onclick='eactrls.style.right="-30%";x.src="";einicsld.style.background="rgba(0,150,0,.50)";einicsld.style.display="block";ele.value="";ele.scrollTo(0, 0);edle.style.display="none";clearInterval(scintervalo)'>Close</button>
+        <button id="clle" onclick='eactrls.style.top="-80%";x.src="";einicsld.style.background="rgba(0,150,0,.50)";einicsld.style.display="block";ele.value="";ele.scrollTo(0, 0);edle.style.display="none";clearInterval(scintervalo)'>Close</button>
         <button id="inicsld"  onclick='clearInterval(scintervalo);inicScrolling();'>Start</button>
    
    
     </div>  
    <button id="logo" onclick="showsettings()">&#9881;</button>
-     <button id="ref" onclick="eactrls.style.right='-30%';x.src='';sortear('');edc.scrollTop = 0;">&#9851;</button>
+     <button id="ref" onclick="eactrls.style.top='-80%';x.src='';sortear('');edc.scrollTop = 0;">&#9851;</button>
  
     <div id="todo">
  
@@ -319,8 +319,10 @@ border-width: .5px;
 
 
         <div id="ctrls">
-             <button class="btns" onclick='opendoc( "open rep")'>Repertorio Mix.</button>
-
+            <button class="btns"  id="ppr" onclick='opendoc( "repPrac")'>. *NOTES* .</button>
+            <button id="mainrep" class=btns onclick='opendoc( "rep")'>. Repertorio .</button>
+            <button class="btns" onclick='opendoc( "open rep")'>Repertorio Mix.</button>
+         <button class="btns" onclick='sortearTocada()'>Repertorio Tocada</button>  
 
         </div>
         <div id=ifrs>
@@ -384,7 +386,7 @@ border-width: .5px;
   </audio>
   <div id="audctrls">
   <button id="bpl" class="cbaudio" onclick="x.play().catch(e => e);">&#9658;</button>
-  <button  id="bpa" class="cbaudio" onclick="eactrls.style.right='-30%';x.pause();">&#9612;&#9612;</button> 
+  <button  id="bpa" class="cbaudio" onclick="eactrls.style.top='-80%';x.pause();">&#9612;&#9612;</button> 
  </div>
     <script>
         //769  crnode2() para hacer el cambio tocada a cliente
