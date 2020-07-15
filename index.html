@@ -11,11 +11,14 @@
     <style>
         body {
             background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
-            font-size: 30px;
+            font-size: 30px; 
+                       overflow-y: auto;
+            overflow-x: hidden;
         }
         #todo {
             width: 100%;
             height: 100%;
+            
             overflow-y: auto;
             overflow-x: hidden;
             transition: overflow-y 0.5s ease;
@@ -40,8 +43,8 @@
             border-radius: 5px;
             background: #000070;
             font-size: 15px;
-            // font-weight: bold;
-            width: 45%;
+       
+            width: 98%;
             height: 8%;
         }
         #ed {
@@ -67,7 +70,7 @@
         #lirep {
             background: black;
             color: white;
-            width: 83%;
+            width: 88%;
             // height: 40%;
             font-size: 16px;// font repertorio
             font-weight: bold;
@@ -139,7 +142,7 @@
             padding: 15px;
             color: black;
             font-size: 17px;
-            width: 90%;
+            width: 100%;
             height: 90%;
          //   overflow: auto;
             
@@ -152,12 +155,12 @@
         }
         #clle {
             position: absolute;
-            bottom:5px;
+            bottom:45px;
             left: 0%;
             width:60%;
             
        
-            height:80px;
+            height:40px;
             border-radius:10px;
             background-color: rgba(0, 212, 255, .40);
             color:#ffffff;
@@ -168,10 +171,10 @@
         }
          #inicsld {
             position: absolute;
-            bottom: 5px;
+            bottom: 45px;
             right: 42px;
             width:80px;
-            height:80px;
+            height:40px;
             border-radius:10px;
             background-color: rgba(0, 212, 255, .40);
             color:#ffffff;
@@ -244,9 +247,9 @@
     position:absolute;
     width:60x;
     height:60%;
-       top:35%;
-       right:0%;
-       transition:  top ease-in-out 2s;
+       top:30%;
+       right:-30%;
+       transition:  right ease-in-out 2s;
  //   display: none;
 }
 .cbaudio{
@@ -288,13 +291,13 @@ border-width: .5px;
     <div id="dle">
 
         <textarea id="le" readonly onscroll="movescroll(this.scrollHeight,this.scrollTop)" ></textarea  >
-        <button id="clle" onclick='eactrls.style.top="-80%";x.src="";einicsld.style.background="rgba(0,150,0,.50)";einicsld.style.display="block";ele.value="";ele.scrollTo(0, 0);edle.style.display="none";clearInterval(scintervalo)'>Close</button>
+        <button id="clle" onclick='eactrls.style.right="-30%";x.src="";einicsld.style.background="rgba(0,150,0,.50)";einicsld.style.display="block";ele.value="";ele.scrollTo(0, 0);edle.style.display="none";clearInterval(scintervalo)'>Close</button>
         <button id="inicsld"  onclick='clearInterval(scintervalo);inicScrolling();'>Start</button>
    
    
     </div>  
    <button id="logo" onclick="showsettings()">&#9881;</button>
-     <button id="ref" onclick="eactrls.style.top='-80%';x.src='';sortear('');edc.scrollTop = 0;">&#9851;</button>
+     <button id="ref" onclick="eactrls.style.right='-30%';x.src='';sortear('');edc.scrollTop = 0;">&#9851;</button>
  
     <div id="todo">
  
@@ -319,10 +322,9 @@ border-width: .5px;
 
 
         <div id="ctrls">
-            <button class="btns"  id="ppr" onclick='opendoc( "repPrac")'>. *NOTES* .</button>
-            <button id="mainrep" class=btns onclick='opendoc( "rep")'>. Repertorio .</button>
+ 
             <button class="btns" onclick='opendoc( "open rep")'>Repertorio Mix.</button>
-         <button class="btns" onclick='sortearTocada()'>Repertorio Tocada</button>  
+ 
 
         </div>
         <div id=ifrs>
@@ -386,7 +388,7 @@ border-width: .5px;
   </audio>
   <div id="audctrls">
   <button id="bpl" class="cbaudio" onclick="x.play().catch(e => e);">&#9658;</button>
-  <button  id="bpa" class="cbaudio" onclick="eactrls.style.top='-80%';x.pause();">&#9612;&#9612;</button> 
+  <button  id="bpa" class="cbaudio" onclick="eactrls.style.right='-30%';x.pause();">&#9612;&#9612;</button> 
  </div>
     <script>
         //769  crnode2() para hacer el cambio tocada a cliente
@@ -399,16 +401,9 @@ var arlinks=[];
 var txlinks="";
 loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Canc.txt",function(r){
 arlinks=r.split("\n");
-//alert(txlinks);
-//alert(arlinks.length)
 arlinks=arlinks.filter(function(ar){return ar !="" && ar !=undefined});
-//alert(arlinks)
 txlinks=arlinks.toString();
-//alert(arlinks.length)
-//
-
 inicprs()
-
 });
 
     
@@ -452,7 +447,7 @@ var timewarning, timeout, timeover,test=false;
         edle = document.getElementById("dle");
         eactrls = document.getElementById("audctrls");
 
-      //  eactrls.style.right="-30%";
+        eactrls.style.right="-30%";
  
         edc = document.getElementById("todo")
          doc = ifr.contentWindow.document;
