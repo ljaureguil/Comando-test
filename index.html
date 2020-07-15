@@ -293,7 +293,7 @@ border-width: .5px;
    
    
     </div>  
-   <button id="logo" onclick="showsettings()">&#9881;</button>
+   <button id="logo" onclick="">&#9881;</button>
      <button id="ref" onclick="eactrls.style.top='-80%';x.src='';sortear('');edc.scrollTop = 0;">&#9851;</button>
  
     <div id="todo">
@@ -319,8 +319,8 @@ border-width: .5px;
 
 
         <div id="ctrls">
-            <button class="btns"  id="ppr" onclick='opendoc( "repPrac")'>. *NOTES* .</button>
-            <button id="mainrep" class=btns onclick='opendoc( "rep")'>. Repertorio .</button>
+           
+      
             <button class="btns" onclick='opendoc( "open rep")'>Repertorio Mix.</button>
          <button class="btns" onclick='sortearTocada()'>Repertorio Tocada</button>  
 
@@ -502,7 +502,7 @@ var timewarning, timeout, timeover,test=false;
                 //  
             }
             ////kj
-            etitulo.innerHTML = ". . . Repertorio: " + total.length + " Songs";
+            etitulo.innerHTML = ". . . Repertorio: " + total.length + "+ Songs";
             ////////////////////////////////////////////////
             for (i = 0; i < orremix.length; i++) {
                 //  if(orremix[i].indexOf("*")>=0) alert(orremix[i])
