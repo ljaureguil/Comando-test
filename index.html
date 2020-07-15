@@ -245,8 +245,8 @@
     width:60x;
     height:60%;
        top:35%;
-       right:0%;
-       transition:  top ease-in-out 2s;
+       right:-30%;
+       transition:  right ease-in-out 2s;
  //   display: none;
 }
 .cbaudio{
@@ -288,13 +288,13 @@ border-width: .5px;
     <div id="dle">
 
         <textarea id="le" readonly onscroll="movescroll(this.scrollHeight,this.scrollTop)" ></textarea  >
-        <button id="clle" onclick='eactrls.style.top="-80%";x.src="";einicsld.style.background="rgba(0,150,0,.50)";einicsld.style.display="block";ele.value="";ele.scrollTo(0, 0);edle.style.display="none";clearInterval(scintervalo)'>Close</button>
+        <button id="clle" onclick='eactrls.style.right="-30%";x.src="";einicsld.style.background="rgba(0,150,0,.50)";einicsld.style.display="block";ele.value="";ele.scrollTo(0, 0);edle.style.display="none";clearInterval(scintervalo)'>Close</button>
         <button id="inicsld"  onclick='clearInterval(scintervalo);inicScrolling();'>Start</button>
    
    
     </div>  
    <button id="logo" onclick="showsettings()">&#9881;</button>
-     <button id="ref" onclick="eactrls.style.top='-80%';x.src='';sortear('');edc.scrollTop = 0;">&#9851;</button>
+     <button id="ref" onclick="eactrls.style.right='-30%';x.src='';sortear('');edc.scrollTop = 0;">&#9851;</button>
  
     <div id="todo">
  
@@ -384,7 +384,7 @@ border-width: .5px;
   </audio>
   <div id="audctrls">
   <button id="bpl" class="cbaudio" onclick="x.play().catch(e => e);">&#9658;</button>
-  <button  id="bpa" class="cbaudio" onclick="eactrls.style.top='-80%';x.pause();">&#9612;&#9612;</button> 
+  <button  id="bpa" class="cbaudio" onclick="eactrls.style.right='-30%';x.pause();">&#9612;&#9612;</button> 
  </div>
     <script>
         //769  crnode2() para hacer el cambio tocada a cliente
@@ -450,7 +450,7 @@ var timewarning, timeout, timeover,test=false;
         edle = document.getElementById("dle");
         eactrls = document.getElementById("audctrls");
 
-        eactrls.style.top="-80%";
+        eactrls.style.right="-30%";
  
         edc = document.getElementById("todo")
          doc = ifr.contentWindow.document;
@@ -782,9 +782,9 @@ function crnode2(song) {
                 node.innerHTML = di + song.titulo + di;//+" . . . " + song.tono; //
      if(song.link.indexOf("http")>=0){
  //        alert("con link "+song.link)
- //para clientes        node.setAttribute('onclick', 'eactrls.style.top="35%";x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play().catch(e => e);');}
+ //para clientes        node.setAttribute('onclick', 'eactrls.style.right="35%";x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play().catch(e => e);');}
        //para practica
-         node.setAttribute('onclick', 'eactrls.style.top="35%";x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play().catch(e => e);');
+         node.setAttribute('onclick', 'eactrls.style.right="0%";x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play().catch(e => e);');
            node.innerHTML = di + song.titulo + di+" . . . <font color='#00ffff'>&#9193;</font>";// + song.tono;//+"<font color='#00ff00'>&#9835;</font>"; //
        
        
