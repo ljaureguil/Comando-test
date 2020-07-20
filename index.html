@@ -11,11 +11,14 @@
     <style>
         body {
             background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
-            font-size: 30px;
+            font-size: 30px; 
+                       overflow-y: auto;
+            overflow-x: hidden;
         }
         #todo {
             width: 100%;
             height: 100%;
+            
             overflow-y: auto;
             overflow-x: hidden;
             transition: overflow-y 0.5s ease;
@@ -40,8 +43,8 @@
             border-radius: 5px;
             background: #000070;
             font-size: 15px;
-            // font-weight: bold;
-            width: 45%;
+       
+            width: 98%;
             height: 8%;
         }
         #ed {
@@ -67,7 +70,7 @@
         #lirep {
             background: black;
             color: white;
-            width: 83%;
+            width: 88%;
             // height: 40%;
             font-size: 16px;// font repertorio
             font-weight: bold;
@@ -139,7 +142,7 @@
             padding: 15px;
             color: black;
             font-size: 17px;
-            width: 90%;
+            width: 100%;
             height: 90%;
          //   overflow: auto;
             
@@ -152,12 +155,12 @@
         }
         #clle {
             position: absolute;
-            bottom:5px;
+            bottom:45px;
             left: 0%;
             width:60%;
             
        
-            height:80px;
+            height:40px;
             border-radius:10px;
             background-color: rgba(0, 212, 255, .40);
             color:#ffffff;
@@ -168,10 +171,10 @@
         }
          #inicsld {
             position: absolute;
-            bottom: 5px;
+            bottom: 45px;
             right: 42px;
             width:80px;
-            height:80px;
+            height:40px;
             border-radius:10px;
             background-color: rgba(0, 212, 255, .40);
             color:#ffffff;
@@ -230,13 +233,12 @@
      text-align:center;  
 }
 #bottonInic{
-    height:180px;
-    width: 180px;
-    color:rgb(250, 0, 0);
-   background:url(https://lh3.googleusercontent.com/m6YEmcXhjRQRdkS7AMBgGzpbdyZLK2gpbju5jB_WUJwp4Ss_fxeKA202ybPMhJixfnrm);
-   background-size: 100% 100%;
-  //  border-radius:50%;
- //   box-shadow: ;
+    height:160px;
+    width: 160px;
+    color:black;
+
+    border-radius:50%;
+    box-shadow: ;
     font-size:30px;
     font-weight:bold;
  //   box-shadow: -15px 15px 26px  #503333, inset 10px -10px 7px #1f0cd1, inset -10px 10px 7px #b61ee4bb;
@@ -245,9 +247,9 @@
     position:absolute;
     width:60x;
     height:60%;
-       top:35%;
-       right:0%;
-       transition:  top ease-in-out 2s;
+       top:30%;
+       right:-30%;
+       transition:  right ease-in-out 2s;
  //   display: none;
 }
 .cbaudio{
@@ -289,13 +291,13 @@ border-width: .5px;
     <div id="dle">
 
         <textarea id="le" readonly onscroll="movescroll(this.scrollHeight,this.scrollTop)" ></textarea  >
-        <button id="clle" onclick='eactrls.style.top="-80%";x.src="";einicsld.style.background="rgba(0,150,0,.50)";einicsld.style.display="block";ele.value="";ele.scrollTo(0, 0);edle.style.display="none";clearInterval(scintervalo)'>Close</button>
+        <button id="clle" onclick='eactrls.style.right="-30%";x.src="";einicsld.style.background="rgba(0,150,0,.50)";einicsld.style.display="block";ele.value="";ele.scrollTo(0, 0);edle.style.display="none";clearInterval(scintervalo)'>Close</button>
         <button id="inicsld"  onclick='clearInterval(scintervalo);inicScrolling();'>Start</button>
    
    
     </div>  
    <button id="logo" onclick="showsettings()">&#9881;</button>
-     <button id="ref" onclick="eactrls.style.top='-80%';x.src='';sortear('');edc.scrollTop = 0;">&#9851;</button>
+     <button id="ref" onclick="eactrls.style.right='-30%';x.src='';sortear('');edc.scrollTop = 0;">&#9851;</button>
  
     <div id="todo">
  
@@ -320,10 +322,9 @@ border-width: .5px;
 
 
         <div id="ctrls">
-            <button class="btns"  id="ppr" onclick='opendoc( "repPrac")'>. *NOTES* .</button>
-            <button id="mainrep" class=btns onclick='opendoc( "rep")'>. Repertorio .</button>
+ 
             <button class="btns" onclick='opendoc( "open rep")'>Repertorio Mix.</button>
-         <button class="btns" onclick='sortearTocada()'>Repertorio Tocada</button>  
+ 
 
         </div>
         <div id=ifrs>
@@ -360,10 +361,10 @@ border-width: .5px;
 
    <div id="timerh">
        <p color="white">Timer:</p>
-      
-    1st. Hora<button id="bottonInic" class="btnsset" onclick="inicTocada(1)">60 Min</button><br>
-    . . . . . . . .<br>
-    2a. Hora+<button id="bottonInic" class="btnsset" onclick="inicTocada(2)">45 Min</button>
+       <br>
+    <button id="bottonInic" class="btnsset" onclick="inicTocada(1)">1st. Hora</button>  
+    
+    <button id="bottonInic" class="btnsset" onclick="inicTocada(2)">2a. Hora +++</button>  
 
  
 
@@ -387,7 +388,7 @@ border-width: .5px;
   </audio>
   <div id="audctrls">
   <button id="bpl" class="cbaudio" onclick="x.play().catch(e => e);">&#9658;</button>
-  <button  id="bpa" class="cbaudio" onclick="eactrls.style.top='-80%';x.pause();">&#9612;&#9612;</button> 
+  <button  id="bpa" class="cbaudio" onclick="eactrls.style.right='-30%';x.pause();">&#9612;&#9612;</button> 
  </div>
     <script>
         //769  crnode2() para hacer el cambio tocada a cliente
@@ -400,16 +401,9 @@ var arlinks=[];
 var txlinks="";
 loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Canc.txt",function(r){
 arlinks=r.split("\n");
-//alert(txlinks);
-//alert(arlinks.length)
 arlinks=arlinks.filter(function(ar){return ar !="" && ar !=undefined});
-//alert(arlinks)
 txlinks=arlinks.toString();
-//alert(arlinks.length)
-//
-
 inicprs()
-
 });
 
     
@@ -453,7 +447,7 @@ var timewarning, timeout, timeover,test=false;
         edle = document.getElementById("dle");
         eactrls = document.getElementById("audctrls");
 
-        eactrls.style.top="-80%";
+        eactrls.style.right="-30%";
  
         edc = document.getElementById("todo")
          doc = ifr.contentWindow.document;
@@ -472,7 +466,7 @@ var timewarning, timeout, timeover,test=false;
          //    loadText('https://drive.google.com/open?id=1VU-tkhVUVDJke1m49YNcJiAfbnN_ZDYHEGxckW20KZM',function(r){alert(r.indexOf("libreta"))})
          //////////////////////////////////////
      function inicprs(){   loadText('https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/RepertorioOriginal.txt', function(cont) {
-            etitulo.innerHTML = ". . . Repertorio:"
+            etitulo.innerHTML = "---Repertorio:"
             var cc = cont.split("/clases")
             cmi = cc[0].split("\n"),
                 arcmi = [],
@@ -503,7 +497,7 @@ var timewarning, timeout, timeover,test=false;
                 //  
             }
             ////kj
-            etitulo.innerHTML = ". . . Repertorio: " + total.length + " Songs";
+            etitulo.innerHTML = "---Repertorio: " + total.length + "+ Songs";
             ////////////////////////////////////////////////
             for (i = 0; i < orremix.length; i++) {
                 //  if(orremix[i].indexOf("*")>=0) alert(orremix[i])
@@ -718,7 +712,7 @@ var timewarning, timeout, timeover,test=false;
             //     alert(cl); 
             var ch = eli.children;
             if (cl === "") {
-                cl = ". . . Repertorio: " + total.length + " Songs";
+                cl = "---Repertorio: " + total.length + "+ Songs";
                 for (i = 0; i < ch.length; i++) {
                     ch[i].style.display = "";
                 }
@@ -782,13 +776,13 @@ function crnode2(song) {
   //        node.setAttribute('onclick', ' setaudio("'+song.link+'");  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play()');}
 
 
-                node.innerHTML = di + song.titulo + di+" . . . " + song.tono; //
+                node.innerHTML = di + song.titulo + di;//+" . . . " + song.tono; //
      if(song.link.indexOf("http")>=0){
  //        alert("con link "+song.link)
- //para clientes        node.setAttribute('onclick', 'eactrls.style.top="35%";x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play().catch(e => e);');}
+ //para clientes        node.setAttribute('onclick', 'eactrls.style.right="35%";x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play().catch(e => e);');}
        //para practica
-         node.setAttribute('onclick', 'eactrls.style.top="35%";x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");');
-           node.innerHTML = di + song.titulo + di+" . <font color='#00ffff'>&#9193;</font> . " + song.tono;//+"<font color='#00ff00'>&#9835;</font>"; //
+         node.setAttribute('onclick', 'eactrls.style.right="5px";x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play().catch(e => e);');
+           node.innerHTML = di + song.titulo + di+" . . . <font color='#00ffff'>&#9193;</font>";// + song.tono;//+"<font color='#00ff00'>&#9835;</font>"; //
        
        
          }
@@ -820,11 +814,13 @@ function crnode2(song) {
                 t.name = "cltit"
                 return t;
             } else {/*
+
                 var node = document.createElement("LI");
                 var di = "<font color='#00ffff'> _ </font>";
                 di = "";
  
                 node.innerHTML = di + song + di+" . . . " + to; //
+
                 node.setAttribute('onclick', 'this.style.color="#00ff00";showletra("' + song + '")');
                 node.estado = true;
                 node.index = i;
@@ -1199,21 +1195,26 @@ closesettings();
           subs: []
       };
      
+ //     alert(ar);
       var er=getClaseName(ar[0]);// alert(er);
       cm.main =er ;
      
       for (var i = 1; i < ar.length; i++) {
          if(ar[i]!="") cm.subs.push(getClaseName(ar[i]))
       }
-       return cm;
-   }
+ 
+      return cm;
+  /**/
+
+  }
  //454
  function setaudio(a){
 
 try{
       if(a!="" && a!=undefined && a.length>10){
            x.currentTime = 0;
-        }
+ 
+      }
 }
 catch(e){
     alert(e);
@@ -1224,18 +1225,28 @@ function getlink(c){
  //   alert(c)
   if(txlinks.indexOf(c)>=0){
 
+   //   alert(txlinks.indexOf(c))
       for(var iw=0;iw<arlinks.length;iw++){  
+ //         alert(arlinks[iw])
           if(arlinks[iw].indexOf(c)>=0 && arlinks[iw].indexOf("https://drive.google.com/file/d/")>=0){/* */
-               var pp=arlinks[iw].split("https://drive.google.com/file/d/");
-               pp=pp[1].split("/view");
-               pp="https://docs.google.com/uc?export=open&id="+pp[0]
-             iw=arlinks.length
+      //        alert("goog\n\n"+arlinks[i].indexOf(c))
+              var pp=arlinks[iw].split("https://drive.google.com/file/d/");
+            //  alert(pp)
+              pp=pp[1].split("/view?usp=sharing");
+           //   alert("ffffffffffffffff\n"+pp)
+              pp="https://docs.google.com/uc?export=open&id="+pp[0]
+      //        alert(pp);
+      iw=arlinks.length
               return pp;
-           }
-       }
+
+         
+          }
+        
+      }
 return "";
   }
   else return "";
+
 }
 
 
@@ -1260,6 +1271,7 @@ return "";
  
  
     </script>
+
 
 
 </body>
