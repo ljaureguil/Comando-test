@@ -101,18 +101,19 @@
         }
         #logo {
             position: absolute;
-            top: 1%;
+            top: 0%;
             right: 1%;
-            background: url(logo.jpg);
+            background: url(https://lh3.googleusercontent.com/m6YEmcXhjRQRdkS7AMBgGzpbdyZLK2gpbju5jB_WUJwp4Ss_fxeKA202ybPMhJixfnrm);
             background-size: 100% 100%;
             color: #ffffff;
             font-weight: bold;
-            width: 48px;
-            height: 48px;
+            width: 65px;
+            height: 65px;
             font-size: 30px;
-            border-radius: 8px;
-            // box-shadow: inset 0 0 20px #ffffff;
-            background-color: black;
+            border-radius: 50%;
+            border-color: white;
+         
+          //  background-color: white;
             // opacity: .65;
             visibility: visible;
         }
@@ -294,7 +295,7 @@ border-width: .5px;
    
    
     </div>  
-   <button id="logo" onclick="showsettings()">&#9881;</button>
+   <button id="logo" onclick="showsettings()"></button>
      <button id="ref" onclick="eactrls.style.top='-80%';x.src='';sortear('');edc.scrollTop = 0;">&#9851;</button>
  
     <div id="todo">
@@ -390,7 +391,7 @@ border-width: .5px;
   <button  id="bpa" class="cbaudio" onclick="eactrls.style.top='-80%';x.pause();">&#9612;&#9612;</button> 
  </div>
     <script>
-        //769  crnode2() para hacer el cambio tocada a cliente
+        //769  crnode2() para hacer el cambio tocada a cliente  //&#9881;
 //    loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Canc.txt",function(r){alert(r)})
     
   window.onerror = function(){
@@ -634,39 +635,7 @@ var timewarning, timeout, timeover,test=false;
            showletra(ebarra.value)
        }
 
-       function showletra2(cancion) { //Corrido de Roberto Gastelum
-   //  var tc=cancion.toUpperCase();
-    var tc=cancion.titulo.toUpperCase();
-          var tl=Letras.toUpperCase();
-          var aas=tl.indexOf("*" + tc);
-      //     var as = Letras.indexOf("*" + cancion.titulo);
-                as=aas
-           if (as >= 0) {
-   if(cancion.link!= undefined) x.setAttribute("src",cancion.link);
-               edle.style.display = "block";
-               var vt = Letras.slice(as, Letras.indexOf("*", as + 1));
-               var vt = Letras.slice(as, Letras.indexOf("*", as + 1));
-               le.value = vt;
-               sch = ele.offsetHeight * 1;
-               scy = 0;
-//               tiempo = vt.slice(vt.indexOf("...") + 3, vt.indexOf("...", vt.indexOf("...") + 1)) * 1000 * 60;
-//               delay = vt.slice(vt.lastIndexOf("...") + 3, vt.indexOf("\n", vt.indexOf("...") + 1)) * 1000;
-                var par= vt.slice(vt.indexOf("(")+1 , vt.indexOf(")"));
-                par=par.split(",");
-               tiempo = par[0]* 1000 * 60;
-               dilay = par[1] * 1000;
-        //        alert(par.toString());
-           } else {
-               ebarra.value = cancion.titulo + " letra";
-               //   window.open(ebarra.value, '_blank');
-               esrch.click()
-               ebarra.value = "";
-           }
-
-       }
-        
-
-
+ 
        function showletra(cancion) { //Corrido de Roberto Gastelum
      var tc=cancion.toUpperCase();
           var tl=Letras.toUpperCase();
