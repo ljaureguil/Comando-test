@@ -69,7 +69,7 @@
             color: white;
             width: 83%;
             // height: 40%;
-            font-size: 16px;// font repertorio
+            font-size: 18px;// font repertorio
             font-weight: bold;
             border-radius: 15px;
             padding: 5%;
@@ -202,12 +202,13 @@
         text-align:center;
   position: absolute;
   width:90%;
-  height: 90%;
-  background:rgba(0, 212, 255, .60);
+  height: auto;
+  background:url(https://ae01.alicdn.com/kf/HTB170FoRFXXXXaAXpXXq6xXFXXX5/Party-Disco-Club-DJ-Light-Show-Lumiere-Colorful-wedding-room-beam-lights-background-Mini-RGB-lamps.jpg);
+  background-size: 100% 100%;
   color:blue;
   font-size: 20px;
   font-weight: bold;
-  left: 0%;
+  left: 5%;
   top: 5%;
  
   display: none;
@@ -231,16 +232,17 @@
      text-align:center;  
 }
 #bottonInic{
-    height:180px;
-    width: 180px;
-    color:rgb(250, 0, 0);
+    height:100px;
+    width: 100px;
+    color:#00ff00;
    background:url(https://lh3.googleusercontent.com/m6YEmcXhjRQRdkS7AMBgGzpbdyZLK2gpbju5jB_WUJwp4Ss_fxeKA202ybPMhJixfnrm);
    background-size: 100% 100%;
-  //  border-radius:50%;
- //   box-shadow: ;
-    font-size:30px;
+   -webkit-text-stroke: 1.80px #000000;
+-webkit-text-fill-color: #00ff00;
+    font-size:25px;
     font-weight:bold;
- //   box-shadow: -15px 15px 26px  #503333, inset 10px -10px 7px #1f0cd1, inset -10px 10px 7px #b61ee4bb;
+    border-radius: 10px;
+    box-shadow: -5px 5px 26px  #c3e2d3, inset 10px -10px 10px #3e8049, inset -10px 10px 10px #02fb38bb;
 }
 #audctrls{
     position:absolute;
@@ -277,14 +279,21 @@ right: 0%;
 top:20%;
 }
 #timerh{
-    color: white;
- width: 100%;
+    background:url(https://i.pinimg.com/originals/5c/3f/6e/5c3f6e1423d6a2ab20e137e5f082cedf.jpg);
+        background-size: 100% 100%;
+    text-align: center;
+    position: absolute;
+    top:15%;
+    left:30%;
+     color: white;
+ width: 40%;
  height: auto;
-  font-size: 40px;
-padding: 20px;
+  font-size: 20px;
+padding: 10px;
 border-style: double;
 border-radius: 10px;
 border-width: .5px;
+display: none;
 }
     </style>
     <div id="dle">
@@ -295,7 +304,7 @@ border-width: .5px;
    
    
     </div>  
-   <button id="logo" onclick="showsettings()"></button>
+   <button id="logo" onclick="showstimer()"></button>
      <button id="ref" onclick="eactrls.style.top='-80%';x.src='';sortear('');edc.scrollTop = 0;">&#9851;</button>
  
     <div id="todo">
@@ -359,17 +368,7 @@ border-width: .5px;
 <br>
 
 
-   <div id="timerh">
-       <p color="white">Timer:</p>
-      
-    1st. Hora<button id="bottonInic" class="btnsset" onclick="inicTocada(1)">60 Min</button><br>
-    . . . . . . . .<br>
-    2a. Hora+<button id="bottonInic" class="btnsset" onclick="inicTocada(2)">45 Min</button>
-
  
-
-
-   </div>
 <br>
     <button id="finish" class="btnsset" onclick="finish()">Terminar Tocada</button>  
     <br>
@@ -381,7 +380,16 @@ border-width: .5px;
 
 
 </div>
+<div id="timerh">
+    <p color="white">Timer:</p>
+   
+ 1st. Hora<button id="bottonInic" class="btnsset" onclick="inicTocada(1)">60 Min</button><br>
+ . . . . . . . .<br>
+ 2a. Hora+<button id="bottonInic" class="btnsset" onclick="inicTocada(2)">45 Min</button>
+<br>
+<button class="btnsset" onclick="showsettings()">Open Settings</button>
 
+</div>
   
 <audio id="myAudio">
     <source src="" type="audio/ogg">
@@ -448,6 +456,7 @@ var timewarning, timeout, timeover,test=false;
  
  
        esettings = document.getElementById("settings-dlg");
+        etimer = document.getElementById("timerh");
  
    var tocadas=localStorage.getItem("tocadas");
         ele = document.getElementById("le");
@@ -959,15 +968,23 @@ document.getElementById("lirep").style.fontSize = s+"px";
   }
   function showsettings(){
       
-      
     esettings.style.display="block";
-    //     document.getElementById("hh").innerHTML=horast+"a. Hora";
- 
-    
+    etimer.style.display="none";
+      
+  }
+   function showstimer(){
+      
+    esettings.style.display="none";
+    etimer.style.display="block";
+      
   }
   function closesettings(){
+    
+    etimer.style.display="none"
       esettings.style.display="none"
+   //     alert("ddd")
   }
+    
  tiempodetocar=60*60*1000;  
    
   function inicTocada(h) { 
@@ -975,18 +992,10 @@ document.getElementById("lirep").style.fontSize = s+"px";
    
    if(test) alert("you are in test mode");
    
-           clearTimeout(timeout);
+     clearTimeout(timeout);
      clearTimeout(timeover);
      clearTimeout(timewarning);
-     
-  /*   
-     ////////
-      if(horast>1) tiempodetocar=45*60*1000;
-      else  tiempodetocar=60*60*1000;  
-      if(test) tiempodetocar=tiempodetocar= 7500;
-    //  else tiempodetocar=45*60*1000;
-  */   
-
+  
   if(h>1) tiempodetocar=45*60*1000;
       else  tiempodetocar=60*60*1000;  
       if(test) tiempodetocar=tiempodetocar= 7500;
@@ -1021,8 +1030,6 @@ else{
       
     }, tiempodetocar - 5000);
  
-  //  }, tiempodetocar - (5*60*1000));
-    
   timeout=setTimeout(function() {
           document.body.style.background = "red";
     }, tiempodetocar);
@@ -1033,7 +1040,8 @@ else{
 //    }, tiempodetocar +  (2.5*60*1000))
  }, tiempodetocar +  2000)
 
-    closesettings()
+    closesettings();
+  
 
     var toc = localStorage.getItem("inicio");
     if (toc != null) {} else {
