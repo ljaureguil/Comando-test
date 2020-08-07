@@ -923,37 +923,22 @@ function crnode2(song) {
                 di = "";
   //        node.setAttribute('onclick', ' setaudio("'+song.link+'");  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play()');}
                node.innerHTML = di + song.titulo + di+" . . . " + song.tono; //
-
+var tt="";
 if(song.guitarra!=undefined && song.guitarra!="" || song.acordeon!=undefined && song.acordeon!="" ) {
  if(song.guitarra!=undefined && song.guitarra!="") {
-     //;this.links="'+song.links+'"
-     node.setAttribute('onclick', 'swc();egu.style.opacity=1;guitarra="'+song.guitarra+'"; this.style.color="#00ff00";showletra("' + song.titulo + '");');
-    node.innerHTML = di + song.titulo + di+" . <font color='#00ffff'>&#9193;</font> . " + song.tono;//+"<font color='#00ff00'>&#9835;</font>"; //
- 
+     tt="guitarra='"+song.guitarra+"';egu.style.opacity=1;";
+   //  node.setAttribute('onclick', 'swc();egu.style.opacity=1;guitarra="'+song.guitarra+'"; this.style.color="#00ff00";showletra("' + song.titulo + '");');
+  // alert(tt)
   }
   
 if(song.acordeon!=undefined && song.acordeon!="") {//alert(acordeon);
-        node.setAttribute('onclick', 'swc(); eac.style.opacity=1;acordeon="'+song.acordeon+'"; this.style.color="#00ff00";showletra("' + song.titulo + '");');
-      node.innerHTML = di + song.titulo + di+" . <font color='#00ffff'>&#9193;</font> . " + song.tono;//+"<font color='#00ff00'>&#9835;</font>"; //
- //alert(song.acordeon)
-
+    tt=tt+";acordeon='"+song.acordeon+"';eac.style.opacity=1;";
+   //     node.setAttribute('onclick', 'swc(); eac.style.opacity=1;acordeon="'+song.acordeon+'"; this.style.color="#00ff00";showletra("' + song.titulo + '");');
+     // alert(tt)
  }
-
-////////////////////////////
-   /*if(song.links[0]!=undefined){
-     
- //para clientes        node.setAttribute('onclick', 'eactrls.style.top="35%";x.src="'+song.link+'";  ;this.style.color="#00ff00";this.links="'+song.link+'";showletra("' + song.titulo + '");x.play().catch(e => e);');}
-       //para practica
-         node.setAttribute('onclick', 'eactrls.style.top="35%";x.src="'+song.links[0]+'";  ;this.style.color="#00ff00";this.links="'+song.links+'";showletra("' + song.titulo + '");');
-          node.innerHTML = di + song.titulo + di+" . <font color='#00ffff'>&#9193;</font> . " + song.tono;//+"<font color='#00ff00'>&#9835;</font>"; //
-          if(song.acordeon!=undefined && song.links[0]!=undefined){
-               acordeon=song.acordeon;
-          }
-          if(song.links[1]!=undefined && song.links[1]!=undefined){
-               acordeon=song.guitarra;
-          }
-          */
-           }
+         node.setAttribute('onclick', 'swc(); eac.style.opacity=1;'+tt+'; this.style.color="#00ff00";showletra("' + song.titulo + '");');
+        node.innerHTML = di + song.titulo + di+" . <font color='#00ffff'>&#9193;</font> . " + song.tono;//+"<font color='#00ff00'>&#9835;</font>"; //
+         }
         else {
   //          alert("sin link,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,")
             node.setAttribute('onclick', 'this.style.color="#00ff00";showletra("' + song.titulo + '");');
