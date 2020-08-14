@@ -232,8 +232,8 @@
      text-align:center;  
 }
 #bottonInic{
-    height:100px;
-    width: 100px;
+    height:180px;
+    width: 180px;
     color:#00ff00;
    background:url(https://lh3.googleusercontent.com/m6YEmcXhjRQRdkS7AMBgGzpbdyZLK2gpbju5jB_WUJwp4Ss_fxeKA202ybPMhJixfnrm);
    background-size: 100% 100%;
@@ -297,10 +297,10 @@ background-size: 100% 100%;
         background-size: 100% 100%;
     text-align: center;
     position: absolute;
-    top:15%;
-    left:20%;
+    top:10%;
+    left:2%;
      color: white;
- width: 60%;
+ width: 90%;
  height: auto;
   font-size: 20px;
 padding: 10px;
@@ -382,7 +382,7 @@ display: none;
         </div>
     </div>
    <div id="settings-dlg">
-        <button class="btnsset" onclick="testmode();">*Test Mode*</button><br>
+ 
  <button class="btnsset" onclick="resetTocada();">*Recet Tocada*</button><br>
    <button class="btnsset" onclick="settingUpTocada()">Set a Tocada</button>
    
@@ -396,12 +396,15 @@ display: none;
  
 </div>
 <div id="timerh">
+       <button class="btnsset" onclick="testmode();" style="position:absolute;left:2%;top:1%;border-radius:100px;background:red;color:white;">*Test Mode*</button><br>
+       <button class="btnsset" onclick="resetTocada();" style="position:absolute;left:2%;top:1%;border-radius:100px;background:red;color:white;top:12%;">Reset Timer</button><br>
+
     <p onclick="closesettings()" style="position:absolute;width:30px;height:30px;font-size: 30px;font-weight: bold;right: 10px;top: -20px;border-radius: 50%;border-style: solid;">X</p>
     <p color="white">Timer:</p>
    
- 1st. Hora<button id="bottonInic" class="btnsset" onclick="inicTocada(1)">60 Min</button><br>
+ 1st. Hora<button id="bottonInic" class="btnsset" onclick="inicTimer(60);//inicTocada(1)">60 Min</button><br>
  . . . . . . . .<br>
- 2a. Hora+<button id="bottonInic" class="btnsset" onclick="inicTocada(2)">45 Min</button>
+ 2a. Hora+<button id="bottonInic" class="btnsset" onclick="inicTimer(45);//inicTocada(2)">45 Min</button>
 <br>
 <button class="btnsset" onclick="showsettings()">Open Settings</button>
 
@@ -419,15 +422,55 @@ display: none;
 </button>
   <button  id="bpa" class="cbaudio" onclick="acordeon='';guitarra='';eactrls.style.top='-80%';x.pause();"></button> 
  </div>
+
     <script>
-        //&#9612;&#9612;769  crnode2() para hacer el cambio tocada a cliente  //&#9881;
+  var obtimer=function(){
+     var date=new Date();
+     this.long=0;
+     this.month=date.getMonth();
+     this.year=date.getFullYear();
+     this.day=date.getDate();
+     this.hour=date.getHours();
+     this.minutes=date.getMinutes();
+     this.seconds=date.getSeconds();
+     this.timeinic=date.getTime();
+ }
+
+ verifyTimer();
+
+
+ /*loadText("https://www.musica.com/letras.asp?letra=826644",function(r){//file:///C:/Users/djvdj/Desktop/
+     alert(r);
+ });
+ 
+ 
+  function loadDoc(url,callback) {
+  var xhttp = new XMLHttpRequest();
+ 
+  xhttp.open("GET", url, false);
+  xhttp.send(); 
+  setTimeout(function(){ alert("ddd\n\n"+xhttp.responseXML)
+  callback(xhttp.responseXML)},10000)
+ }   
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
 //    loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Canc.txt",function(r){alert(r)})
-  /*
-         <button id="clle" onclick='eactrls.style.top="-80%";x.src="";einicsld.style.background="rgba(0,150,0,.50)";einicsld.style.display="block";ele.value="";ele.scrollTo(0, 0);edle.style.display="none";clearInterval(scintervalo)'>
-            Close
-        </button>
-  
-  */  
+    online=window.navigator.onLine;
+ //   alert(online)
     acordeon="",guitarra="";
 Element.prototype.appendBefore = function (element) {
     element.parentNode.insertBefore(this, element);
@@ -463,22 +506,28 @@ Element.prototype.appendAfter = function (element) {
 var arlinks=[];
 var txlinks="";
 //loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Canc.txt",function(r){
-loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/cc.txt",function(r){
-
-
+    if(online)loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/cc.txt",function(r){
 arlinks=r.split("\n");
-
 arlinks=arlinks.filter(function(ar){return ar !="" && ar !=undefined && ar.indexOf("*") < 0 });
-//alert(arlinks)
 txlinks=r;
-
 //inicprs()
-
-
+localStorage.setItem("CancLinks",r)
 
 inic2();
 
+
 });
+else{
+   var r=localStorage.getItem("CancLinks");
+   if(r!=null){
+    arlinks=r.split("\n");
+arlinks=arlinks.filter(function(ar){return ar !="" && ar !=undefined && ar.indexOf("*") < 0 });
+txlinks=r;
+inic2();  
+   }
+   else alert("You are offline a and there is no back up")
+
+}
 
     songs=[];
     
@@ -514,12 +563,26 @@ var timewarning, timeout, timeover,test=false;
         var total = []
         var btit = true;
         var Letras=""; 
-        loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Letras.txt", function(r) {Letras=r;});
- 
- 
+        var letrasLocal=localStorage.getItem("letras");
+ //       alert(letrasLocal);
+    
+        
+        if(online) loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Letras.txt",
+         function(r) {
+             Letras=r;
+             localStorage.setItem("letras",r);
+             
+             });
+             else{
+                Letras=localStorage.getItem("Letras");
+                if(Letras==null) Letras="";
+                
+                 
+             }
+  
        esettings = document.getElementById("settings-dlg");
         etimer = document.getElementById("timerh");
- 
+  
    var tocadas=localStorage.getItem("tocadas");
         ele = document.getElementById("le");
         edle = document.getElementById("dle");
@@ -555,7 +618,7 @@ var timewarning, timeout, timeover,test=false;
                 rsongs = [],
                 rcl = [];
             orremix = cc[1].split("\n")
-            alert(orremix)
+//            alert(orremix)
             // oremix = [];
             //class
             for (i = 0; i < cmi.length; i++) {
@@ -631,9 +694,12 @@ var timewarning, timeout, timeover,test=false;
         });
      }
  var clases=[];
-     function inic2(){
-        loadText('https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/RepertorioOriginal.txt', function(cont) {
-            etitulo.innerHTML = ". . . Repertorio:"
+ function proceso(cont){
+ //    alert(etitulo.innerHTML); 
+
+  //   alert("\n\n\nffffffffff\n\n"+cont)
+  
+    etitulo.innerHTML = ". . . Repertorio:";
             var cc = cont.split("/clases");
             var pc=cc[0].split("\n");
             tpcc=[];
@@ -672,7 +738,18 @@ var timewarning, timeout, timeover,test=false;
                 }
             })
   
-        });
+        
+ }
+     function inic2(){
+         if(online){ loadText('https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/RepertorioOriginal.txt', function(cont) {
+           proceso(cont) ;
+           localStorage.setItem("Repertorio",cont)        });
+           }
+        else{
+          var rep=localStorage.getItem("Repertorio");
+          if(rep!=null) proceso(rep);
+          alert("You are offline and there is not a backup")
+        }
 
      }
      function getsongobj(raw){
@@ -770,7 +847,7 @@ var timewarning, timeout, timeover,test=false;
                 // 
                 if (op === "repPrac") {
                     loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/RepPractica.txt", function(r) {
-                        alert(r)
+                //        alert(r)
                     });
                 } else {
                     if (op === "open rep") {
@@ -809,6 +886,34 @@ var timewarning, timeout, timeover,test=false;
            var as = Letras.indexOf("*" + cancion);
                 as=aas
            if (as >= 0) {
+                var na=Letras.indexOf("*",as+1)
+              var cal=Letras.slice(as,na);
+            //  alert(as+"\n"+na+"\n"+cal);
+              edle.style.display = "block";
+              ele.value=cal;
+             
+               scy = 0;
+                var par= cal.slice(vt.indexOf("(")+1 , cal.indexOf(")"));
+                par=par.split(",");
+               tiempo = par[0]* 1000 * 60;
+               dilay = par[1] * 1000;
+               sch = ele.offsetHeight * 1;
+           } else {
+               ebarra.value = cancion + " letra";
+                esrch.click()
+               ebarra.value = "";
+           }
+
+       }
+
+       /*
+             function showletra(cancion) { //Corrido de Roberto Gastelum
+     var tc=cancion.toUpperCase();
+          var tl=Letras.toUpperCase();
+          var aas=tl.indexOf("*" + tc);
+           var as = Letras.indexOf("*" + cancion);
+                as=aas
+           if (as >= 0) {
               
 
                edle.style.display = "block";
@@ -832,11 +937,15 @@ var timewarning, timeout, timeover,test=false;
            }
 
        }
+       */
         
         function loadText(file, callback) {
-            fetch(file).then(response => response.text()).then((data) => {
+        //    if(online){
+                 fetch(file).then(response => response.text()).then((data) => {
                 callback(data); //
             })
+         //   }
+ //     else {alert("You are offline...");callback("")}
         }
 
         function createbtns(li) {
@@ -1083,8 +1192,8 @@ if(song.acordeon!=undefined && song.acordeon!="") {//alert(acordeon);
     }
     dilay=4000;
     function inicScrolling() {
-         document.getElementById("clle").focus();
-      einicsld.style.background = "rgba(150,0,0,.50)";
+        ele.focus();// document.getElementById("le").focus();//clle
+    //  einicsld.style.background = "rgba(150,0,0,.50)";
          setTimeout(function(){
       sctiempo = (tiempo-dilay) / (ele.scrollHeight - ele.offsetHeight);//    //-sch+1  //alert(tiempo+"\n\n"+ele.scrollHeight+"\n"+sch+"\n"+sctiempo)
       it = 0;
@@ -1155,6 +1264,239 @@ document.getElementById("lirep").style.fontSize = s+"px";
   }
     
  tiempodetocar=60*60*1000;  
+ 
+
+ function verifyTimer(){
+    var toc = localStorage.getItem("Timer");
+    var tt=new obtimer();
+     if(toc!=null && toc!=""){
+        var obd=JSON.parse(toc);
+     
+        var acd=new Date();
+        var dif=(acd.getTime()-obd.timeinic)/(60*1000);
+       alert(JSON.stringify(obd))
+        alert(dif)
+        var t=obd.long-dif;
+       if( dif<obd.long ){
+             var o=confirm("It seems that you have an 'hour' of "+obd.long+" in progress,\n\nhave played "+dif+" mins. and "+t+" minutes still left\n\n Press Ok Continue or cancel to reset timer")
+           //  alert(o)
+             if(!o){
+                resetTocada();
+                    }
+                    else{
+                      //   alert("faltan por tocar "+t)
+                   inicTimer(t)
+                  
+                  
+
+
+                    }
+        
+        } 
+        else{
+            var op=confirm("the hour of "+obd.long+" has ended, do you want to Add Up this hour to the tocada?");
+            if(op){
+                //addup
+            }
+            else{
+                resetTocada();
+            }
+            
+        }
+     }
+     else{
+
+            var tt=new obtimer();
+             tt.long=t;
+             localStorage.setItem("Timer",JSON.stringify(tt))
+             alert("nueva hora iniciada")
+
+         //   alert(JSON.stringify(tt))
+            
+     }
+
+
+
+}
+ var twarn=5*60*1000;
+ var tovert=3*60*1000;
+
+
+ function inicTimer(t){
+    twarn=5*60*1000;
+    tovert=3*60*1000;
+
+///////////////////////////////////////////////////
+
+ //Trabajar en esto..................
+if(!test){
+    var toc = localStorage.getItem("Timer");
+    var tt=new obtimer();
+     if(toc!=null && toc!=""){
+        var obd=JSON.parse(toc);
+     
+        var acd=new Date();
+        var dif=(acd.getTime()-obd.timeinic)/(60*1000);
+        alert(JSON.stringify(obd))
+        alert(dif)
+ 
+       if( dif<t ){
+             var o=confirm("you have played "+dif+" mins. Press Ok Continue or cancel to reset timer")
+             alert(o)
+             if(!o){
+                resetTocada();
+              //  localStorage.setItem("Timer","");
+             //   alert("reseteado")
+                    }
+                    else{
+                   //      alert("continue");
+                   t=t-dif;
+                   alert("faltan por tocar "+t)
+
+
+                    }
+        
+        } 
+        else{
+            var op=confirm("the hour of "+obd.long+" has ended, do you want to Add Up this hour to the tocada?");
+            if(op){
+                //addup
+            }
+            else{
+                resetTocada();
+            }
+            
+        }
+     }
+     else{
+
+            var tt=new obtimer();
+             tt.long=t;
+             localStorage.setItem("Timer",JSON.stringify(tt))
+             alert("nueva hora iniciada")
+
+         //   alert(JSON.stringify(tt))
+            
+     }
+}
+
+/**/
+     ////////////////////////////////
+
+ 
+      clearTimeout(timeout);
+     clearTimeout(timeover);
+     clearTimeout(timewarning);
+   if(test) alert("you are in test mode");
+      
+   tiempodetocar=t*60*1000;
+        if(test && t<47){ tiempodetocar=tiempodetocar= 4500;twarn=5000;tovert=2000}
+        if(test && t>47){ tiempodetocar=tiempodetocar= 7500;twarn=5000;tovert=2000}
+          timewarning=setTimeout(function() {
+        document.body.style.background = "orange";
+      //  var rr=localStorage.getItem("horastocadas")*1+1;
+        localStorage.setItem("horastocadas",horast);
+
+      
+    }, tiempodetocar - twarn);
+   timeout=setTimeout(function() {
+       
+       localStorage.setItem("Timer","");
+
+          document.body.style.background = "red";
+    }, tiempodetocar);
+    
+    timeover=setTimeout(function() {
+
+        eli.style.background = "red";
+
+ }, tiempodetocar +  tovert)
+     closesettings();
+ }
+ /*
+ 
+ var twarn=5*60*1000;
+ var tovert=3*60*1000;
+ function inicTimer(t){
+///////////////////////////////////////////////////
+if(!test){
+    var toc = localStorage.getItem("Timer");
+    var tt=new obtimer();
+     if(toc!=null && toc!=""){
+        var obd=JSON.parse(toc);
+     
+        var acd=new Date();
+        var dif=(acd.getTime()-obd.timeinic)/(60*1000);
+        alert(JSON.stringify(obd))
+        alert(dif)
+ 
+       if( dif<t ){
+             var o=prompt("you have played "+dif+" mins. Press Ok to Reset or Cancel to Continue")
+             alert(o)
+             if(o!=null){
+                localStorage.setItem("Timer","");
+                alert("reseteado")
+                    }
+                    else alert("continue")
+        
+        } 
+        else{
+            
+        }
+     }
+     else{
+
+            var tt=new obtimer();
+             tt.long=t;
+             localStorage.setItem("Timer",JSON.stringify(tt))
+
+         //   alert(JSON.stringify(tt))
+            
+     }
+}
+     ////////////////////////////////
+
+      twarn=5*60*1000;
+      tovert=3*60*1000;
+
+
+
+      clearTimeout(timeout);
+     clearTimeout(timeover);
+     clearTimeout(timewarning);
+   if(test) alert("you are in test mode");
+      
+   tiempodetocar=t*60*1000;
+        if(test && t<47){ tiempodetocar=tiempodetocar= 4500;twarn=5000;tovert=2000}
+        if(test && t>47){ tiempodetocar=tiempodetocar= 7500;twarn=5000;tovert=2000}
+          timewarning=setTimeout(function() {
+        document.body.style.background = "orange";
+      //  var rr=localStorage.getItem("horastocadas")*1+1;
+        localStorage.setItem("horastocadas",horast);
+
+      
+    }, tiempodetocar - twarn);
+   timeout=setTimeout(function() {
+       
+       localStorage.setItem("Timer","");
+
+          document.body.style.background = "red";
+    }, tiempodetocar);
+    
+    timeover=setTimeout(function() {
+
+        eli.style.background = "red";
+
+ }, tiempodetocar +  tovert)
+
+
+    
+     closesettings();
+ 
+  
+ }
+ 
+ */
    
   function inicTocada(h) { 
    ///////////////////   
@@ -1279,6 +1621,7 @@ function resetTocada(){//confirm("Press a button!");
         localStorage.removeItem("Tocadainfo")
         localStorage.removeItem("tocadas")
       localStorage.removeItem("inicio")
+      localStorage.setItem("Timer","");
      localStorage.removeItem("horastocadas");
      horast=1;
      Tocada="";
@@ -1308,12 +1651,12 @@ closesettings();
     //  
       if(test){alert("test mode is off");
       test=false;
-              resetTocada();
+           //   resetTocada();
           }
           else{
         if(confirm("you are going to test mode")){
             test=true;
-            resetTocada();
+         //   resetTocada();
   }
   }
   }
@@ -1432,17 +1775,7 @@ return "";
 
 
 
-
- 
- 
- /*
-  function loadDoc(url) {
-  var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", url, false);
-  xhttp.send();
-  return xhttp.responseXML;  
-}   
- */
+/* */
  
  
  
