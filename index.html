@@ -402,9 +402,9 @@ display: none;
     <p onclick="closesettings()" style="position:absolute;width:30px;height:30px;font-size: 30px;font-weight: bold;right: 10px;top: -20px;border-radius: 50%;border-style: solid;">X</p>
     <p color="white">Timer:</p>
    
- 1st. Hora<button id="bottonInic" class="btnsset" onclick="inicTimer(60);//inicTocada(1)">60 Min</button><br>
+ 1st. Hora<button id="bottonInic" class="btnsset" onclick="verifyTimer(8);//inicTocada(1)">60 Min</button><br>
  . . . . . . . .<br>
- 2a. Hora+<button id="bottonInic" class="btnsset" onclick="inicTimer(45);//inicTocada(2)">45 Min</button>
+ 2a. Hora+<button id="bottonInic" class="btnsset" onclick="verifyTimer(6);//inicTocada(2)">45 Min</button>
 <br>
 <button class="btnsset" onclick="showsettings()">Open Settings</button>
 
@@ -422,8 +422,20 @@ display: none;
 </button>
   <button  id="bpa" class="cbaudio" onclick="acordeon='';guitarra='';eactrls.style.top='-80%';x.pause();"></button> 
  </div>
+ 
+    
+ </div>
 
     <script>
+     
+     esettings = document.getElementById("settings-dlg");
+        etimer = document.getElementById("timerh");
+  
+   tiempodetocar=60*60*1000;  
+ kt=60*1000;
+ 
+
+//localStorage.removeItem("Timer")
   var obtimer=function(){
      var date=new Date();
      this.long=0;
@@ -434,6 +446,21 @@ display: none;
      this.minutes=date.getMinutes();
      this.seconds=date.getSeconds();
      this.timeinic=date.getTime();
+     this.chkStatus = function(){
+         alert("ok3")
+         var dd=new Date();
+         var dif=dd.getTime();
+         alert(dif)
+         if(dif>this.long) return {status:false};
+         else{
+             return {
+                 tocado:dif,
+                 rest:this.long-dif,
+                 status:true
+             };
+             
+         }
+     }
  }
 
  verifyTimer();
@@ -579,10 +606,7 @@ var timewarning, timeout, timeover,test=false;
                 
                  
              }
-  
-       esettings = document.getElementById("settings-dlg");
-        etimer = document.getElementById("timerh");
-  
+
    var tocadas=localStorage.getItem("tocadas");
         ele = document.getElementById("le");
         edle = document.getElementById("dle");
@@ -1262,241 +1286,217 @@ document.getElementById("lirep").style.fontSize = s+"px";
       esettings.style.display="none"
    //     alert("ddd")
   }
-    
- tiempodetocar=60*60*1000;  
  
 
- function verifyTimer(){
-    var toc = localStorage.getItem("Timer");
-    var tt=new obtimer();
-     if(toc!=null && toc!=""){
-        var obd=JSON.parse(toc);
-     
-        var acd=new Date();
-        var dif=(acd.getTime()-obd.timeinic)/(60*1000);
-       alert(JSON.stringify(obd))
-        alert(dif)
-        var t=obd.long-dif;
-       if( dif<obd.long ){
-             var o=confirm("It seems that you have an 'hour' of "+obd.long+" in progress,\n\nhave played "+dif+" mins. and "+t+" minutes still left\n\n Press Ok Continue or cancel to reset timer")
-           //  alert(o)
-             if(!o){
-                resetTocada();
-                    }
-                    else{
-                      //   alert("faltan por tocar "+t)
-                   inicTimer(t)
-                  
-                  
 
 
-                    }
-        
-        } 
-        else{
-            var op=confirm("the hour of "+obd.long+" has ended, do you want to Add Up this hour to the tocada?");
-            if(op){
-                //addup
-            }
-            else{
-                resetTocada();
-            }
-            
-        }
-     }
-     else{
+function verifyTimer(y) {
 
-            var tt=new obtimer();
-             tt.long=t;
-             localStorage.setItem("Timer",JSON.stringify(tt))
-             alert("nueva hora iniciada")
-
-         //   alert(JSON.stringify(tt))
-            
-     }
-
-
-
-}
- var twarn=5*60*1000;
- var tovert=3*60*1000;
-
-
- function inicTimer(t){
-    twarn=5*60*1000;
-    tovert=3*60*1000;
-
-///////////////////////////////////////////////////
-
- //Trabajar en esto..................
-if(!test){
-    var toc = localStorage.getItem("Timer");
-    var tt=new obtimer();
-     if(toc!=null && toc!=""){
-        var obd=JSON.parse(toc);
-     
-        var acd=new Date();
-        var dif=(acd.getTime()-obd.timeinic)/(60*1000);
-        alert(JSON.stringify(obd))
-        alert(dif)
- 
-       if( dif<t ){
-             var o=confirm("you have played "+dif+" mins. Press Ok Continue or cancel to reset timer")
-             alert(o)
-             if(!o){
-                resetTocada();
-              //  localStorage.setItem("Timer","");
-             //   alert("reseteado")
-                    }
-                    else{
-                   //      alert("continue");
-                   t=t-dif;
-                   alert("faltan por tocar "+t)
-
-
-                    }
-        
-        } 
-        else{
-            var op=confirm("the hour of "+obd.long+" has ended, do you want to Add Up this hour to the tocada?");
-            if(op){
-                //addup
-            }
-            else{
-                resetTocada();
-            }
-            
-        }
-     }
-     else{
-
-            var tt=new obtimer();
-             tt.long=t;
-             localStorage.setItem("Timer",JSON.stringify(tt))
-             alert("nueva hora iniciada")
-
-         //   alert(JSON.stringify(tt))
-            
-     }
-}
-
-/**/
-     ////////////////////////////////
-
- 
-      clearTimeout(timeout);
-     clearTimeout(timeover);
-     clearTimeout(timewarning);
-   if(test) alert("you are in test mode");
+      var acd = new Date();
+      var d=0;
+      if(y===undefined) y=0;
+      y=y*kt;
+      var ty = localStorage.getItem("Timer");
+ //   alert(y+" -------el proximo\n"+acd.getTime()+" ----actual\n"+ty+" -----storage");
+     if (ty != null && ty != "") {
+        var dif = ty * 1 - acd.getTime() * 1;//global
+        d = dif;
+       //     alert("diferencia "+d)
+        dif = dif / kt;
       
-   tiempodetocar=t*60*1000;
-        if(test && t<47){ tiempodetocar=tiempodetocar= 4500;twarn=5000;tovert=2000}
-        if(test && t>47){ tiempodetocar=tiempodetocar= 7500;twarn=5000;tovert=2000}
-          timewarning=setTimeout(function() {
-        document.body.style.background = "orange";
-      //  var rr=localStorage.getItem("horastocadas")*1+1;
-        localStorage.setItem("horastocadas",horast);
+        if (dif > 0) {
+            var rr = confirm("You have a timer running, you have " + dif.toFixed(0) + " minutes left\n\nDo you want to continue it?")
+              if (rr){
+                  inicTimer(d);
+             }
+             else{
+                 if(y>0){
+                if (confirm("Do yuo want to set "+y/kt+" minutes?")) {
+                    localStorage.setItem("Timer", acd.getTime()+y);
+                    inicTimer(y);
+                 }
+                 else localStorage.setItem("Timer", "");
+                        }
+             }
 
-      
-    }, tiempodetocar - twarn);
-   timeout=setTimeout(function() {
-       
-       localStorage.setItem("Timer","");
-
-          document.body.style.background = "red";
-    }, tiempodetocar);
-    
-    timeover=setTimeout(function() {
-
-        eli.style.background = "red";
-
- }, tiempodetocar +  tovert)
-     closesettings();
- }
- /*
- 
- var twarn=5*60*1000;
- var tovert=3*60*1000;
- function inicTimer(t){
-///////////////////////////////////////////////////
-if(!test){
-    var toc = localStorage.getItem("Timer");
-    var tt=new obtimer();
-     if(toc!=null && toc!=""){
-        var obd=JSON.parse(toc);
-     
-        var acd=new Date();
-        var dif=(acd.getTime()-obd.timeinic)/(60*1000);
-        alert(JSON.stringify(obd))
-        alert(dif)
- 
-       if( dif<t ){
-             var o=prompt("you have played "+dif+" mins. Press Ok to Reset or Cancel to Continue")
-             alert(o)
-             if(o!=null){
-                localStorage.setItem("Timer","");
-                alert("reseteado")
-                    }
-                    else alert("continue")
-        
-        } 
-        else{
-            
-        }
-     }
-     else{
-
-            var tt=new obtimer();
-             tt.long=t;
-             localStorage.setItem("Timer",JSON.stringify(tt))
-
-         //   alert(JSON.stringify(tt))
-            
-     }
-}
-     ////////////////////////////////
-
-      twarn=5*60*1000;
-      tovert=3*60*1000;
-
-
-
-      clearTimeout(timeout);
-     clearTimeout(timeover);
-     clearTimeout(timewarning);
-   if(test) alert("you are in test mode");
-      
-   tiempodetocar=t*60*1000;
-        if(test && t<47){ tiempodetocar=tiempodetocar= 4500;twarn=5000;tovert=2000}
-        if(test && t>47){ tiempodetocar=tiempodetocar= 7500;twarn=5000;tovert=2000}
-          timewarning=setTimeout(function() {
-        document.body.style.background = "orange";
-      //  var rr=localStorage.getItem("horastocadas")*1+1;
-        localStorage.setItem("horastocadas",horast);
-
-      
-    }, tiempodetocar - twarn);
-   timeout=setTimeout(function() {
-       
-       localStorage.setItem("Timer","");
-
-          document.body.style.background = "red";
-    }, tiempodetocar);
-    
-    timeover=setTimeout(function() {
-
-        eli.style.background = "red";
-
- }, tiempodetocar +  tovert)
-
-
-    
-     closesettings();
- 
+         }
+         else {
+            if(y>0){
+            if (confirm("You have a overdue Timer, it will be replaced for "+y/kt+" minutes")){
+                localStorage.setItem("Timer", acd.getTime()+y);
+            }
+            }
+            else {
+                if (confirm("You have an overdue Timer that ended "+(d/kt)*(-1)+" minutes ago.\n\nDo you want to reset it?")){
+                localStorage.setItem("Timer", "");
+            }
+              
+            }
+           }
+    }
+    if(y>0){
   
- }
+         localStorage.setItem("Timer",acd.getTime()+y);
+                inicTimer(y);
+         
+         }
+}
+var twarn = 5 * 60 * 1000;
+var tovert = 3 * 60 * 1000;
+
+function inicTimer(t) {
+     var aw=new Date().getTime();
+          closesettings();
+    var tiempodetocar=t;
  
- */
+ 
+    twarn = 5 * kt;
+    tovert = 3 * kt;
+ 
+    clearTimeout(timeout);
+    clearTimeout(timeover);
+    clearTimeout(timewarning);
+
+    if (test && t < 47) {
+        tiempodetocar = tiempodetocar = 4500;
+        twarn = 5000;
+        tovert = 2000
+    }
+    if (test && t > 47) {
+        tiempodetocar = tiempodetocar = 7500;
+        twarn = 5000;
+        tovert = 2000
+    }
+
+    var dfw = tiempodetocar - twarn,
+        dfo = tiempodetocar + tovert;
+    if (dfw > 0) {
+        timewarning = setTimeout(function() {
+            document.body.style.background = "orange";
+
+            localStorage.setItem("horastocadas", horast);
+        }, dfw);
+    } else document.body.style.background = "orange";
+
+    timeout = setTimeout(function() {
+
+        localStorage.setItem("Timer", "");
+
+        document.body.style.background = "red";
+    }, tiempodetocar);
+
+    timeover = setTimeout(function() {
+
+        eli.style.background = "red";
+
+    }, dfo);
+
+
+}
+
+/*
+
+
+
+function verifyTimer(y) {
+      var acd = new Date();
+      var d=0;
+      if(y===undefined) y=0;
+      var ty = localStorage.getItem("Timer");
+    alert(y+" -------el proximo\n"+acd.getTime()+" ----actual\n"+ty+" -----storage");
+     if (ty != null && ty != "") {
+        var dif = ty * 1 - acd.getTime() * 1;//global
+        d = dif;
+            alert("diferencia "+d)
+        dif = dif / kt;
+      
+        if (dif > 0) {
+            var rr = confirm("(Before reset timero please) You have a timer running, you have " + dif.toFixed(0) + " minutes left\n\nDo you want to reset it?")
+  
+   
+            if (rr){
+                if (confirm("Are you sure you want to Reset Timer?")) {
+                    localStorage.setItem("Timer", "");
+                    return 0;
+                 }
+                 else return d;
+            }
+            return d;
+        }
+         else {
+            if (confirm("You have a overdue Timer, it will be reseted")){
+             localStorage.setItem("Timer", "")
+            return y;}
+            else return y;
+
+        }
+    }
+    return y;
+}
+var twarn = 5 * 60 * 1000;
+var tovert = 3 * 60 * 1000;
+
+function inicTimer(t) {
+     var aw=new Date().getTime();
+     if (!test) { 
+     t=t*kt;
+    // alert(t)
+    tiempodetocar = verifyTimer(t);
+     closesettings();
+    var f=tiempodetocar/kt;
+
+    alert("this is the return value vvvvv "+tiempodetocar+"\n this is in minutes "+f)
+
+    twarn = 5 * kt;
+    tovert = 3 * kt;
+      var aj=tiempodetocar+aw; alert("this is the return 44444444444444 value "+tiempodetocar)
+      localStorage.setItem("Timer", tiempodetocar+aw);
+      alert(tiempodetocar+aw+"\nafter save it to localstorage"+localStorage.getItem("Timer"))
+    }
+ 
+    clearTimeout(timeout);
+    clearTimeout(timeover);
+    clearTimeout(timewarning);
+
+    if (test && t < 47) {
+        tiempodetocar = tiempodetocar = 4500;
+        twarn = 5000;
+        tovert = 2000
+    }
+    if (test && t > 47) {
+        tiempodetocar = tiempodetocar = 7500;
+        twarn = 5000;
+        tovert = 2000
+    }
+
+    var dfw = tiempodetocar - twarn,
+        dfo = tiempodetocar + tovert;
+    if (difw > 0) {
+        timewarning = setTimeout(function() {
+            document.body.style.background = "orange";
+
+            localStorage.setItem("horastocadas", horast);
+        }, dfw);
+    } else document.body.style.background = "orange";
+
+    timeout = setTimeout(function() {
+
+        localStorage.setItem("Timer", "");
+
+        document.body.style.background = "red";
+    }, tiempodetocar);
+
+    timeover = setTimeout(function() {
+
+        eli.style.background = "red";
+
+    }, dfo);
+
+
+}
+
+
+*/
    
   function inicTocada(h) { 
    ///////////////////   
