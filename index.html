@@ -402,9 +402,9 @@ display: none;
     <p onclick="closesettings()" style="position:absolute;width:30px;height:30px;font-size: 30px;font-weight: bold;right: 10px;top: -20px;border-radius: 50%;border-style: solid;">X</p>
     <p color="white">Timer:</p>
    
- 1st. Hora<button id="bottonInic" class="btnsset" onclick="verifyTimer(8);//inicTocada(1)">60 Min</button><br>
+ 1st. Hora<button id="bottonInic" class="btnsset" onclick="verifyTimer(60);//inicTocada(1)">60 Min</button><br>
  . . . . . . . .<br>
- 2a. Hora+<button id="bottonInic" class="btnsset" onclick="verifyTimer(6);//inicTocada(2)">45 Min</button>
+ 2a. Hora+<button id="bottonInic" class="btnsset" onclick="verifyTimer(45);//inicTocada(2)">45 Min</button>
 <br>
 <button class="btnsset" onclick="showsettings()">Open Settings</button>
 
@@ -1297,7 +1297,7 @@ function verifyTimer(y) {
       if(y===undefined) y=0;
       y=y*kt;
       var ty = localStorage.getItem("Timer");
- //   alert(y+" -------el proximo\n"+acd.getTime()+" ----actual\n"+ty+" -----storage");
+ //  alert(y+" -------el proximo\n"+acd.getTime()+" ----actual\n"+ty+" -----storage");
      if (ty != null && ty != "") {
         var dif = ty * 1 - acd.getTime() * 1;//global
         d = dif;
@@ -1327,7 +1327,8 @@ function verifyTimer(y) {
             }
             }
             else {
-                if (confirm("You have an overdue Timer that ended "+d/kt+" minutes ago.\n\nDo you want to reset it?")){
+                var res=d/kt
+                if (confirm("You have an overdue Timer that ended "+res.toFixed(1)+" minutes ago.\n\nDo you want to reset it?")){
                 localStorage.setItem("Timer", "");
             }
               
