@@ -325,7 +325,7 @@ display: none;
     <div id="dle">
 
         <textarea id="le" readonly onscroll="movescroll(this.scrollHeight,this.scrollTop)" ></textarea  >
-            <p id="wesea" onclick='ebarra.value +=" letra";ebarra.click();eactrls.style.top="-80%";x.src="";einicsld.style.background="rgba(0,150,0,.50)";einicsld.style.display="block";ele.value="";ele.scrollTo(0, 0);edle.style.display="none";clearInterval(scintervalo);' style="position:absolute;width:30px;height:30px;font-size: 18px;font-weight: bold;right: 15%;bottom: 22%;border-radius: 50%;border-style: solid;"></p>
+            <p id="wesea" onclick='ebarra.value =websong+" letra";esrch.click();eactrls.style.top="-80%";x.src="";einicsld.style.background="rgba(0,150,0,.50)";einicsld.style.display="block";ele.value="";ele.scrollTo(0, 0);edle.style.display="none";clearInterval(scintervalo);' style="opacity:.5;position:absolute;width:40px;height:40px;font-size: 18px;font-weight: bold;right: 15%;bottom: 22%;border-radius: 50%;border-style: solid;"></p>
   
         <p onclick='eactrls.style.top="-80%";x.src="";einicsld.style.background="rgba(0,150,0,.50)";einicsld.style.display="block";ele.value="";ele.scrollTo(0, 0);edle.style.display="none";clearInterval(scintervalo)' style="color:black;position:absolute;width:30px;height:30px;font-size: 30px;font-weight: bold;right: 15%;bottom: 11%;border-radius: 50%;border-style: solid;">X</p>
   
@@ -442,7 +442,7 @@ display: none;
   
    tiempodetocar=60*60*1000;  
  kt=60*1000;
- 
+ websong="";
 
 //localStorage.removeItem("Timer")
   var obtimer=function(){
@@ -882,6 +882,7 @@ var timewarning, timeout, timeover,test=false;
 
  
        function showletra(cancion) { //Corrido de Roberto Gastelum
+       websong=cancion;
      var tc=cancion.toUpperCase();
           var tl=Letras.toUpperCase();
           var aas=tl.indexOf("*" + tc);
