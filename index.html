@@ -314,17 +314,26 @@ display: none;
    height:20px;
 
 }
+#wesea{
+    background:url(https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-web-icon-png-image_3997299.jpg);
+    background-size: 100% 100%;
+}
+#notes-timer{
+    
+}
     </style>
     <div id="dle">
 
         <textarea id="le" readonly onscroll="movescroll(this.scrollHeight,this.scrollTop)" ></textarea  >
- 
+            <p id="wesea" onclick='ebarra.value +=" letra";ebarra.click();eactrls.style.top="-80%";x.src="";einicsld.style.background="rgba(0,150,0,.50)";einicsld.style.display="block";ele.value="";ele.scrollTo(0, 0);edle.style.display="none";clearInterval(scintervalo);' style="position:absolute;width:30px;height:30px;font-size: 18px;font-weight: bold;right: 15%;bottom: 22%;border-radius: 50%;border-style: solid;"></p>
+  
         <p onclick='eactrls.style.top="-80%";x.src="";einicsld.style.background="rgba(0,150,0,.50)";einicsld.style.display="block";ele.value="";ele.scrollTo(0, 0);edle.style.display="none";clearInterval(scintervalo)' style="color:black;position:absolute;width:30px;height:30px;font-size: 30px;font-weight: bold;right: 15%;bottom: 11%;border-radius: 50%;border-style: solid;">X</p>
   
         <button id="inicsld"  onclick='clearInterval(scintervalo);inicScrolling();'>Start</button>
    
    
     </div>  
+  
    <button id="logo" onclick="showstimer()"></button>
      <button id="ref" onclick="eactrls.style.top='-80%';x.src='';sortear('');edc.scrollTop = 0;">&#9851;</button>
  
@@ -351,7 +360,7 @@ display: none;
 
 
         <div id="ctrls">
-            <button class="btns"  id="ppr" onclick='opendoc( "repPrac")'>. *NOTES* .</button>
+            <button id="notes-timer" class="btns"  id="ppr" onclick='opendoc( "repPrac")'>. *NOTES* .</button>
             <button id="mainrep" class=btns onclick='opendoc( "rep")'>. Repertorio .</button>
             <button class="btns" onclick='opendoc( "open rep")'>Repertorio Mix.</button>
          <button class="btns" onclick='sortearTocada()'>Repertorio Tocada</button>  
@@ -427,7 +436,7 @@ display: none;
  </div>
 
     <script>
-     
+          entimer = document.getElementById("notes-timer");
      esettings = document.getElementById("settings-dlg");
         etimer = document.getElementById("timerh");
   
@@ -462,38 +471,8 @@ display: none;
          }
      }
  }
-
+ runningTimer=null;
  verifyTimer();
-
-
- /*loadText("https://www.musica.com/letras.asp?letra=826644",function(r){//file:///C:/Users/djvdj/Desktop/
-     alert(r);
- });
- 
- 
-  function loadDoc(url,callback) {
-  var xhttp = new XMLHttpRequest();
- 
-  xhttp.open("GET", url, false);
-  xhttp.send(); 
-  setTimeout(function(){ alert("ddd\n\n"+xhttp.responseXML)
-  callback(xhttp.responseXML)},10000)
- }   
-
-
-
-*/
-
-
-
-
-
-
-
-
-
-
-
 
 //    loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Canc.txt",function(r){alert(r)})
     online=window.navigator.onLine;
@@ -1286,7 +1265,19 @@ document.getElementById("lirep").style.fontSize = s+"px";
       esettings.style.display="none"
    //     alert("ddd")
   }
- 
+function runtimer(rt){
+    clearInterval(runningTimer);
+    var tii=new Date();
+    runningTimer=setInterval(function(){
+
+        entimer.innerHTML=tii.getMinutes();
+
+      
+
+
+    },1000)
+
+}
 function verifyTimer(y) {
       var acd = new Date();
       var d=0;
@@ -1304,6 +1295,7 @@ function verifyTimer(y) {
             var rr = confirm("You have a timer running, you have " + dif.toFixed(0) + " minutes left\n\nDo you want to continue it?")
               if (rr){
                   inicTimer(d);
+              //    runtimer(d)
              }
              else{
                  if(y>0){
