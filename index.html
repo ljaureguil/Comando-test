@@ -391,8 +391,8 @@ display: none;
         </div>
     </div>
    <div id="settings-dlg">
-   <button class="btnsset" onclick="if(marktocada){this.innerHTML='Clear Select Rep.';marktocada=false}else{marktocada=true;this.innerHTML='Select Rep. Next Tocada'};closesettings();">Select Rep. Next Tocada</button><br>
-   <button class="btnsset" onclick="localStorage.removeItem('NextRep');">Erase all Rep. de Tocada</button><br>
+   <button class="btnsset" onclick="if(marktocada){this.innerHTML='Set Select Mode On';marktocada=false}else{marktocada=true;this.innerHTML='Set Select Mode Off'};closesettings();">Set Select Mode On</button><br>
+   <button class="btnsset" onclick="if(confirm('Are you sure?')){localStorage.removeItem('NextRep');window.location.reload(true);}">Clear all Rep. de Tocada</button><br>
 
  <button class="btnsset" onclick="resetTocada();">*Recet Tocada*</button><br>
  
@@ -442,7 +442,7 @@ display: none;
     <script>
         nextRep=localStorage.getItem("NextRep");
         if(nextRep==null || nextRep =="") nextRep="";
-       // alert(nextRep)
+      //  alert(nextRep)
         marktocada=false;
           entimer = document.getElementById("notes-timer");
      esettings = document.getElementById("settings-dlg");
@@ -923,6 +923,12 @@ var timewarning, timeout, timeover,test=false;
                     if(confirm("Save "+cancion+" for next Tocada?")){ 
                         nextRep+="~"+cancion;localStorage.setItem("NextRep",nextRep);
                          }
+                         else{
+                            if(nodec!=undefined){
+                          nodec.style.color="#fff"
+                      }                           
+                         }
+
                          }
                else {
                    if(confirm("Cancion "+cancion+" ya Existe, do you want to clear it from Rep de tocada?")){
@@ -930,30 +936,14 @@ var timewarning, timeout, timeover,test=false;
                       nextRep=nextRep.replace(r,"")
                       localStorage.setItem("NextRep",nextRep);
                       if(nodec!=undefined){
-                          nodec.style.color="fff"
+                          nodec.style.color="#fff"
                       }
                       
                    }
                }
-  /*   if(nodec!=undefined){
-                if(node.style.color=="#0ff"){
-                    if(confirm("Do you want to clear "+cancion+" From next tocada?")) {
-                        var a=nextRep.indexOf(cancion);
-                        var b=nextRep.indexOf("~",a)-1;
-                        nextRep=nextRep.slice(a,b);
-                        alert(nextRep)
-                    }
-
                 }
-                else {
-  
-           }
-           }*/
-              }
        }
-
-     
-        
+      
         function loadText(file, callback) {
         //    if(online){
                  fetch(file).then(response => response.text()).then((data) => {
@@ -1084,25 +1074,7 @@ if(song.acordeon!=undefined && song.acordeon!="") {//alert(acordeon);
                 t.innerHTML = song;
                 t.name = "cltit"
                 return t;
-            } else {/*
-                var node = document.createElement("LI");
-                var di = "<font color='#00ffff'> _ </font>";
-                di = "";
- 
-                node.innerHTML = di + song + di+" . . . " + to; //
-                node.setAttribute('onclick', 'this.style.color="#00ff00";showletra("' + song + '")');
-                node.estado = true;
-                node.index = i;
-                node.clase = cl;
-                node.song = song;
-                node.tono = to;
-                if (cl.indexOf("practica") >= 0) {
-                    node.style.color = "#ff0";
-                }
-                if (cl.indexOf("repertorio tocada") >= 0) {
-                //    node.style.color = "#0ff";
-                }
-                return node;*/
+            } else {
             }
         }
 
