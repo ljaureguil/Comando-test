@@ -219,13 +219,18 @@
 
 }
 .btnsset{
-    font-size:20px;
- color:blue;
- margin: 20px;
+    font-size:18px;
+     margin:20px;
+     width:50%;
    text-align:center;
+   border-radius:100px;
+   background:rgb(245, 78, 56);
+   color:white;
+
 }
 .divpicks{
-    border:solid;fornt-size:10px;
+    border:solid;
+    font-size:10px;
     padding:15px;
     color:white;
     width:80%;
@@ -454,7 +459,7 @@ display: none;
 
 //localStorage.removeItem("Timer")
   var obtimer=function(){
-     var date=new Date();
+     var date=new Date();				
      this.long=0;
      this.month=date.getMonth();
      this.year=date.getFullYear();
@@ -1351,12 +1356,15 @@ function verifyTimer(y) {
             if(y>0){
             if (confirm("You have a overdue Timer, it will be replaced for "+y/kt+" minutes")){
                 localStorage.setItem("Timer", acd.getTime()+y);
+                
             }
             }
             else {
-                var res=d/kt
+                var res=d/kt;
+               document.body.style.background="#f00"
                 if (confirm("You have an overdue Timer that ended "+res.toFixed(1)+" minutes ago.\n\nDo you want to reset it?")){
-                localStorage.setItem("Timer", "");
+                localStorage.removeItem("Timer");
+                window.location.reload(true);
             }
               
             }
