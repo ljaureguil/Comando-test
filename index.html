@@ -1,5 +1,5 @@
 <html>
-
+    <script src="https://apis.google.com/js/api.js"></script>
 <head>
     <meta name="viewport" content="width=device-width" name="theme-color" content="#4285f4">
     <link rel="shortcut icon" href="https://scontent-atl3-1.xx.fbcdn.net/v/t1.0-9/66105070_2606484239385650_1488724510487085056_n.jpg?_nc_cat=106&_nc_oc=AQnx7XRzS47pDYNv0h-dDfqV4kE07czctw5Vm7DOCPn0EMJa2QGEbh-PAJWE2tmrGyo&_nc_ht=scontent-atl3-1.xx&oh=6f6b09b8d92c3007c254fd5ba07f45d7&oe=5DA91A9C"
@@ -40,9 +40,10 @@
             border-radius: 5px;
             background: #000070;
             font-size: 15px;
-            // font-weight: bold;
+           
             width: 45%;
             height: 8%;
+           
         }
         #ed {
             background: rgba(0, 255, 0, .5);
@@ -117,12 +118,30 @@
             // opacity: .65;
             visibility: visible;
         }
-        #ppr {
+         #ppr {
+            overflow:auto;
             background: #0000FF;
             color: #ffffff;
-            font-size:22px;
-            border-radius:100px;
-             box-shadow: inset 5px -5px 30px #000020, inset -5px 5px 30px #000088;
+            font-size:16px;
+            width:94%;
+            border-radius:10px;
+             box-shadow: inset 5px -5px 30px #000020, inset -5px 5px 30px #000088;;
+        //     display:none;
+            
+        }       
+        
+        #complac {
+            overflow:auto;
+            height:12%;
+            background: #00FF00;
+            color: #fff;
+            font-size:20px;
+            width:94%;
+            border-radius:10px;
+             box-shadow: inset 5px -5px 20px #000020, inset -5px 5px 20px #000088;
+               -webkit-text-stroke: 0.3px #f00;
+                -webkit-text-fill-color: #000;
+            display:none;
             
         }
         #dle {
@@ -323,10 +342,11 @@ display: none;
     background:url(https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-web-icon-png-image_3997299.jpg);
     background-size: 100% 100%;
 }
-#notes-timer{
-    
-}
+
     </style>
+               <button class="btns"  id="complac" onclick='this.style.background="blue";this.innerHTML="Complacencias";this.style.display="none"'>. *Complacencias* .</button>
+ 
+    
     <div id="dle">
 
         <textarea id="le" readonly onscroll="movescroll(this.scrollHeight,this.scrollTop)" ></textarea  >
@@ -365,8 +385,8 @@ display: none;
 
 
         <div id="ctrls">
-            <button id="notes-timer" class="btns"  id="ppr" onclick='opendoc( "repPrac")'>. *NOTES* .</button>
-            <button id="mainrep" class=btns onclick='opendoc( "rep")'>. Repertorio .</button>
+            <button class="btns"  id="ppr" onclick='this.style.background="blue";this.innerHTML="Complacencias";//opendoc( "repPrac")'>. *Complacencias* .</button>
+ 
             <button class="btns" onclick='opendoc( "open rep")'>Repertorio Mix.</button>
          <button class="btns" onclick='sortearTocada()'>Repertorio Tocada</button>  
 
@@ -445,13 +465,323 @@ display: none;
  </div>
 
     <script>
-        nextRep=localStorage.getItem("NextRep");
+        //           <button id="mainrep" class=btns onclick='opendoc( "rep")'>. Repertorio .</button>
+//https://www.file.io/
+
+//https://stackoverflow.com/questions/50481314/hosting-an-editable-single-string-of-text-online
+//https://pastebin.com/
+
+//When you use the pastebin.com/raw/ + id of your text you get plain text.
+//jzfx2mKq3rYmg4UCnpaDm0oXCraS4EcR
+///https://jsonblob.com/2cf859d7-eec6-11ea-b1f3-6f02c0e4fe61.,    hhhhhhhhhhhhhh
+
+/*
+https://jsonblob.com/34620735-ebe1-11ea-9641-5deb564a7f24
+
+//https://gist.github.com/EtienneR/2f3ab345df502bd3d13e
+
+
+
+
+curl -i -X "PUT" -d '{"people":["fred", "mark", "andrew"]}' -H "Content-Type: application/json" -H "Accept: application/json" https://jsonblob.com/api/jsonBlob/2cf859d7-eec6-11ea-b1f3-6f02c0e4fe61
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+Transfer-Encoding: chunked
+
+{"people":["fred","mark","andrew"]}
+
+*/
+
+/*
+
+loadDoc("https://jsonblob.com/api/jsonBlob/2cf859d7-eec6-11ea-b1f3-6f02c0e4fe61",function(t){alert("eto es diecto "+t)});
+
+postDoc("https://jsonblob.com/api/jsonBlob",{"nombre":"lauro","apeido":"jauregui"},function(t){alert("eto es diecto "+t)
+
+loadDoc("https://jsonblob.com/api/jsonBlob/2cf859d7-eec6-11ea-b1f3-6f02c0e4fe61",function(t){alert("eto es diecto "+t)});
+});
+
+*/
+postDoc("https://jsonblob.com/api/jsonBlob/2cf859d7-eec6-11ea-b1f3-6f02c0e4fe61",{"nombre":"lauro","apeido":"jauregui"},function(t){alert("eto es diecto "+t)})
+
+     icomplacencias=undefined;
+     enota = document.getElementById("complac");
+ //    enota = document.getElementById("ppr");
+     esettings = document.getElementById("settings-dlg");
+        etimer = document.getElementById("timerh"); 
+        complacencias="";
+        complacenciasonoff=true;
+        complacenciaslink="";
+       // var arcs=[]
+     //   iniciargit();//elim
+        csob="";
+        cob={};
+        clink="";
+        inter1=undefined;
+        inter2=undefined;
+
+    ionoff=undefined;//=setInterval("iniciargit()",1*60000);
+    loadObj();
+
+function loadObj() {
+    loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Complacencias.txt",function (cs) {
+       // alert(cs)
+              loadText(cs,function (r) {
+                  var obf=null;
+                  if(r[0]==="{"){
+                    obf=JSON.parse(r);  
+                  }
+                  else{ alert(r);
+            var q=r.indexOf("cancion");
+                var q1=r.indexOf('}',q+2);
+                qq='{"'+r.slice(q,q1+1) ;
+                var ob=qq.replace(/\\"/g, '"'); 
+              obf=JSON.parse(ob);//
+                  }
+         //      
+               if(obf.frecuency>=0 && obf.chkcomp>=0){
+               //   alert("va por inter1 "+obf.frecuency*60000)
+
+                    ionoff=setInterval(function () {
+                   //     alert("1");inter1();
+                     //   alert("11");
+
+                        },obf.frecuency*60000);
+               //     alert("va por inter2 "+obf.chkcomp*60000)
+                    iniccomplacencias=setInterval(function () {a();},obf.chkcomp*60000);
+               //     alert("paso el primer paso de inicio")
+                }
+              })
+              });
+  
+    
+}
+function getObj(l,callback) {
+       //"https://jsonblob.com/api/jsonBlob/2cf859d7-eec6-11ea-b1f3-6f02c0e4fe61"
+       loadText(l,function (r) {
+     //      alert(r);
+           var o=JSON.parse(r);
+                callback(o);
+
+          });
+  /*  
+    loadText(l,function (r) {
+            var q=r.indexOf("cancion");
+                var q1=r.indexOf('}',q+2);
+                qq='{"'+r.slice(q,q1+1) ;
+                var ob=qq.replace(/\\"/g, '"'); 
+             //   alert(ob);
+                var o=JSON.parse(ob);
+                callback(o);
+                 
+    });*/
+}
+
+ function a() {
+   // alert("llega a inter2...khlkjhlk..........")
+    loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Complacencias.txt",function (cs) {
+        clink=cs;
+               getObj(cs,function (r) {
+   
+                var obf=r;
+                var ob=JSON.stringify(r)
+              //  alert(ob)
+                
+
+                if(obf.frecuency>=0 && obf.chkcomp>=0){
+                   
+                    var l=localStorage.getItem("complacencias");
+                    if(l.indexOf("{")<0 || l.indexOf("}")<0){
+                         l=ob;
+                         localStorage.setItem("complacencias",ob);
+                     }
+                   // alert("checar antes    "+l);
+                    var obl=JSON.parse(l);
+                //    alert(l+"\n"+ob+"\n"+l);
+         //          alert(obf.cancion+"\n"+obl.cancion)
+                    if(obf.cancion!=obl.cancion){
+                        enota.style.display="block";
+                     enota.innerHTML=obf.cancion;
+                    enota.style.background="#00FF00";
+                    localStorage.setItem("complacencias",ob);
+
+                    }
+                    if(obf.frecuency!=obl.frecuency){
+                       localStorage.setItem("complacencias",ob);
+                    clearInterval(ionoff);
+                 //   alert("...........................reinic1")
+                     //    clearInterval(iniccomplacencias);
+                     ionoff=setInterval(function () {a()},obf.frecuency*60000);
+                 
+                    }
+                  //  ionoff=setInterval(inter1,ob.frecuency*60000);
+                  //  iniccomplacencias=setInterval(inter2,ob.chkcomp*6000);
+                }
+                else{
+                    clearInterval(iniccomplacencias);
+                    clearInterval(ionoff);
+                }
+              })
+              });
+ }
+function inter1() {
+    alert("llega a interrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr1..........")
+    loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Complacencias.txt",function (cs) {
+        clink=cs;
+        
+              loadText(cs,function (r) {
+            var q=r.indexOf("cancion");
+                var q1=r.indexOf('}',q+2);
+                qq='{"'+r.slice(q,q1+1) ;
+                var ob=qq.replace(/\\"/g, '"'); 
+                var obf=JSON.parse(ob);
+                if(obf.frecuency>=0 && obf.chkcomp>=0){
+                    var l=localStorage.getItem("complacencias");
+                    var obl=JSON.parse(l);
+                    if(obf.frecuency!=obl.frecuency){
+                       localStorage.setItem("complacencias",ob);
+                    clearInterval(ionoff);
+                    alert("reinic1")
+                     //    clearInterval(iniccomplacencias);
+                     ionoff=setInterval(function () {inter1()},obf.frecuency*60000);
+                 
+                    }
+                  //  ionoff=setInterval(inter1,ob.frecuency*60000);
+                  //  iniccomplacencias=setInterval(inter2,ob.chkcomp*6000);
+                }
+                else{
+                    clearInterval(iniccomplacencias);
+                    clearInterval(ionoff);
+                }
+              })
+              });
+}
+function inter2() {
+       alert("llega a inter2.............")
+    if(clink.indexOf("http")>=0){
+    loadText(clink,function (r) {
+            var q=r.indexOf("cancion");
+                var q1=r.indexOf('}',q+2);
+                qq='{"'+r.slice(q,q1+1) ;
+                var ob=qq.replace(/\\"/g, '"'); 
+                var obf=JSON.parse(ob);
+                if(obf.frecuency>=0 && obf.chkcomp>=0){
+                    var l=localStorage.getItem("complacencias");
+                    var obl=JSON.parse(l);
+                    if(obf.chkcomp!=obl.chkcomp){
+                        enota.style.display="block";
+                        enota.innerHTML=obf.cancion;
+               enota.style.background="#00FF00";
+                     localStorage.setItem("complacencias",ob);
+                   
+                    clearInterval(iniccomplacencias);  alert("reinic");
+                     //    clearInterval(iniccomplacencias);
+                     iniccomplacencias=setInterval("inter2()",obf.chkcomp*60000);
+     
+                    }
+                  //  ionoff=setInterval(inter1,ob.frecuency*60000);
+                  //  iniccomplacencias=setInterval(inter2,ob.chkcomp*6000);
+                }
+                else{
+                    clearInterval(iniccomplacencias);
+                    clearInterval(ionoff);
+                }
+              })
+            }      
+}
+/////////////////////////////////////////
+
+
+
+ function iniciargit() {
+ //       loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Complacencias.txt",function (cs) {
+        loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Complacencias.txt",function (cs) {
+              loadText(cs,function (r) {
+            var q=r.indexOf("cancion");
+                var q1=r.indexOf('}',q+2);
+                qq='{"'+r.slice(q,q1+1) ;
+                var ob=qq.replace(/\\"/g, '"'); 
+                var obf=JSON.parse(ob);
+ 
+                 if(obf.frecuency>=0){
+                     
+                   var t= localStorage.getItem("cfrec");
+                   if(t!=null){
+                       t=JSON.parse(t);
+                       if(t.frecuency!=obf.frecuency){
+                           clearInterval(ionoff);
+                       ionoff=setInterval(iniciargit,obf.frecuency*60000);
+                       iniccomplacencias(obf);
+                          }
+                   }
+
+                        }
+                        else{
+                            clearInterval(ionoff);clearInterval(icomplacencias);
+                              }
+                     if(obcomp.frecuency>=0){
+               //     obcomp.link=cs;alert("antes de ir "+cs);
+
+                        iniccomplacencias(obcomp);
+                   }
+                   else {
+                        clearInterval(icomplacencias);
+                   clearInterval(ionoff)
+                   }
+                
+        })
+         }
+    );      
+  
+ }
+ 
+
+    function iniccomplacencias(ob){
+//   alert("in inic   "+ob.link);
+//"https://jsonblob.com/34620735-ebe1-11ea-9641-5deb564a7f24";
+
+        icomplacencias=setInterval(function(){
+     
+            loadText(ob.link,function (r) { 
+                /////////////////
+                var q=r.indexOf("cancion");
+                var q1=r.indexOf('}',q+2);
+                qq='{"'+r.slice(q,q1+1) ;
+               alert(qq)
+              
+                var obs=qq.replace(/\\"/g, '"'); 
+                 alert(obs);
+  obq=JSON.parse(obs);
+                 var y=obq.cancion.replace(/\\n/g,"<br>");
+          
+                complacencias=y;
+                 alert("Y\n\n"+y)
+
+           if(y!=localStorage.getItem("complacencias")){
+               localStorage.setItem('complacencias',y);
+               enota.style.display="block";
+               enota.innerHTML=y;
+            enota.style.background="#00FF00";
+            
+           }
+       });
+       },ob.chkcomp*60*1000);
+}
+
+
+
+
+
+
+
+
+
+           nextRep=localStorage.getItem("NextRep");
         if(nextRep==null || nextRep =="") nextRep="";
       //  alert(nextRep)
-        marktocada=false;
-          entimer = document.getElementById("notes-timer");
-     esettings = document.getElementById("settings-dlg");
-        etimer = document.getElementById("timerh");
+       marktocada=false;
+    
   
    tiempodetocar=60*60*1000;  
  kt=60*1000;
@@ -469,7 +799,7 @@ display: none;
      this.seconds=date.getSeconds();
      this.timeinic=date.getTime();
      this.chkStatus = function(){
-         alert("ok3")
+    //     alert("ok3")
          var dd=new Date();
          var dif=dd.getTime();
          alert(dif)
@@ -710,10 +1040,7 @@ var timewarning, timeout, timeover,test=false;
      }
  var clases=[];
  function proceso(cont){
- //    alert(etitulo.innerHTML); 
-
-  //   alert("\n\n\nffffffffff\n\n"+cont)
-  
+ 
     etitulo.innerHTML = ". . . Repertorio:";
             var cc = cont.split("/clases");
             var pc=cc[0].split("\n");
@@ -727,19 +1054,11 @@ var timewarning, timeout, timeover,test=false;
             })
           var pr=cc[1].split("\n");
             mc=[];
-          /*   pr=pr.filter(function(a){
-                if(a.includes("*")) mc.push(a);
-               return a.includes("-");
-
-            });
-            */
-            pr=pr.filter(function(a){
+           pr=pr.filter(function(a){
                 return a!="" && a!=undefined;
 
             });
-              //alert(pr)
-
-            pr.forEach(e=>{
+              pr.forEach(e=>{
                 if(e.includes("*")){
                    eli.appendChild(crtitulos(e));
                     mc.push(e);
@@ -751,7 +1070,8 @@ var timewarning, timeout, timeover,test=false;
                 songs.push(sng);
                 eli.appendChild(crnode2(sng));
                 }
-            })
+            });
+            etitulo.innerHTML = ". . . Repertorio: " + songs.length + " Songs+";
   
         
  }
@@ -951,6 +1271,7 @@ var timewarning, timeout, timeover,test=false;
       
         function loadText(file, callback) {
         //    if(online){
+         //   alert("from ;oadtext\n"+file)
                  fetch(file).then(response => response.text()).then((data) => {
                 callback(data); //
             })
@@ -1344,7 +1665,8 @@ function verifyTimer(y) {
                         }
                         if(y==0 || y==undefined || y==null) {
                             if(confirm("The timer will be reseted...")){
-                                 localStorage.setItem("Timer", "");
+                                 localStorage.setItem("Timer", ""); 
+                                 window.location.reload(true);
                                  verifyTimer();
                                  }
                         }
@@ -1353,9 +1675,11 @@ function verifyTimer(y) {
 
          }
          else {
+            
             if(y>0){
             if (confirm("You have a overdue Timer, it will be replaced for "+y/kt+" minutes")){
                 localStorage.setItem("Timer", acd.getTime()+y);
+                window.location.reload(true);
                 
             }
             }
@@ -1673,9 +1997,70 @@ function getlink(c){
 
  }
  
+function loadDoc(url,callback) {
+  var xhttp = new XMLHttpRequest();
+  
+  xhttp.open("GET", url, false);
+  xhttp.send();
+//  var xx=xhttp.responseXML;
+ // alert("...................\n\n"+xx);
+ // var a=xx.getElementById("style");
+//  var b=a[0].innerHTML;
+//  alert(a.length);
+  
+//  return xhttp.responseXML;  
+callback(xhttp.responseText);
+
+}   
+  
+function postDoc(url,ob,callback) { //alert("ok");
+  
+  // Update a user
+//var url = "http://localhost:8080/api/v1/users";
+//alert(ob);
+ob.cancion="esa mera"
+//var data = 
+//data.firstname = "John2";
+//data.lastname  = "Snow2";
+var json = JSON.stringify(ob);//JSON.stringify(data);
+
+var xhr = new XMLHttpRequest();
+xhr.open("PUT", url+'/12', true);
+xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+xhr.onload = function () {
+	var users = JSON.parse(xhr.responseText);
+	if (xhr.readyState == 4 && xhr.status == "200") {
+		console.table(users);
+	} else {
+		console.error(users);
+	}
+}
+xhr.send(json);
+  
+  /*
+  var xhttp = new XMLHttpRequest();
+   xhttp.open("POST", url, true); 
+   
+  xhttp.setRequestHeader("Content-Type", "application/json");
+  
+  
+  //xhr.open("POST", '/server', true);
+
+  
+  
+  xhttp.send(ob);
  
- 
- 
+
+
+
+
+
+  var aa=xhttp.responseText;
+localStorage.setItem("jss",aa)
+  alert(aa)
+callback(xhttp.responseText);
+*/
+}   
  
     </script>
 
