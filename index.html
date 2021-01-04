@@ -468,23 +468,7 @@ display: none;
 	    
 	    
 	  // Get a user
-function GetJ(url,callback) {
-    
-//var url  = "http://localhost:8080/api/v1/users";
-var xhr  = new XMLHttpRequest()
-xhr.open('GET', url+'/1', true)
-xhr.onload = function () {
-	var users = JSON.parse(xhr.responseText);
-	if (xhr.readyState == 4 && xhr.status == "200") {
-	//	console.table(users);
-	callback(users);
-	} else {
-		console.error(users);
-	}
-}
-xhr.send(null);
-}  
-	    
+
 	    
 	    
 	    
@@ -533,7 +517,23 @@ loadDoc("https://jsonblob.com/api/jsonBlob/2cf859d7-eec6-11ea-b1f3-6f02c0e4fe61"
 
 */
 	    
-  
+  function GetJ(url,callback) {
+    
+//var url  = "http://localhost:8080/api/v1/users";
+var xhr  = new XMLHttpRequest()
+xhr.open('GET', url+'/1', true)
+xhr.onload = function () {
+	var users = JSON.parse(xhr.responseText);
+	if (xhr.readyState == 4 && xhr.status == "200") {
+	//	console.table(users);
+	callback(users);
+	} else {
+		console.error(users);
+	}
+}
+xhr.send(null);
+}  
+	    
 	    
 	    
 postDoc("https://jsonblob.com/api/jsonBlob/2cf859d7-eec6-11ea-b1f3-6f02c0e4fe61",{"nombre":"lauro","apeido":"jauregui"},function(t){alert("eto es diecto "+t)})
