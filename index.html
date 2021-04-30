@@ -205,14 +205,14 @@
             lo.id = new Date().toString();
             localStorage.setItem("ns", lo.id);
             obj.movimientos.push(lo);
-            lo.indice = obj.movimientos.length - 1;
+            lo.indice = objT.movimientos.length - 1;
             UpdateJ(linkt, objT);
         } else {
             var v = getMove(nu, objT);
             if (v === null) {
                 lo.id = nu; 
-                obj.movimientos.push(lo);
-                lo.indice = obj.movimientos.length - 1;
+                objT.movimientos.push(lo);
+                lo.indice = objT.movimientos.length - 1;
                 UpdateJ(linkt, objT);
             } else {
                 lo = v;
@@ -222,7 +222,7 @@
 
         }
 
-
+alert(lo.id);
         start();
 
     });
