@@ -21,19 +21,7 @@
             overflow-x: hidden;
             transition: overflow-y 0.5s ease;
         }
-        #ifr {
-            width: 100%;
-            height: 75%;
-            background: white;
-            border-radius: 15px;
-            display: none;
-        }
-        #ifrs {
-            width: 100%;
-            // height: 40%;
-            font-size: 25px;
-            border-radius: 15px;
-        }
+   
         .btns {
             color: white;
             font-weight: bold;
@@ -63,26 +51,7 @@
 
 
         }
-        #ed {
-            background: rgba(0, 255, 0, .5);
-            color: white;
-            position: absolute;
-            top: 90%;
-            bottom: right: 5%;
-        }
-        #divrep {
-            font-size: 18px;
-            //position: absolute;
-            bottom: 2%;
-            width: 100%;
-            // height: 85%;
-            // background: white;
-            overflow-y: auto;
-            overflow-x: hidden;
-            display: none;
-            border-radius: 15px;
-            padding: 5%;
-        }
+  
         #lirep {
             margin:3%;
             background: black;
@@ -120,37 +89,7 @@
             font-size: 20px;
             font-weight: bold;
         }
-        #logo {
-            position: absolute;
-            top: 0%;
-            right: 1%;
-            background: url(https://lh3.googleusercontent.com/m6YEmcXhjRQRdkS7AMBgGzpbdyZLK2gpbju5jB_WUJwp4Ss_fxeKA202ybPMhJixfnrm);
-            background-size: 100% 100%;
-            color: #ffffff;
-            font-weight: bold;
-            width: 65px;
-            height: 65px;
-            font-size: 30px;
-            border-radius: 50%;
-            border-color: white;
-         
-          //  background-color: rgb(248, 10, 10);
-            // opacity: .65;
-            visibility: visible;
-        }
-         #ppr {
-            overflow:auto;
-            background: #0000FF;
-            color: #ffffff;
-            font-size:16px;
-            width:94%;
-            border-radius:10px;
-             box-shadow: inset 5px -5px 30px #000020, inset -5px 5px 30px #000088;;
-        //     display:none;
-            
-        }       
-        
-        #complac {
+       #complac {
             overflow:auto;
             height:12%;
             background: #00FF00;
@@ -181,32 +120,12 @@
             font-size: 17px;
             width: 90%;
             height: 90%;
-         //   overflow: auto;
-            
-           // border-style: solid;
-           border-radius:5px;
+            border-radius:5px;
             font-weight: bold;
             background: #ffff;
-        //   box-shadow:inset 0 0 30px 4px #6666ff;
-          scroll-behavior: smooth;
+            scroll-behavior: smooth;
         }
-        #clle {
-            position: absolute;
-            bottom:5px;
-            left: 0%;
-            width:60%;
-            
-       
-            height:80px;
-            border-radius:10px;
-            background-color: rgba(0, 212, 255, .40);
-            color:#ffffff;
-            font-size:20px;
-            font-weight:bold;
-            border-style:double;
-             box-shadow:inset 0 0 5px 1px #66aa66;   
-        }
-         #inicsld {
+        #inicsld {
             position: absolute;
             bottom: 5px;
             right: 42px;
@@ -216,8 +135,7 @@
             background-color: rgba(0, 212, 255, .40);
             color:#ffffff;
             font-size:18px;
-          //  font-weight:bold;
-            border-style:double;
+                border-style:double;
                     box-shadow:inset 0 0 5px 1px #66aa66; 
         }  
  
@@ -407,7 +325,9 @@ progress[value] {
 
     <div id="editr" >
         <button class="btnse" onclick="document.body.style.background='red';openEdit();editr.style.display='none';">Sel Song</button>
-        <button class="btnse" onclick="clre();">clear</button>
+        <button class="btnse" onclick="clre();">clear</button>  
+        <button class="btnse" onclick="document.body.style.background=' linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)';editr.style.display='none';">CLOSE</button>
+ 
 <br>
          <input id="icancion" type="text" class="ced">Cancion<br>
         <input id="itono" type="text" class="ced">Tono<br>
@@ -418,8 +338,7 @@ progress[value] {
         Letra
         <textarea id="iletra"   type="text" class="ced"></textarea><br>
         <button class="btnse" onclick="document.body.style.background=' linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)';editr.style.display='none';addCancion()">ADD NEW SONG</button>
-        <button class="btnse" onclick="document.body.style.background=' linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)';editr.style.display='none';">CLOSE</button>
-       <button class="btnse" onclick="delCancion()">Delete Sont</button>
+        <button class="btnse" onclick="delCancion()">Delete Sont</button>
 
     </div>
 <button class="btns" id="complac" onclick='this.style.background="blue";this.innerHTML="Complacencias";this.style.display="none"'>. *Complacencias* .</button>
@@ -469,16 +388,7 @@ progress[value] {
             <button class="btns" onclick="document.body.style.background=' linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)';openEdit();editr.style.display='block';//openEditarCanc()">Editar Canciones</button>
 
     </div>
-    <div id=ifrs>
-
-
-
-  
-    </div>
-    <iframe id="ifr"></iframe>
-
-    <div id="divrep"></div>
-    <div id="bclas"></div>
+     <div id="bclas"></div>
     <p id="titulo"></p>
     <div id="lirep">
 
@@ -512,36 +422,36 @@ loadDoc("https://raw.githubusercontent.com/ljaureguil/MyLib/master/geoloc.js",fu
   }
 
   chooseS=false;
+ //localStorage.removeItem("key");
+ /*
  
-        //           <button id="mainrep" class=btns onclick='opendoc( "rep")'>. Repertorio .</button>
-//https://www.file.io/
+var enc=cod("ljaureguil","linkGit='https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Complacencias.txt';linkc='https://jsonblob.com/api/dd1dc37f-6728-11eb-82c8-83376f2319bc';linkRep='https://jsonblob.com/api/e86e9eca-db67-11eb-bf92-631e03f93a7b';pass=['andresjv','danieljv','laurojl'];")
+ alert(enc)
+var res=decod("ljaureguil",enc);
+iletra.value=enc;
+localStorage.setItem("keyRep",enc);
 
-//https://stackoverflow.com/questions/50481314/hosting-an-editable-single-string-of-text-online
-//https://pastebin.com/
+eval(res)
 
-//When you use the pastebin.com/raw/ + id of your text you get plain text.
-//jzfx2mKq3rYmg4UCnpaDm0oXCraS4EcR
-///https://jsonblob.com/2cf859d7-eec6-11ea-b1f3-6f02c0e4fe61.,    hhhhhhhhhhhhhh
+alert(linkRep)
 
-/*
-https://jsonblob.com/34620735-ebe1-11ea-9641-5deb564a7f24
-//https://gist.github.com/EtienneR/2f3ab345df502bd3d13e
-           <button class="btns"  id="ppr" onclick='this.style.background="blue";this.innerHTML="Complacencias";//opendoc( "repPrac")'>. *Complacencias* .</button>
- 
+GetJ(linkRep,function(r){r.prim=enc;
+     UpdateJ(linkRep,r,function(){alert("chk...");
+     
+     })
+});
+ //linkRep='https://jsonblob.com/api/e86e9eca-db67-11eb-bf92-631e03f93a7b';
 
-curl -i -X "PUT" -d '{"people":["fred", "mark", "andrew"]}' -H "Content-Type: application/json" -H "Accept: application/json" https://jsonblob.com/api/jsonBlob/2cf859d7-eec6-11ea-b1f3-6f02c0e4fe61
-HTTP/1.1 200 OK
-Content-Type: application/json
-Transfer-Encoding: chunked
-{"people":["fred","mark","andrew"]}
+var ss=localStorage.getItem("keyRep")
+alert(ss);
+
+alert("local storage\n\n"+decod("ljaureguil",ss));
+
 */
 
-/*
-loadDoc("https://jsonblob.com/api/jsonBlob/2cf859d7-eec6-11ea-b1f3-6f02c0e4fe61",function(t){alert("eto es diecto "+t)});
-postDoc("https://jsonblob.com/api/jsonBlob",{"nombre":"lauro","apeido":"jauregui"},function(t){alert("eto es diecto "+t)
-loadDoc("https://jsonblob.com/api/jsonBlob/2cf859d7-eec6-11ea-b1f3-6f02c0e4fe61",function(t){alert("eto es diecto "+t)});
-});https://jsonblob.com/api/jsonBlob/34620735-ebe1-11ea-9641-5deb564a7f24
-*/
+linkRep='https://jsonblob.com/api/e86e9eca-db67-11eb-bf92-631e03f93a7b';
+
+
 ObjRep={};
  var arn="a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,x,y,z,_,0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,x,y,z,_,0,1,2,3,4,5,6,7,8,9";
  arn=arn.split(",");
@@ -553,8 +463,9 @@ timerset=0;
 //alert(AppBk);
 var progressTimer=undefined,timerset=0;
 //postDoc("https://jsonblob.com/api/jsonBlob/2cf859d7-eec6-11ea-b1f3-6f02c0e4fe61",{"nombre":"lauro","apeido":"jauregui"},function(t){alert("eto es diecto "+t)})
-
-    linkRep='https://jsonblob.com/api/85e6ddf8-d5ec-11eb-8853-fb31258c7b15'
+//linkRep='https://jsonblob.com/api/e86e9eca-db67-11eb-bf92-631e03f93a7b';
+  
+  //  linkRep='https://jsonblob.com/api/85e6ddf8-d5ec-11eb-8853-fb31258c7b15'
      icomplacencias=undefined;
      emsg = document.getElementById("mmsg");
      enota = document.getElementById("complac");
@@ -714,7 +625,7 @@ function getObj(l,callback) {
                  }
         
              if(obf.resetTimer){
-               //  resetTocada(true);
+             
                  obf.resetTimer=false;
                                   postDoc(clink,obf) 
                  
@@ -743,12 +654,6 @@ function getObj(l,callback) {
           
                  if(obf.setTimerTo>0){ 
                       remotetimer=obf.setTimerTo;
-                    //  resetTocada();
-
-                    // alert("Set de timero to " + obf.setTimerTo+clink);
-             //      verifyTimer( obf.setTimerTo);  
-                //  inicTimer(obf.setTimerTo);
-              
                      obf.setTimerTo=0;
                      obf.timerset=remotetimer;
                  //  alert("ddddddddddddddddddddd"+clink)
@@ -1018,7 +923,7 @@ var txlinks="";
 arlinks=r.split("\n");
 arlinks=arlinks.filter(function(ar){return ar !="" && ar !=undefined && ar.indexOf("*") < 0 });
 txlinks=r;
-//inicprs()
+
 localStorage.setItem("CancLinks",r)
 
 inic2();
@@ -1101,110 +1006,18 @@ var timewarning, timeout, timeover,test=false;
         eactrls.style.top="-80%";
  
         edc = document.getElementById("todo")
-         doc = ifr.contentWindow.document;
-        etitulo = document.getElementById("titulo");
+           etitulo = document.getElementById("titulo");
         ectrls = document.getElementById("ctrls");
         eli = document.getElementById("lirep")
          repmix = "";
         esrch = document.getElementById('srch');
         ebarra = document.getElementById('barra');
-         //  eedventana = document.getElementById('edventana');
-        edivrep = document.getElementById('divrep');
-    
-         arindex = [];
+        arindex = [];
         arsongs = [];
 
          //    loadText('https://drive.google.com/open?id=1VU-tkhVUVDJke1m49YNcJiAfbnN_ZDYHEGxckW20KZM',function(r){alert(r.indexOf("libreta"))})
          //////////////////////////////////////
-     function inicprs(){   loadText('https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/RepertorioOriginal.txt', function(cont) {
-        
-        etitulo.innerHTML = ". . . Repertorio:"
-            var cc = cont.split("/clases")
-            cmi = cc[0].split("\n"),
-                arcmi = [],
-                cid = [],
-                cclas = [],
-                rca = [],
-                rto = [],
-                rsongs = [],
-                rcl = [];
-            orremix = cc[1].split("\n")
-//            alert(orremix)
-            // oremix = [];
-            //class
-            for (i = 0; i < cmi.length; i++) {
-                if (cmi[i].indexOf("-") > 0) {
-                    arcmi.push(cmi[i].replace(/(\r\n|\n|\r)/gm, ""))
-                    var f = cmi[i].split("-");
-                    cclas.push(f[1]); //clase
-                    cid.push(f[0]); //letra
-                }
-            }
-            
-            ////////////////////////////////////////////
-            for (i = 0; i < orremix.length; i++) {
-                if (orremix[i].indexOf("-") > 0) {
-                    total.push(orremix[i]); //selecciona las canciones
-                    //   if(i==orremix.length-1); // alert(total.length);
-                }
-                //  
-            }
-            ////kj
-            etitulo.innerHTML = ". . . Repertorio: " + total.length + " Songs";
-            ////////////////////////////////////////////////
-            for (i = 0; i < orremix.length; i++) {
-                //  if(orremix[i].indexOf("*")>=0) alert(orremix[i])
-                if (orremix[i].indexOf("-") > 0 || orremix[i].indexOf("*") >= 0) {
-                    if (orremix[i].indexOf("*") >= 0) {
-                        arindex.push([rca.length, orremix[i]]);
-                 //       alert(orremix[i])
-                      //  eli.appendChild(crnode(orremix[i]));
-             ////////    CHANGE MADE RIGHT HERE          
-                      
-                     eli.appendChild(crtitulos(orremix[i]));
-                    } 
-                    else {
-                        var f = orremix[i].split("-");
-                       var ste=new song();
-                       ste.titulo=f[0];
-                        ste.tono=f[1];
-                   //    alert(f);
-                       var aaa=getClases(f[2].split(" "))
-                         ste.clase=aaa.main;
-                      ste.subclases=aaa.subs;
-                  ste.links=getlink(ste.titulo);
- 
-                        songs.push(ste);
-                         var ca = f[2].split(" "),
-                            tt = "";
-                        var ff = [];
-                        //clases
-                        for (ii = 0; ii < ca.length; ii++) {
-                            var ind = cid.indexOf(ca[ii]);
-                            if (ind >= 0) {
-                                //alert(cclas[ind])
-                                ff.push(cclas[ind]);
-                            }
-                        }
-                        /* hacer la rutina para cambiar letras por normbres de clases
-                 
-                */
-                        rca.push(f[0]);
-                        rto.push(f[1]);
-                        rcl.push(ff);
-                    
-                        ////////    CHANGE MADE RIGHT HERE
-                     //   eli.appendChild(crnode(f[0], f[1], ff));
-                     eli.appendChild(crnode2(ste))
-                    }
-                }
-            }
-            //   alert(arindex);
-            createbtns(cclas)
-            //   preparesongs()     
-        });
-     }
- var clases=[];
+  var clases=[];
 
  function proceso(ob){
     etitulo.innerHTML = ". . . Repertorio: "+ob.canciones.length+"+";
@@ -1275,6 +1088,7 @@ if(chooseS){
 else{
    if(el.letra!=""){ edle.style.display = "block";
               ele.value=el.letra;
+              websong=el.cancion;
             }
             else{
            
@@ -1283,83 +1097,17 @@ else{
                ebarra.value = "";
 
             }
-                        
+                     
 }
-
-
-
  }
- 
- function proceso2(cont){
- 
- etitulo.innerHTML = ". . . Repertorio:";
-         var cc = cont.split("/clases");
-         var pc=cc[0].split("\n");
-         tpcc=[];
-         var tpc=pc.filter(function(a,index,ar){
-             if(a.includes("-")) { 
-                   var to=a.split("-");
-                   clases.push({id:to[0],nclase:to[1]})
-                   return a;
-             }
-         })
-       var pr=cc[1].split("\n");
-         mc=[];
-        pr=pr.filter(function(a){
-             return a!="" && a!=undefined;
 
-         });
-           pr.forEach(e=>{
-             if(e.includes("*")){
-                eli.appendChild(crtitulos(e));
-                 mc.push(e);
-               //  alert(mc)
-             }
-
-             else{
-             sng=getsongobj(e)
-             songs.push(sng);
-             eli.appendChild(crnode2(sng));
-             }
-         });
-         etitulo.innerHTML = ". . . Repertorio: " + songs.length + " Songs+";
-
-     
-}
      function inic2(){
          var re={}
          if(online){ loadText('https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/RepertorioOriginal.txt', function(cont) {
             GetJ(linkRep,function(re){
   
-
-     /*       loadDoc('https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Letras.txt',function(l){
-           // alert(re);
-                ll=l.split("*");//alert(ll)
-                for(var i=1;i<ll.length;i++){
-                   // alert(ll[i])
-                    var t=ll[i].split("\n")[0];
-                    t=t.split(" (")[0].toUpperCase();
-                   // alert(t)
-                    var ts=re.canciones;
-                   
-                    for(var ii=0;ii<ts.length;ii++){
-                      //  alert(t+"\n"+ts[ii].cancion)
-                       var cs=ts[ii].cancion.toUpperCase()
-                        if(cs===t){
-                        //    alert(t+"\n"+cs+"\n\n"+ll[i]);
-                            
-                         ts[ii].letra=ll[i];
-}
-                    }
-                }
-      alert(JSON.stringify(re))
-      UpdateJ('https://jsonblob.com/api/85e6ddf8-d5ec-11eb-8853-fb31258c7b15',re,function(){alert("listo ya esta")})
-            })*/
-
            ObjRep=re; 
 
-
-      
             proceso(re);
            localStorage.setItem("Repertorio",JSON.stringify(re))   ;
 
@@ -1372,39 +1120,6 @@ else{
           if(rep!=null) proceso(JSON.stringify(rep));
           alert("You are offline and there is not a backup")
         }
-
-     }
-     function getsongobj(raw){
-         var so=new song();
-         so.subclases=[];
-         var pa=raw.split("-");
-        
-         so.titulo=pa[0]; 
-         so.tono=pa[1];//alert(so.titulo)
-         var ov=getlink(so.titulo)
-         
-         //alert(JSON.stringify(ov))
-         so.acordeon=ov.acordeon;
-         so.guitarra=ov.guitarra;
-        // alert(JSON.stringify(so))
-         var subc=[];
-         var arc=pa[2].split(" ");
-         arc=arc.filter(ee=>{if(ee!=" " && ee!="") return ee})
-        
-         var arcc=arc.forEach(function(r){
-         
-            for(var i=0;i<clases.length;i++){
-                if(r===clases[i].id){ 
-                     so.subclases.push(clases[i].nclase);
-                     i=clases.length; 
-            }
-            }
-
-         });
-         so.clase=so.subclases.shift();
-         so.raw=raw;
-         return so;
-
 
      }
 
@@ -1423,148 +1138,13 @@ else{
 
     }    
     function gtcl(c){
-        
+    
 
     }    
-
-        function setclasesmix(repertorio) {
-            var cl = [],
-                rp = [],
-                clt = "";
-            for (i = 0; i < repertorio.length; i++) {
-                if (repertorio[i] != "undefined" || repertorio[i] != "" || repertorio[i] != " ") {
-                    rp = repertorio[i].split("-");
-                    //alert(rp)
-                    if (rp != "" || rp != null || rp != undefinef) clt += rp[2] + " "
-                }
-            }
-            //  alert(clt);
-            return cl;
-        }
          ///////////////////////////////////////   
-        function opendoc(op) {
-            doc.close();
-            //alert(op);
-            //   eedventana.href = op; //eedventana.click();
-            if (op.indexOf("https") >= 0) {
-                var re = prompt("Write your password");
-                var d = new Date().toString();
-                var m = d.split(" ");
-                d = "andy " + m[1] + " " + m[2];
-                d = d.toUpperCase();
-                re = re.toUpperCase();
-                if (d === re) {
-                    eli.style.display = "none";
-                    ifr.style.display = "block";
-                    edivrep.style.display = "none";
-                    ifr.src = op;
-                } else {
-                    alert("Wrong Pasword");
-                    //   edivrep.style.display = "block";
-                    edivrep.style.display = "block";
-                    ifr.style.display = "none";
-                    eli.style.display = "block";
-                }
-            } else {
-                // 
-                if (op === "repPrac") {
-                    loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/RepPractica.txt", function(r) {
-                //        alert(r)
-                    });
-                } else {
-                    if (op === "open rep") {
-                        //ebarra.value="";
-                        //  sortear("")
-                        edivrep.style.display = "block";
-                        ifr.style.display = "none";
-                        eli.style.display = "block";
-                        // repstate= false;
-                    }
-                    if (op === "rep") {
-                        //    repstate=true;
-                        edivrep.style.display = "block";
-                        ifr.style.display = "none";
-                        eli.style.display = "block";
-                        sortear("");
-                    }
-                    // else repstate=false;
-                }
-            }
-        }
 
- //       function getletra() {
-  //          showletra(ebarra.value)
- //       }
-
-        function getletra() {
-           showletra(ebarra.value)
-       }
-       function getletra2(){
-        ebarra.value +=" letra";
-                esrch.click()
-               ebarra.value = "";
-
-       }
-
-       function showletra(cancion, nodec) { //Corrido de Roberto Gastelum
-     if(!marktocada){
-           websong=cancion;
-     var tc=cancion.toUpperCase();
-          var tl=Letras.toUpperCase();
-          var aas=tl.indexOf("*" + tc);
-           var as = Letras.indexOf("*" + cancion);
-                as=aas
-           if (as >= 0) {
-                var na=Letras.indexOf("*",as+2)
-              var cal=Letras.slice(as,na);
-            //  alert(tl)
-            //  alert(as+"\n"+na+"\n"+cal);
-              edle.style.display = "block";
-              ele.value=cal;
-             
-               scy = 0;
-                var par= cal.slice(vt.indexOf("(")+1 , cal.indexOf(")"));
-                par=par.split(",");
-               tiempo = par[0]* 1000 * 60;
-               dilay = par[1] * 1000;
-               sch = ele.offsetHeight * 1;
-           } else {
-               ebarra.value = cancion + " letra";
-                esrch.click()
-               ebarra.value = "";
-           }
-           }
-           else{
-                      var r=nextRep.indexOf(cancion);
-               if(r<0){
-                 
-                    if(confirm("Save "+cancion+" for next Tocada?")){ 
-                        nextRep+="~"+cancion;localStorage.setItem("NextRep",nextRep);
-                         }
-                         else{
-                            if(nodec!=undefined){
-                          nodec.style.color="#fff"
-                      }                           
-                         }
-
-                         }
-               else {
-                   if(confirm("Cancion "+cancion+" ya Existe, do you want to clear it from Rep de tocada?")){
-                      var r="~"+cancion
-                      nextRep=nextRep.replace(r,"")
-                      localStorage.setItem("NextRep",nextRep);
-                      if(nodec!=undefined){
-                          nodec.style.color="#fff"
-                      }
-                      
-                   }
-               }
-                }
-       }
-      
         function loadText(file, callback) {
-        //    if(online){
-        //   alert("from ;oadtext\n"+file)
+
            if(file!=null){
                if(file.indexOf("http")>=0){
                  fetch(file).then(response => response.text()).then((data) => {
@@ -1574,167 +1154,7 @@ else{
            }
  //     else {alert("You are offline...");callback("")}
         }
-
-        function createbtns(li) {
-            for (i = 0; i < li.length; i++) {
-                var bt = document.createElement('button');
-                bt.innerHTML = li[i];
-                bt.setAttribute('onclick', "addca('" + li[i] + "')");
-                bt.setAttribute("class", "btns")
-                edivrep.appendChild(bt);
-            }
-        }
-
-        function addca(cl) {
-            //     alert(cl); 
-            var ch = eli.children;
-            if (cl === "") {
-                cl = ". . . Repertorio: " + total.length + " Songs";
-                for (i = 0; i < ch.length; i++) {
-                    ch[i].style.display = "";
-                }
-            } else {
-                if (cl != undefined) {
-                    for (i = 0; i < ch.length; i++) {
-                        if (ch[i].song != undefined) {
-                            if (ch[i].clase.indexOf(cl) >= 0) {
-                                ch[i].style.display = "";
-                            } else {
-                                if (ch[i].title != undefined) ch[i].style.display = "none";
-                            }
-                        } else {
-                            ch[i].style.display = "none";
-                        }
-                    }
-                }
-            }
-            edc.scrollTop = 200;
-            etitulo.innerHTML = cl ;//+ " . . ."; ". . . " +
-        }
-
-        function preparesongs() {
-            var ix = arindex[0][0] * 1,
-                ixx = 0;
-            // alert(arindex.length);
-            for (i = 0; i < rca.length; i++) {
-                var node = document.createElement("LI");
-                var textnode = document.createElement('p');
-                textnode.innerHTML = rca[i] + "    . . . . Tono " + rto[i];
-                textnode.setAttribute('onclick', 'this.style.color="#00ff00";showletra("' + rca[i] + '",this)');
-                node.appendChild(textnode);
-                node.estado = true;
-                node.index = i;
-                node.clase = rcl[i];
-                node.songname = rca[i];
-                node.tono = rto
-                if (ix === i) {
-                    var t = document.createElement("p");
-                    t.setAttribute("class", "cind");
-                    t.innerHTML = arindex[ixx][1];
-                    t.titulo = arindex[ixx][1];
-                    t.visible = true;
-                    ixx++;
-                    if (arindex.length > ixx) ix = arindex[ixx][0];
-                    eli.appendChild(t);
-                }
-                eli.appendChild(node);
-                //   rsongs.push(node);
-            }
-            //          alert(rsongs[10].estado);
-            //   
-        }
-        
  ///////////////////////////////////////////////////////////////////////////////
-function swc(){
-    eactrls.style.top="15%";
-    eac.style.opacity=.35;
-    egu.style.opacity=.35;
-  //  alert(eactrls.style.top);
-}
-///////////////////////////////////////////////////////////////////
-function crnode2(song) {
-                var node = document.createElement("LI");
-                node.sng=song;
-                var di = "<font color='#00ffff'> _ </font>";
-                di = "";
-               node.innerHTML = di + song.titulo + di+" . . . " + song.tono; //
-var tt="";
-if(song.guitarra!=undefined && song.guitarra!="" || song.acordeon!=undefined && song.acordeon!="" ) {
- if(song.guitarra!=undefined && song.guitarra!="") {
-     tt="guitarra='"+song.guitarra+"';egu.style.opacity=1;";
-   }
-  
-if(song.acordeon!=undefined && song.acordeon!="") {//alert(acordeon);
-    tt=tt+";acordeon='"+song.acordeon+"';eac.style.opacity=1;";
- }
-         node.setAttribute('onclick', 'swc(); eac.style.opacity=1;'+tt+'; if(marktocada) this.style.color="#0ff";else this.style.color="#00ff00";showletra("' + song.titulo + '",this);');
-        node.innerHTML = di + song.titulo + di+" . <font color='#00ffff'>&#9193;</font> . " + song.tono;//+"<font color='#00ff00'>&#9835;</font>"; //
-         }
-        else {
-  //          alert("sin link,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,")
-            node.setAttribute('onclick', ' if(marktocada) this.style.color="#0ff";else this.style.color="#00ff00";showletra("' + song.titulo + '",this);');
-        }
-                node.estado = true;
-            //    node.index = i;
-                node.clase = song.clase;
-                node.song = song.titulo;
-                node.tono = song.ono;
-                if (song.subclases.indexOf("practica") >= 0) {
-                 //   node.style.color = "#ff0";
-                }
-   
-                   if(nextRep.indexOf(song.titulo)>=0) node.style.color = "#0ff";
-
-                return node;
-      
-        }
-
-      function crtitulos(song) {
-            if (song.indexOf("*") === 0) {
-                var t = document.createElement("p");
-                t.setAttribute("class", "cind");
-                t.innerHTML = song;
-                t.name = "cltit"
-                return t;
-            } else {
-            }
-        }
-
-
-        function crnode(song, to, cl) {
-            if (song.indexOf("*") === 0) {
-                var t = document.createElement("p");
-                t.setAttribute("class", "cind");
-                t.innerHTML = song;
-                t.name = "cltit"
-                return t;
-            } else {
-
-                var node = document.createElement("LI");
-                var di = "<font color='#00ffff'> _ </font>";
-                di = "";
- 
-                node.innerHTML = di + song + di+" . . . " + to; //
-
-                node.setAttribute('onclick', 'this.style.color="#00ff00";showletra("' + song + '",this)');
-                node.estado = true;
-                node.index = i;
-                node.clase = cl;
-                node.song = song;
-                node.tono = to;
-                if (cl.indexOf("practica") >= 0) {
-                    node.style.color = "#ff0";
-                }
-                if (cl.indexOf("repertorio tocada") >= 0) {
-                //    node.style.color = "#0ff";
-                }
-                return node;
-            }
-        }
-
-        function update(v) {
-            //   alert(v+"ffffff");
-        }
 
         function sortear2(filter) {
           var ar = eli.children;
@@ -1760,56 +1180,7 @@ if(song.acordeon!=undefined && song.acordeon!="") {//alert(acordeon);
 
             //}
       }
-        function sortear(filter) {
-            if (filter === "") {
-                addca("");
-                ectrls.style.display = "";
-               edivrep.style.display = "";
-            } else {
-                settot(false)
-                ectrls.style.display = "none";
-                edivrep.style.display = "none";
-                var ul, li, a, i, txtValue;
-                filter = filter.toUpperCase(); //input.value.toUpperCase();
-                ul = eli;
-                li = ul.getElementsByTagName("li");
-                for (i = 0; i < li.length; i++) {
-                    txtValue = li[i].textContent || li[i].innerText;
-                    var aa = txtValue.split(" . .");
-                    txtValue = aa[0];
-                 //   app.ShowPopup(li[i].clase);
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        li[i].style.display = "";
-                        if (txtValue != ""); //ebarra.value=txtValue;
-                        else; //ebarra.value="";
-                    } else {
-                        li[i].style.display = "none";
-                    }
-                }
-            }
-        }
 
-        function settot(op) {
-            //getElementsByClassName()
-            var a = document.getElementsByClassName("cind");
-            if (op) {
-                if (!a[0].visible) {
-                    //activarlas 
-                    for (i = 0; i < a.length; i++) {
-                        a[i].style.display = "";
-                        a[0].visible = true
-                    }
-                } else return;
-            } else {
-                if (a[0].style.display === "") {
-                    //desactivarlas
-                    for (i = 0; i < a.length; i++) {
-                        a[i].style.display = "none"
-                        a[0].visible = false
-                    }
-                }
-            }
-        }
         var sch=ele.offsetHeight*1,scy=0,scintervalo=null,tiempo=500*60,sctiempo=0,iti=0,einicsld=document.getElementById("inicsld");
     function  movescroll(h,y){
         sch=h;
@@ -1819,302 +1190,9 @@ if(song.acordeon!=undefined && song.acordeon!="") {//alert(acordeon);
     }
     dilay=1000;   var cto; tiempo=1; var cc=0;
     function inicScrolling2() {
- /* 
-        var bk=ele.value;
-        he=ele.offsetHeight;
-        hc=ele.scrollHeight;
-        var dh=hc-he;
  
-     if(dh>=5){
-         var tco=new Date()
-                co=tco.getTime();
-                var tf=co+tiempo*kt;
-               
-              var vl=hc/(tiempo*kt);
-          alert(vl); 
-  //     einicsld.style.background = "rgba(150,0,0,.50)";
-   ele.focus();   ele.scrollTo(0, 0);
-         setTimeout(function(){
-       scintervalo = setInterval(function() {
-                cc+=vl*10;
-              //  cc+=1;
-    
-                tco=new Date().getTime();
- 
-              var d=tf-tco; 
-              var dp=60-d/1000;//dp=d/1000-dp;
-            ele.value=dp+bk;
-                if(dp>he){
-                        ele.value=bk+dp+" Moving ";
-                        ele.scrollTo(0, 0, 'smooth');
-               // ele.scrollTop+=dp;
-             
-               
-             //   ele.value=bk+co+" Moving ";
-            //              alert(cc)
-                }
-                if(cc>hc){
-                    ele.value=bk+dp+" Done ";  co=0
-                     clearInterval(scintervalo);
-                   
-                     }
-              //  alert(co)
-            },10);
-        },dilay);
-    }
-    else alert("noo need scroll")*/
-  }
-    
-    function inicScrolling() {
-      //  ele.focus();// document.getElementById("le").focus();//clle
-    //  einicsld.style.background = "rgba(150,0,0,.50)";
-         setTimeout(function(){
-      sctiempo = (tiempo-dilay) / (ele.scrollHeight - ele.offsetHeight);//    //-sch+1  //alert(tiempo+"\n\n"+ele.scrollHeight+"\n"+sch+"\n"+sctiempo)
-      it = 0;
- 
-      var tinic = new Date().getTime() * 1;
-      var tprog = null;
- 
-      var dint = new Date().getTime() * 1;
-      scintervalo = setInterval(function() {
-          tprog = new Date().getTime() * 1;
-
-          var dif = tprog - tinic; //alert(dif);
-          var s = new Date().getTime() * 1 - dint;//alert("s="+s);
-          if (s > sctiempo/2) {
-              if(einicsld.style="block"){     einicsld.style.display="none";}
-            // app.ShowPopup(s);
-              dint = new Date().getTime() * 1;//alert("dint="+dint);
-              it += 1;
-              ele.scrollTop += .5;
-          }
-          if (dif > tiempo-dilay) {
-              einicsld.style.background = "rgba(0,150,0,.50)";
-               einicsld.style.display="block";
-              clearInterval(scintervalo);
-          }
-      }, 10);
-        },dilay);
-  }
-  
- 
-function runtimer(rt){
-    clearInterval(runningTimer);
-    var tii=new Date();
-    runningTimer=setInterval(function(){
-
-        entimer.innerHTML=tii.getMinutes();
-
-      
-
-
-    },1000)
-
-}
-
-var twarn = 5 * 60 * 1000;
-var tovert = 3 * 60 * 1000;
-
-function inicTimer(t) { 
-//          closesettings();
-     var aw=new Date().getTime();
-  
-       ///////////////
-       clearInterval(progressTimer);
-       eprogress.min=0;
-       eprogress.max=t/kt;//alert(eprogress.max)
-//////////
-var tem=new Date().getTime();
-            var u=localStorage.getItem("Timer");
-            var dif=(u-tem);
-           // alert(dif/kt)
-            ///////////////
-            var oc=(t-dif)/kt;
-          //  var oc=eprogress.value;
-            eprogress.setAttribute("value",oc);
-            etimersw.innerHTML="Timer: "+(eprogress.max-eprogress.value).toFixed(1)+" min.";
-
-
-
-        //
-        progressTimer=setInterval(function() {
-
-            /////////////////////
-            var tem=new Date().getTime();
-            var u=localStorage.getItem("Timer");
-            var dif=(u-tem);
-           // alert(dif/kt)
-            ///////////////
-            var oc=(t-dif)/kt;;
-          //  var oc=eprogress.value;
-            eprogress.setAttribute("value",oc);
-            etimersw.innerHTML="Timer: "+(eprogress.max-eprogress.value).toFixed(1)+" min.";
-            if(eprogress.value>eprogress.max) clearInterval(progressTimer);
-
-        }, 10000);
-
-
-
-
-    var tiempodetocar=t;
- 
- 
-    twarn = 5 * kt;
-    tovert = 3 * kt;
- 
-    clearTimeout(timeout);
-    clearTimeout(timeover);
-    clearTimeout(timewarning);
-
-    if (test && t < 47) {
-        tiempodetocar = tiempodetocar = 4500;
-        twarn = 5000;
-        tovert = 2000
-    }
-    if (test && t > 47) {
-        tiempodetocar = tiempodetocar = 7500;
-        twarn = 5000;
-        tovert = 2000
-    }
-
-    var dfw = tiempodetocar - twarn,
-        dfo = tiempodetocar + tovert;
-    if (dfw > 0) {
-        timewarning = setTimeout(function() {
-            document.body.style.background = "orange";
-
-            localStorage.setItem("horastocadas", horast);
-        }, dfw);
-    } else document.body.style.background = "orange";
-
-    timeout = setTimeout(function() {
-    document.body.style.background = "red";
-    }, tiempodetocar);
-
-    timeover = setTimeout(function() {
-
-        eli.style.background = "red";
-
-    }, dfo);
-}
-
-   
-  function inicTocada(h) { 
-   ///////////////////   
-   
-   if(test) alert("you are in test mode");
-   
-     clearTimeout(timeout);
-     clearTimeout(timeover);
-     clearTimeout(timewarning);
-  
-  if(h>1) tiempodetocar=45*60*1000;
-      else  tiempodetocar=60*60*1000;  
-      if(test) tiempodetocar=tiempodetocar= 7500;
-
-
-  if(Tocada=="" != Tocada==null){
-         alert("preciona primero 'set tocada' y pon las horas")
-  }
-  else{
-      if(test) tiempodetocar= 12000;
-   //   else tiempodetocar=60*60*1000; 
-      horast++;
-      document.body.style.background = "linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)";
-   eli.style.background = "black";
-    var d = new Date();
-    var hinic = d.getHours();
-    var minic = d.getMinutes();
-    sinic = hinic + ":" + minic;
-         if(localStorage.getItem("inicio")==="") {
-       
-    localStorage.setItem("inicio", sinic);
-    localStorage.setItem("horastocadas","1");
-    
-}
-else{
-
-    timewarning=setTimeout(function() {
-        document.body.style.background = "orange";
-      //  var rr=localStorage.getItem("horastocadas")*1+1;
-        localStorage.setItem("horastocadas",horast);
-
-      
-    }, tiempodetocar - 5000);
- 
-  timeout=setTimeout(function() {
-          document.body.style.background = "red";
-    }, tiempodetocar);
-    
-    timeover=setTimeout(function() {
-
-        eli.style.background = "red";
-//    }, tiempodetocar +  (2.5*60*1000))
- }, tiempodetocar +  2000)
-
-  //  closesettings();
-  
-
-    var toc = localStorage.getItem("inicio");
-    if (toc != null) {} else {
-
-    }
-}
-  }
-}
-
-
-  function tocada(){
-
-this.date="";
-this.start="";
-this.timeinic=0;
-this.iniciarTocada=function(){
-}
-this.setTocada=function(){
-     this.horas=prompt("cuantas horas?");
-     this.precio=prompt("Type el precio por hora");
-     this.informacion=prompt("Type Informacion extra si hay"); 
-     
-     alert("Cuando estes listo preciona el boton de 'Iniciar Primer Hora");
-
-}
-this.phone="";
-this.costumername="";
-this.direccion="";
-this.horas=0;
-this.precio=0;
-this.horadeinic=0;
-this.informacion="";
-this.horasTocadas=0;
-
   }
 
-  function getClaseName(c) {
-      var ret;
-      var i = cid.indexOf(c[0]);
-//      alert(cclas[i]);
-  //    alert(cclas)
-      if (i >= 0) return cclas[i];
-
-      //    else return "";
-  }
-
-  function getClases(ar) {
-     var cm = {
-          main: "",
-          subs: []
-      };
-     
-      var er=getClaseName(ar[0]);// alert(er);
-      cm.main =er ;
-     
-      for (var i = 1; i < ar.length; i++) {
-         if(ar[i]!="") cm.subs.push(getClaseName(ar[i]))
-      }
-       return cm;
-   }
- //454
  function setaudio(a){
 
 try{
@@ -2138,24 +1216,6 @@ if(ll!=undefined){
 else return "";
 
 }
-function getlink(c){
-   var vers={acordeon:"",guitarra:""}
-      if(txlinks.indexOf(c)>=0){
-     var indi=txlinks.indexOf(c);
-      var inde=txlinks.indexOf("\n",indi);
-      var r=txlinks.slice(indi,inde)
-        if(r.indexOf("ahttps:")) vers.acordeon=fixlink(r.split("ahttps://drive.google.com/file/d/")[1]) 
-      if(r.indexOf("ghttps:")) vers.guitarra=fixlink(r.split("ghttps://drive.google.com/file/d/")[1]); 
-        return vers;
-       }
-
-  else return vers;
-}
-
- function selrep(){
-
-
- }
  
 function loadDoc(url,callback) {
   var xhttp = new XMLHttpRequest();
@@ -2289,7 +1349,7 @@ for (var i = 0; i < rre.length; i++) {
         }
         if (chn.length === 4) {
             //       if(chn.indexOf('{"s')===-1) return null }
-            if (chn.indexOf('{') === -1) return null
+           // if (chn.indexOf('{') === -1) return null
         }
 
     }
