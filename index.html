@@ -1,694 +1,2447 @@
 <html>
-
+   <scriptsrc="https://raw.githubusercontent.com/ljaureguil/MyLib/master/jsondials.js"  onload="showobj()"  ></script>
+    <script src="https://apis.google.com/js/api.js"></script>
 <head>
-    <meta name="viewport" content="width=device-width">
-    <script src='file:///android_asset/app.js'></script>
+    <meta name="viewport" content="width=device-width" name="theme-color" content="#4285f4">
+    <link rel="shortcut icon" href="https://scontent-atl3-1.xx.fbcdn.net/v/t1.0-9/66105070_2606484239385650_1488724510487085056_n.jpg?_nc_cat=106&_nc_oc=AQnx7XRzS47pDYNv0h-dDfqV4kE07czctw5Vm7DOCPn0EMJa2QGEbh-PAJWE2tmrGyo&_nc_ht=scontent-atl3-1.xx&oh=6f6b09b8d92c3007c254fd5ba07f45d7&oe=5DA91A9C"
+    type="image/x-icon" />
+
 </head>
-<style>
-    body {
-        background-color: #ffffff;
-        font-size: 25px;
-    }
-    button {
-        font-size: 25px;
-        border-radius: 50px;
-        background: blue;
-        color: white;
-        box-shadow: -20px 20px 20px 2px rgba(0, 0, 0, .4);
-        width: 95%;
-    }
-    #todo {
-        // text-align: center;
-        height: 200%;
-    }
-    input {
-        font-size: 25px;
-        // border-radius: 10px;
-        border-style: solid;
-        background: #c5f5c5;
-        width: 100%;
-    }
-    .centradas {
-        // border-radius: 10px;
-        border-style: solid;
-    }
-    #clip {
-        height: 100%;
-        width: 100%;
-        background: #c3e534;
-    }
-    #precio {
-        background: #c5c5f5;
-    }
-    #fecha {
-        background: #c5c5f5;
-    }
-    #nota {
-        width: 100%;
-        height: 5%;
-    }
-    #deposito {} #tcontrato {
-        position: absolute;
-        width: 100%;
-        ;
-        height: 100%;
-        font-size: 9px;
-        font-weight: bold;
-        top: 0%;
-        left: 0%;
-        display: none;
-        padding: 15px;
-        font-weight: bold;
-    }
-    #bc {
-        background: red;
-    }
-    #cblnk {
-        background: #FF6347;
-    }
-</style>
+ 
+<body >
+    <style>
+        body {
+            background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+            font-size: 30px;
+        }
+        #todo {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            transition: overflow-y 0.5s ease;
+        }
+        #ifr {
+            width: 100%;
+            height: 75%;
+            background: white;
+            border-radius: 15px;
+            display: none;
+        }
+        #ifrs {
+            width: 100%;
+            // height: 40%;
+            font-size: 25px;
+            border-radius: 15px;
+        }
+        .btns {
+            color: white;
+            font-weight: bold;
+            margin: 5px;
+            border-radius: 5px;
+            background: #000070;
+            font-size: 15px;
+           
+            width: 45%;
+            height: 8%;
+           
+        }
 
-<div id="todo">Para alluda habla al:
-    <br>209 665 8321
-    <div id="intradas">
-        <p></p>
-        Nombre
-        <input id="nombre" type="text" class="centradas">
-        <bf>
-            <p></p>
-            Fecha del event
-            <input id="fecha" type="date" class="centradas" readonly=true>
-            <br>
-            <p></p>
-            Direccion
-            <input id="direccion" type="text" class="centradas">
-            <p></p>
-            Telefono
-            <input id="telefono" type="tel" class="centradas">
+        .btnss{
+            font-size: 18px;
+            color:rgb(205, 201, 211);
+            margin:3%;
+
+        }
+        .ctit{
+           
+            font-size: 30px;
+            color:#7bc4da;
+            background:#3f0101;
+            border-style:solid;
+            border-color:#ffffff
 
 
+        }
+        #ed {
+            background: rgba(0, 255, 0, .5);
+            color: white;
+            position: absolute;
+            top: 90%;
+            bottom: right: 5%;
+        }
+        #divrep {
+            font-size: 18px;
+            //position: absolute;
+            bottom: 2%;
+            width: 100%;
+            // height: 85%;
+            // background: white;
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: none;
+            border-radius: 15px;
+            padding: 5%;
+        }
+        #lirep {
+            margin:3%;
+            background: black;
+            color: white;
+            width: 94%;
+            // height: 40%;
+            font-size: 18px;// font repertorio
+            font-weight: bold;
+            border-radius: 15px;
+          //  padding: 5%;
+            border-color: blue;
+            border-style: double;
+            border-width: 5px;
+            
+        }
+        .songs {
+            color: #50ff50;
+            font-weight: bold;
+            font-size: 25px;
+        }
+        .songsdone {
+            color: #50ff50;
+            font-weight: bold;
+            font-size: 25px;
+        }
+        .cind {
+            // color: #0ff000;
+            background: green;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        #titulo {
+            color: #0ff000;
+            background: blue;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        #logo {
+            position: absolute;
+            top: 0%;
+            right: 1%;
+            background: url(https://lh3.googleusercontent.com/m6YEmcXhjRQRdkS7AMBgGzpbdyZLK2gpbju5jB_WUJwp4Ss_fxeKA202ybPMhJixfnrm);
+            background-size: 100% 100%;
+            color: #ffffff;
+            font-weight: bold;
+            width: 65px;
+            height: 65px;
+            font-size: 30px;
+            border-radius: 50%;
+            border-color: white;
+         
+          //  background-color: rgb(248, 10, 10);
+            // opacity: .65;
+            visibility: visible;
+        }
+         #ppr {
+            overflow:auto;
+            background: #0000FF;
+            color: #ffffff;
+            font-size:16px;
+            width:94%;
+            border-radius:10px;
+             box-shadow: inset 5px -5px 30px #000020, inset -5px 5px 30px #000088;;
+        //     display:none;
+            
+        }       
+        
+        #complac {
+            overflow:auto;
+            height:12%;
+            background: #00FF00;
+            color: #fff;
+            font-size:20px;
+            width:94%;
+            border-radius:10px;
+             box-shadow: inset 5px -5px 20px #000020, inset -5px 5px 20px #000088;
+               -webkit-text-stroke: 0.3px #f00;
+                -webkit-text-fill-color: #000;
+            display:none;
+            
+        }
+        #dle {
+            color: white;
+            display: none;
+            width: 95%;
+            height: 98%;
+            position: absolute;
+            padding: 20px;
+           // overflow: auto;
+            background: black;
+            border: solid;
+        }
+        #le {
+            padding: 15px;
+            color: black;
+            font-size: 17px;
+            width: 90%;
+            height: 90%;
+         //   overflow: auto;
+            
+           // border-style: solid;
+           border-radius:5px;
+            font-weight: bold;
+            background: #ffff;
+        //   box-shadow:inset 0 0 30px 4px #6666ff;
+          scroll-behavior: smooth;
+        }
+        #clle {
+            position: absolute;
+            bottom:5px;
+            left: 0%;
+            width:60%;
+            
+       
+            height:80px;
+            border-radius:10px;
+            background-color: rgba(0, 212, 255, .40);
+            color:#ffffff;
+            font-size:20px;
+            font-weight:bold;
+            border-style:double;
+             box-shadow:inset 0 0 5px 1px #66aa66;   
+        }
+         #inicsld {
+            position: absolute;
+            bottom: 5px;
+            right: 42px;
+            width:50px;
+            height:50px;
+            border-radius:50%;
+            background-color: rgba(0, 212, 255, .40);
+            color:#ffffff;
+            font-size:18px;
+          //  font-weight:bold;
+            border-style:double;
+                    box-shadow:inset 0 0 5px 1px #66aa66; 
+        }  
+ 
+        
+        #mainrep{
+             font-size:18px;
+            background:#aa0000;
+        }
+        #ref{
+            position:absolute;
+            background:transparent;
+            top:1%;
+            right:0%;
+            border:none;
+            font-size:36px;
+           // width:32px;
+           // height:30px;
+        }
+    #settings-dlg{
+        overflow-y:auto;
+        text-align:center;
+  position: absolute;
+  width:80%;
+  height: auto;
+  background:url(https://ae01.alicdn.com/kf/HTB170FoRFXXXXaAXpXXq6xXFXXX5/Party-Disco-Club-DJ-Light-Show-Lumiere-Colorful-wedding-room-beam-lights-background-Mini-RGB-lamps.jpg);
+  background-size: 100% 100%;
+  color:blue;
+  font-size: 20px;
+  font-weight: bold;
+  left: 10%;
+  top: 10%;
+ 
+  display: none;
+  text-align: center;
+  border-style:double;
+  border-radius:10px;
 
-            <p></p>
-            Inicia
-            <input id="inic" type="time" class="centradas" value="16:00" oninput="adjTime('in')">
-            <p></p>
-            Horas
-            <input id="horas" type="number" class="centradas" oninput="adjTime('h')">
+
+}
+.btnsset{
+    font-size:18px;
+     margin:20px;
+     width:50%;
+   text-align:center;
+   border-radius:100px;
+   background:rgb(245, 78, 56);
+   color:white;
+
+}
+.divpicks{
+    border:solid;
+    font-size:10px;
+    padding:15px;
+    color:white;
+    width:80%;
+     text-align:center;  
+}
+#bottonInic{
+    height:180px;
+    width: 180px;
+    color:#00ff00;
+   background:url(https://lh3.googleusercontent.com/m6YEmcXhjRQRdkS7AMBgGzpbdyZLK2gpbju5jB_WUJwp4Ss_fxeKA202ybPMhJixfnrm);
+   background-size: 100% 100%;
+   -webkit-text-stroke: 1.80px #000000;
+-webkit-text-fill-color: #00ff00;
+    font-size:25px;
+    font-weight:bold;
+    border-radius: 10px;
+    box-shadow: -5px 5px 26px  #c3e2d3, inset 10px -10px 10px #3e8049, inset -10px 10px 10px #02fb38bb;
+}
+#audctrls{
+    position:absolute;
+    width:60x;
+    height:60%;
+       top:35%;
+       right:0%;
+       transition:  top ease-in-out 2s;
+
+}
+.cbaudio{
+    color:red;
+    height:60px;
+    width: 60px;
+    position:absolute;
+    background-color: rgba(0, 212, 255, .40);
+ 
+    border-radius: 75px;
+    font-size: 20px;
+    font-weight: bolder;
+    -webkit-text-stroke: 0.80px #ffffff;
+-webkit-text-fill-color: rgba(241, 58, 58,.5);
+ 
+
+ 
+}
+#bpl{
+right:0%;
+bottom:20%;
+background:url(https://www.pngitem.com/pimgs/m/200-2008129_accordion-png-transparent-images-accordion-png-png-download.png);
+background-size: 100% 100%;
+font-size: 30px;
+}
+#bplg{
+    font-size: 30px;  
+right:0%;
+bottom:40%;
+background:url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQUWYK7I9TSn7Osh3YPtNHE2n4_vqzEs9-3TA&usqp=CAU);
+background-size: 100% 100%;
+
+}
+#bpa{
+right: 0%;
+top:20%;
+
+background:url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT6tNKD0Mb3zxabCHPDWaqh4RK0Dg6B7j8o0Q&usqp=CAU);
+background-size: 100% 100%;
+
+}
+#timerh{
+    background:url(data:image/jpeg;base64,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);
+        background-size: 100% 100%;
+    text-align: center;
+    position: absolute;
+    top:10%;
+    left:2%;
+     color: white;
+ width: 90%;
+ height: auto;
+  font-size: 20px;
+padding: 10px;
+border-style: double;
+border-radius: 10px;
+border-width: .5px;
+display: none;
+}
+.imgicon{
+   width:20px;
+   height:20px;
+
+}
+#wesea{
+    background:url(https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-web-icon-png-image_3997299.jpg);
+    background-size: 100% 100%;
+}
 
 
-            <p></p>
-            Termina
-            <input id="end" type="time" class="centradas" readonly=true>
-            <p></p>
+#prg{
+    width: 100%;
+    border-radius: 10px; 
+}
+progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+   appearance: none;
+   border-radius: 10px; 
+  //width: 250px;
+ // height: 20px;
+}
 
-            Precio/hora
-            <input id="precio" type="number" class="centradas" oninput="setTotal()" readonly=true>
-            <p id="deposito">Deposito</p>
+#mmsg{
+    display:none;
+}
+.ced{
+    margin:10px;
+    width:50%;
+}
+#editr{
+    color:white;
+    display:none;
+    border-style: solid;
+    background:rgba(255,25,0,.5);
+    
+}
+#iletra{
+    height: 45%;
+    width: 90%;
+    background-color:rgb(235, 241, 235);
+}
+.btnse{
+    color:white;
+    background:#030;
+    border-radius:5px;
+    font-size: 18px;
+    margin:10px;
+}
+    </style>
 
-
-            <p></p>
-            <p id="total">Total:</p>
-            <p></p>
-            <p id="resto">Restando</p>
-
-            <p></p>
-            Nota
-            <textarea id="nota" type="text" class="centradas"></textarea>
-
-
-            <br>
-            <br>
-            <button id="done" onclick="setFecha()">Enviar forma</button>
-            <br>
-            <br>
-
-            <button onclick="copy()">Verificar</button>
-            <br>
-            <br>Para alluda habla al:
-            <br>209 665 8321
-            <br>
-            <button id="cblnk" onclick="openContratoBlank()">Abrir Contrato en Blanco</button>
-            <br>
-            <br>
-            <button id="bc" onclick="openContrato()">Abrir mi Contrato
-                <br><font style="font-size:10px">***Este Contrato no tiene valides hasta que se haya dado el Deposito***</font>
-            </button>
-            <br>
-            <br>
-            <textarea id="clip" class="centradas" readonly>===============</textarea>
+    <div id="editr" >
+        <button class="btnse" onclick="document.body.style.background='red';openEdit();editr.style.display='none';">Sel Song</button>
+        <button class="btnse" onclick="clre();">clear</button>
+<br>
+         <input id="icancion" type="text" class="ced">Cancion<br>
+        <input id="itono" type="text" class="ced">Tono<br>
+        <select id="icategoria"  type="text" class="ced" oninput=""></select>Categoria<br>
+        <input id="iartista"   type="text" class="ced">Artista<br>
+        <input  id="ilink"  type="text" class="ced">Link<br>
+        <input  id="inota"  type="text" class="ced">Nota<br><br>
+        Letra
+        <textarea id="iletra"   type="text" class="ced"></textarea><br>
+        <button class="btnse" onclick="document.body.style.background=' linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)';editr.style.display='none';addCancion()">ADD NEW SONG</button>
+        <button class="btnse" onclick="document.body.style.background=' linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)';editr.style.display='none';">CLOSE</button>
+       <button class="btnse" onclick="delCancion()">Delete Sont</button>
 
     </div>
+<button class="btns" id="complac" onclick='this.style.background="blue";this.innerHTML="Complacencias";this.style.display="none"'>. *Complacencias* .</button>
+
+
+<div id="dle">
+
+    <textarea id="le" readonly onscroll="movescroll(this.scrollHeight,this.scrollTop)"></textarea>
+    <p id="wesea" onclick='if(confirm("Are you sure?")){ebarra.value=websong+" letra";esrch.click();eactrls.style.top="-80%";x.src="";einicsld.style.background="rgba(0,150,0,.50)";einicsld.style.display="block";ele.value="";ele.scrollTo(0, 0);edle.style.display="none";clearInterval(scintervalo);}'
+    style="opacity:.5;position:absolute;width:40px;height:40px;font-size: 18px;font-weight: bold;right: 15%;bottom: 22%;border-radius: 50%;border-style: solid;"></p>
+
+    <p onclick='eactrls.style.top="-80%";x.src="";einicsld.style.background="rgba(0,150,0,.50)";einicsld.style.display="block";ele.value="";ele.scrollTo(0, 0);edle.style.display="none";clearInterval(scintervalo)' style="color:black;position:absolute;width:30px;height:30px;font-size: 30px;font-weight: bold;right: 15%;bottom: 11%;border-radius: 50%;border-style: solid;">X</p>
+
+    <button id="inicsld" onclick='clearInterval(scintervalo);inicScrolling2();'>Start</button>
 
 
 </div>
 
 
-<textarea id="tcontrato" readonly=true></textarea>
+<button id="ref" onclick="eactrls.style.top='-80%';x.src='';sortear2('');edc.scrollTop = 0;">&#9851;</button>
+
+<div id="todo">
 
 
-<script>
-    linkt = "https://jsonblob.com/api/07c9b963-a78d-11eb-9988-fd1d237d3a97";
+    <form method="get" action="http://www.google.com/search" target="_blank" style="border:2px dotted white;padding:4px;width:80%;">
 
-    var objT = {}, nu = "";
-    var lo = {};
-    lo.id="";
-    lo.date = new Date().toString();
-    lo.clave = "";
-    lo.claves = []
+        <div>
+            <table border="0" align="center" cellpadding="0">
+                <tr>
+                    <td>
+                        <input id="barra" type="text" name="q" oninput="sortear2(this.value)" style=" font-size:20px;width:65%;" placeholder="Write a song..." />
+                        <input id="srch" type="submit" '_blank' style="display:none" />
+                        <button onclick="getletra2()" style=" background:red;color:white;width:30%;font-size:20px;border-radius:10px;">Letra</button>
 
-    lo.intentos = [];
-    lo.envios = [];
-    lo.editada = [];
-    lo.intentosEnvios = [];
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-
-    link = "https://jsonblob.com/api/47554397-8e50-11eb-81fd-a93d15366c8b"
-    //Called after application is started.
-    eclip = document.getElementById("clip");
-    ecalc = document.getElementById("calc");
-    etotal = document.getElementById("total");
-    ehoras = document.getElementById("horas");
-    enombre = document.getElementById("nombre");
-    efecha = document.getElementById("fecha");
-    einic = document.getElementById("inic");
-    eprecio = document.getElementById("precio");
-    edeposito = document.getElementById("deposito");
-    eend = document.getElementById("end");
-    eresto = document.getElementById("resto");
-    edireccion = document.getElementById("direccion");
-    etelefono = document.getElementById("telefono");
-    enota = document.getElementById("nota");
-    econtrato = document.getElementById("contrato");
-    etodo = document.getElementById("todo");
-    ebc = document.getElementById("bc");
-
-    var r = 0;
-    var m = "Jan,Feb,Mar,Apr,May,Ju,Jul,Aug,Sep,Oct,Nov,Dec";
-    var dd = "Sunday,Monday,Tusday,Wedsnesday,Thursday,Friday,Saturday";
-    dd = dd.split(",");
-    m = m.split(",");
-    var continua = false,
-        o = {}, aprovado = false,
-        cl = "_no_";
-    var depo = 0;
+    </form>
 
 
-    nn = "\nESTA FORMA SOLO ES PARA INFORMACION DE LA AGENDA\nDESPUES DE HAVER RECIBIDO ESTA FORMA SE DARA MAXIMO 2 DIAS PARA EL DEPOSITO Y SERRAR FECHA, DESPUES DE ESTOS 2 DIAS SE PERDERA LA PRIORIDAD Y PODRIA DARSE A OTRA PERSONA QUE LA REQUIERA."
-    nn += "\n\nPara cualquier duda hable al (209) 665-8321"
 
-    GetJ(linkt, function(obj) {
-        objT = obj;
-   //     localStorage.removeItem("ns");
-        nu = localStorage.getItem("ns");
-      //    alert(")))))))))))))))))\n\n"+nu);
-        if (nu === null) {
-            lo.id = new Date().toString();
-            localStorage.setItem("ns", lo.id);
-            obj.movimientos.push(lo);
-            lo.indice = objT.movimientos.length - 1;
-            UpdateJ(linkt, objT);
-        } else {
-            var v = getMove(nu, objT);
-            if (v === null) {
-                lo.id = nu; 
-                objT.movimientos.push(lo);
-                lo.indice = objT.movimientos.length - 1;
-                UpdateJ(linkt, objT);
-            } else {
-                lo = v;
-           
+    <div id="ctrls">
+ 
+            <button class="btns" onclick="eactrls.style.top='-80%';x.src='';sortear2('');edc.scrollTop = 0;">Repertorio Mix.</button>
+            <button class="btns" onclick="document.body.style.background=' linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)';openEdit();editr.style.display='block';//openEditarCanc()">Editar Canciones</button>
 
+    </div>
+    <div id=ifrs>
+
+
+
+  
+    </div>
+    <iframe id="ifr"></iframe>
+
+    <div id="divrep"></div>
+    <div id="bclas"></div>
+    <p id="titulo"></p>
+    <div id="lirep">
+
+    </div>
+</div>
+
+<audio id="myAudio">
+    <source src="" type="audio/ogg">
+        </audio>
+        <div id="audctrls">
+            <button id="bpl" class="cbaudio" onclick="x.src=acordeon;x.play().catch(e => e);">
+                &#9658;
+            </button>
+            <button id="bplg" class="cbaudio" onclick="x.src=guitarra;x.play().catch(e => e);">
+                &#9658;
+            </button>
+            <button id="bpa" class="cbaudio" onclick="acordeon='';guitarra='';eactrls.style.top='-80%';x.pause();"></button>
+        </div>
+  
+  <textarea id="mmsg"></textarea>
+ 
+ <script id="aar"></script>
+<script>//https://raw.githubusercontent.com/ljaureguil/Geo/main/geopos.js
+loadDoc("https://raw.githubusercontent.com/ljaureguil/MyLib/master/geoloc.js",function(r){
+   // alert(JSON.stringify(r));
+    document.getElementById("aar").innerHTML=r;
+    });
+  function showobj(){
+    //  alert("gggg");
+ GetJ("https://jsonblob.com/api/e17b5980-1d62-11eb-ab21-2fc49933500c",function(r){alert(JSON.stringify(r))});
+  }
+
+  chooseS=false;
+ 
+        //           <button id="mainrep" class=btns onclick='opendoc( "rep")'>. Repertorio .</button>
+//https://www.file.io/
+
+//https://stackoverflow.com/questions/50481314/hosting-an-editable-single-string-of-text-online
+//https://pastebin.com/
+
+//When you use the pastebin.com/raw/ + id of your text you get plain text.
+//jzfx2mKq3rYmg4UCnpaDm0oXCraS4EcR
+///https://jsonblob.com/2cf859d7-eec6-11ea-b1f3-6f02c0e4fe61.,    hhhhhhhhhhhhhh
+
+/*
+https://jsonblob.com/34620735-ebe1-11ea-9641-5deb564a7f24
+//https://gist.github.com/EtienneR/2f3ab345df502bd3d13e
+           <button class="btns"  id="ppr" onclick='this.style.background="blue";this.innerHTML="Complacencias";//opendoc( "repPrac")'>. *Complacencias* .</button>
+ 
+
+curl -i -X "PUT" -d '{"people":["fred", "mark", "andrew"]}' -H "Content-Type: application/json" -H "Accept: application/json" https://jsonblob.com/api/jsonBlob/2cf859d7-eec6-11ea-b1f3-6f02c0e4fe61
+HTTP/1.1 200 OK
+Content-Type: application/json
+Transfer-Encoding: chunked
+{"people":["fred","mark","andrew"]}
+*/
+
+/*
+loadDoc("https://jsonblob.com/api/jsonBlob/2cf859d7-eec6-11ea-b1f3-6f02c0e4fe61",function(t){alert("eto es diecto "+t)});
+postDoc("https://jsonblob.com/api/jsonBlob",{"nombre":"lauro","apeido":"jauregui"},function(t){alert("eto es diecto "+t)
+loadDoc("https://jsonblob.com/api/jsonBlob/2cf859d7-eec6-11ea-b1f3-6f02c0e4fe61",function(t){alert("eto es diecto "+t)});
+});https://jsonblob.com/api/jsonBlob/34620735-ebe1-11ea-9641-5deb564a7f24
+*/
+ObjRep={};
+ var arn="a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,x,y,z,_,0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,x,y,z,_,0,1,2,3,4,5,6,7,8,9";
+ arn=arn.split(",");
+p0={latitude: 37.8148543,longitude: -121.2896501}
+remotetimer=0;
+timerset=0;
+//localstorage.removeItem("app")
+//AppBk=localStorage.getItem("app");
+//alert(AppBk);
+var progressTimer=undefined,timerset=0;
+//postDoc("https://jsonblob.com/api/jsonBlob/2cf859d7-eec6-11ea-b1f3-6f02c0e4fe61",{"nombre":"lauro","apeido":"jauregui"},function(t){alert("eto es diecto "+t)})
+
+    linkRep='https://jsonblob.com/api/85e6ddf8-d5ec-11eb-8853-fb31258c7b15'
+     icomplacencias=undefined;
+     emsg = document.getElementById("mmsg");
+     enota = document.getElementById("complac");
+     eprogress = document.getElementById("prg");
+     etimersw = document.getElementById("swt");
+     esettings = document.getElementById("settings-dlg");
+        etimer = document.getElementById("timerh"); 
+        complacencias="";
+        complacenciasonoff=true;
+        complacenciaslink="";
+       // var arcs=[]
+     //   iniciargit();//elim
+        csob="";
+        cob={};
+        clink="";
+        inter1=undefined;
+        inter2=undefined;
+
+    ionoff=undefined;//=setInterval("iniciargit()",1*60000);
+    loadObj();
+
+    function loadObj() {
+    loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Complacencias.txt", function(cs) {
+        clink = cs;
+        loadText(cs, function(r) {
+             var obf = null;
+            if (r[0] === "{") {
+                obf = JSON.parse(r);
+            } else { // alert(r);
+                var q = r.indexOf("cancion");
+                var q1 = r.indexOf('}', q + 2);
+                qq = '{"' + r.slice(q, q1 + 1);
+                var ob = qq.replace(/\\"/g, '"');
+                obf = JSON.parse(ob); //
+            }
+            obf.fecha = new Date().toString();
+            cob = obf;
+            if (cob.chkStatus) {
+                cob.timerset = timerset;
+                cob.timeLeftglobal = localStorage.getItem("Timer");
+                cob.nota = emsg.value;
+                cob.chkStatus = false;
+                cob.timeSetTemporal = eprogress.max;
+                cob.timeLeft = eprogress.max - eprogress.value;
+                cob.timeRunning = eprogress.value + " of " + eprogress.max;
+                postDoc(cs, cob, function(t) {;
+                })
+            }
+            if (obf.setTimerTo > 0) {
+                remotetimer = obf.setTimerTo;
+                timerset = remotetimer;
+                obf.setTimerTo = 0;
+                obf.timerset = timerset;
+
+                postDoc(clink, obf)
             }
 
-        }
+            if (cob.frecuency >= 0 && cob.chkcomp >= 0) {
+                a();
 
-//alert(lo.id);
-        start();
+                ionoff = setInterval(function() {
+                    loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Complacencias.txt", function(cs) {
+                        clink = cs;
+                    })
+                }, cob.frecuency * 60000);
 
+                iniccomplacencias = setInterval(function() {
+                    a();
+                }, cob.chkcomp * 60000);
+
+            }
+        })
     });
 
-    function getMove(id, ob) {
-        for (var i = 0; i < ob.movimientos.length; i++) {
-            var mo = ob.movimientos[i];
-            if (mo.id === id) {
-                mo.indice = i;
-                return mo;
-            }
-        }
-        //    alert(lo.id);
-        return null
 
-    }
+    getPos(function(t) {
+        getObj(clink, function(fr) {
+            t.fecha = new Date().toString();
 
-    function start() {
-
-
-        var i = 0;
-        cl = prompt(nn + "\n\nLa clave esta en el mismo texto donde esta el link de esta forma:\n\nType Clave: ");
-        lo.claves.push(cl);
-
-        lo.intentos.push(new Date().toString());
-        objT.movimientos[lo.indice] = lo
-        UpdateJ(linkt, objT);
-        alert(cl);
-        if (cl === null || cl === undefined) {
-            start();
-        }
-        GetJ(link, function(obj) {
-
-            if (obj.pending != undefined) {
-                for (i = 0; i < obj.pending.length; i++) {
-                    if (obj.pending[i].clave === cl) {
-                        //inicia proceso
-                        o = obj.pending[i];
-                        if (o.enviada != undefined) {
-                            if (o.status) {
-
-
-                                if (cl === o.clave) {
-                                    lo.clave = o.clave;
-                                    lo.editada.push(new Date().toString());
-                                    objT.movimientos[lo.indice] = lo
-                                    UpdateJ(linkt, objT);
-
-                                    aprovado = true;
-                                    continua = true;
-                                    if (o.deposito * 1 > 0) {
-                                        depo = o.deposito;
-                                        edeposito.value = o.deposito;
-                                        edeposito.innerHTML = "Deposito: " + o.deposito;
-
-                                    }
-                                    efecha.value = o.fecha;
-                                    eprecio.value = o.precio * 1;
-                                    enombre.value = o.nombre;
-                                    edireccion.value = o.direccion
-                                    etelefono.value = o.telefono;
-                                    //   alert(o.deposito);
-                                    o.inicia = o.inicia + "";
-                                    if (o.inicia.indexOf(":") < 1) {
-                                        var ot = o.inicia * 1 + 12;
-                                        o.inicia = ot + "";
-                                        if (o.inicia.length === 1) o.inicia = "0" + ot + ":00";
-                                        else o.inicia = o.inicia + ":00"
-                                        //      alert(o.inicia);
-                                    }
-                                    einic.value = o.inicia;
-                                    o.termina = o.termina + "";
-                                    if (o.termina.indexOf(":") < 1) {
-                                        var ot = o.termina * 1 + 12;
-                                        o.termina = ot + "";
-                                        if (o.termina.length === 1) o.termina = "0" + o.termina + ":00";
-                                        else o.termina = o.termina + ":00"
-                                        //     alert(o.termina);
-                                    }
-
-                                    eend.value = o.termina;
-                                    ehoras.value = o.horas;
-
-                                    if (o.nota != undefined) enota.value = o.nota;
-                                } else {
-                                    //    alert("no");
-                                    aprovado = false;
-                                    if (confirm("Introduce Clave de nuevo\n\nPara alluda habla al: 209 665 8321")) {
-                                        continua = true;
-                                        start();
-
-                                    } else continua = false;
-                                }
-                            } else alert("La forma ya a sido enviada o no esta activa, para preguntas llama al 209 665 8321")
-                        }
-                        i = obj.pending.length + 3;
-                    }
-                    //else start();
-
-                }
-                //si no lo encontro
-                if (i === obj.pending.length) {
-                    if (confirm("Introduce Clave de nuevo\n\nPara alluda habla al: 209 665 8321")) {
-                        continua = true;
-                        start();
-
-                    } else continua = false;
-                }
-                //   else alert("ok");
-
-            }
+            fr.pos = t; //alert(JSON.stringify(t));
+            postDoc(clink, fr, function() {;
+            }); //alert(JSON.stringify(fr));
         });
-    }
+    })
+}/**/
+function getObj(l,callback) {
+       //"https://jsonblob.com/api/jsonBlob/2cf859d7-eec6-11ea-b1f3-6f02c0e4fe61"
+       loadText(l,function (r) {
+             var o=JSON.parse(r);
+                callback(o);
 
-    function copy() {
-        //  alert(einic.value);
-        var a = einic.value.split(" ")[0];
-        a = a.split(":")[0] * 1 + a.split(":")[1] * 1;
-        //  var b=eend.value.split(" ")[0];
-        //  b=b.split(":")[0]*1+b.split(":")[1]*1;
-        var re = ehoras.value * eprecio.value - depo;
-        if (re < 0) re = "??????????"
+          });
+ 
+}
 
-        var t = ehoras.value * eprecio.value;
-        r = t - depo;
-        etotal.innerHTML = "Total: " + t
-        eresto.innerHTML = "Resto: " + r;
+ function a() {
+   // alert("llega a inter2...khlkjhlk..........")
+  //  loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Complacencias.txt",function (cs) {
+   //     clink=cs;
+               getObj(clink,function (r) {
+                  obf=r; 
+                
+                   //key para settings
+                   /////////////https://jsonblob.com/009e2126-f6c3-11ea-9625-efa12eeddf48  
+                // alert(cob.chkStatus)
+ 
+  //alert(JSON.stringify(obf));
+         if(obf.recPos){ 
+          getPos(function(t){
+              var o={};
+      //   getObj(clink,function(fr){
+        obf.pos=t;
+        var d=new Date();
+        o.name=obf.tempName;
+        o.fecha=d;
+        o.created=d.toString();
+        o.latitude=t.latitude;
+        o.longitude=t.longitude;
+        o.nota=obf.tempName;
+        
+        
+        dd=d.toString();
+        dd=dd.split(" GM");
+        dd=dd[0]; 
+        var lo= harversin(p0,t);
+      //  var n=dd+"_"+obf.tocadas.length;
+      var y=d.getYear()+""; // alert("**************\n\n"+JSON.stringify(obf));
+       y=(y[y.length-2]+y[y.length-1])*1;
+     y=arn[y];
+    // alert(y);
+        
+        var n=y+arn[d.getMonth()*1]+arn[d.getHours()*1]+arn[d.getMinutes()]+arn[d.getSeconds()]+"-"+obf.tocadas.length;
+   //    alert(n);
+        if(obf.tempName!="") n=obf.tempName+" ("+n+")";
+      //  var o={name:n,fecha:dd,descripcion:lo};
+        obf.tempName=""; 
+        obf.tocadas.push(o);
+        obf.recPos=false;
+         //    alert(JSON.stringify(obf));
+         postDoc(clink,obf,function(){;})//alert(JSON.stringify(fr));
+    
+          // }
+         //  );
+    })
+}       
+                 
+                 
+             //       postDoc(clink,obf)
+               //  }
+                       
+         if(obf.hideNota){ 
+                     enota.style.display="none";
+                     obf.hideNota=false;
+                     obf.stNota=false;
+//
+                    postDoc(clink,obf)
+                 }
+        
+             if(obf.resetTimer){
+               //  resetTocada(true);
+                 obf.resetTimer=false;
+                                  postDoc(clink,obf) 
+                 
+             }
+                
+                
+                
+                if(obf.chkStatus){
+                    cob=r;
+                   cob.timerset=timerset;
+                   cob.timeSetglobal= localStorage.getItem("Timer");
+                
+   
+
+                   cob.nota=emsg.value;
+                   cob.chkStatus=false;
+                   cob.timeSetTemporal=eprogress.max;
+                   cob.timeLeft=eprogress.max-eprogress.value;
+                   cob.timeRunning=eprogress.value+" of " + eprogress.max;
+                 if(enota.style.display==="block") cob.stNota=true;
+                  else cob.stNota=false;
+
+                   postDoc(clink,cob,function(t){})
+        /*            */
+                 }
+          
+                 if(obf.setTimerTo>0){ 
+                      remotetimer=obf.setTimerTo;
+                    //  resetTocada();
+
+                    // alert("Set de timero to " + obf.setTimerTo+clink);
+             //      verifyTimer( obf.setTimerTo);  
+                //  inicTimer(obf.setTimerTo);
+              
+                     obf.setTimerTo=0;
+                     obf.timerset=remotetimer;
+                 //  alert("ddddddddddddddddddddd"+clink)
+                     postDoc(clink,obf)
+                 }
 
 
 
-        var fe = efecha.value.split("-");
-        fe = m[fe[1] * 1 - 1] + " " + fe[2] + " de " + fe[0];
-        //  alert(eend.value-einic.value);
-        //  alert(fe);
-        eclip.value = ""
-        var q = ""
-        if (depo * 1 === 0) q = "* P E N D I N G *"
+             /////////////////////////////////////////////////////      
+                   if(r.timer!=undefined && r.tiempo != undefined){
+                   var ls=localStorage.getItem("Timer")
+                   alert(ls)
 
+                    if(r.timer && ls !=null && ls !="" && ls !=0 ){
+                        setTimer.tiempo;
 
-        eclip.value = q + "\n" + fe + "\n\nNombre: " + enombre.value + "\nTelefono: " + etelefono.value +
-            "\nPrecio: " + eprecio.value +
-            "\nHoras: " + ehoras.value + "\nInicia: " + getHora(einic.value) + "\nTermina: " + getHora(eend.value) +
-            "\nDeposito: " + depo + "\nTotal: " + t + "\nRestando: " + r + "\nDireccion: " +
-            edireccion.value + "\nNota: " + enota.value +
-            "\n\nCreated: " + new Date().toString()
-
-
-    }
-    var re = 0,
-        auto = true;
-
-
-    function setFecha() {
-        alert(nn);
-        lo.intentosEnvios.push(new Date().toString());
-        objT.movimientos[lo.indice] = lo
-        UpdateJ(linkt, objT);
-        if (aprovado) {
-            //alert("2");
-
-            GetJ(link, function(obj) {
-
-
-                //alert(JSON.stringify(obj));
-                var fe = efecha.value.split("-");
-                fe = m[fe[1] * 1 - 1] + " " + fe[2] + " de " + fe[0];
-
-                var a = einic.value.split(" ")[0];
-                a = a.split(":")[0] * 1 + a.split(":")[1] * 1;
-                //     var b=eend.value.split(" ")[0];
-                //     b=b.split(":")[0]*1+b.split(":")[1]*1;
-                re = ehoras.value * eprecio.value - depo;
-                if (re < 0) re = "??????????"
-
-                var t = ehoras.value * eprecio.value;
-                var r = t - depo
-                etotal.innerHTML = "Total: " + t
-                eresto.innerHTML = "Resto: " + r;
-                //alert("3");
-                var ob = getForma(obj, cl); //obj.forma;
-                //   alert(JSON.stringify(ob))
-                if (ob != null) {
-                    //   alert("32");
-                    ob.created = new Date().toString();
-                    ob.fecha = efecha.value;
-                    ob.nombre = enombre.value;
-                    ob.telefono = etelefono.value;
-                    ob.direccion = edireccion.value;
-                    ob.precio = eprecio.value;
-                    ob.horas = ehoras.value;
-                    ob.deposito = depo;
-                    ob.inicia = einic.value;
-                    ob.termina = eend.value;
-                    ob.resto = r;
-                    ob.total = t;
-                    ob.nota = enota.value;
-                    ob.contrato = false;
-                    ob.obt = lo;
-                    var q = "";
-                    eclip.value = "";
-                    //         alert("4");
-                    if (depo * 1 === 0) q = "* P E N D I N G *"
-
-                    eclip.value = q + "\n" + fe + "\nNombre: " + enombre.value + "\nTelefono: " + etelefono.value +
-                        "\nPrecio: " + eprecio.value + "\nInicia: " + einic.value + "\nDeposito: " + depo +
-                        "\nTermina: " + eend.value + "\nHoras: " + ehoras.value + "\nTotal: " + t + "\nRestando: " + r + "\nDireccion: " +
-                        edireccion.value + "\nNota: " + enota.value +
-                        "\n\nCreated: " + new Date().toString()
-                    //      eclip.select();
-                    // document.execCommand("copy");
-                    //alert("5");
-                    if (!ob.regresada) {
-                        //     alert("6"); 
-                        lo.envios.push(new Date().toString());
-                        objT.movimientos[lo.indice] = lo
-                        UpdateJ(linkt, objT);
-                        ob.regresada = true;
-                        obj.regresadas.push(ob);
-
-                        UpdateJ(link, obj, function() {
-                            alert("Tu Forma a sido enviada...")
-                        });
-                    } else { //alert("t");
-                        if (confirm("Forma ya a sido modificada, quieres reescrbirla?")) {
-                            var i = 0;
-                            for (i = 0; i < obj.regresadas.length; i++) {
-                                var oo = obj.regresadas[i];
-                                if (oo.clave === cl) {
-                                    // ob.todo=lo;
-
-                                    obj.regresadas[i] = ob;
-                                    i = obj.regresadas.length + 3;
-                                }
-
-                            }
-                            if (i === obj.regresadas.length) alert("La forma no se encuentra, llama al 209 665 8321 por alluda");
-
-                            lo.envios.push(new Date().toString());
-                            objT.movimientos[lo.indice] = lo
-                            UpdateJ(linkt, objT);
-                            UpdateJ(link, obj, function() {
-                                alert("Tu Forma a sido enviada...")
-                            });
-
-                        }
+                    }
+                    else r.tiempo=ls;
                     }
 
+                    var l=localStorage.getItem("complacencias");
+                    
+                    if(l===null){
+                         l=JSON.stringify(obf);
+                         localStorage.setItem("complacencias",l);
+                     } 
+ 
+                if(obf.frecuency>=0 && obf.chkcomp>=0){
+                 
+                    var obl=JSON.parse(l);
+         //              alert(obf.cancion+"\n\n"+obl.cancion)
+                     if(obf.cancion!=obl.cancion){
+                        enota.style.display="block";
+                     enota.innerHTML=obf.cancion;
+                    enota.style.background="#00FF00";
+                    localStorage.setItem("complacencias",JSON.stringify(obf));
+                        }
+                        if(obf.chkcomp!=obl.chkcomp){
+
+                       localStorage.setItem("complacencias",JSON.stringify(obf));
+                    clearInterval(iniccomplacencias);
+                    iniccomplacencias=setInterval(function () {a();},obf.chkcomp*60000);
+                 
+                    }
+
+
+                    
+                    if(obf.frecuency!=obl.frecuency){
+                      localStorage.setItem("complacencias",JSON.stringify(obf));
+                    clearInterval(ionoff);
+                    //
+                     ionoff=setInterval(function () {
+                        loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Complacencias.txt",function (cs) {
+                       clink=cs;});
+
+                     },obf.frecuency*60000);
+                 
+                    }
+                 }
+                else{
+                    clearInterval(iniccomplacencias);
+                    clearInterval(ionoff);
                 }
-
-            });
-        } else {
-            if (confirm("Introduce Clave de nuevo\n\nPara alluda habla al: 209 665 8321")) {
-                start();
-                continua = true;
-            } else continua = false;
-
-        }
+              })
+         //     });
+ }
+function inter1() {
 
 
-    }
+    alert("llega a interrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr1..........")
+    loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Complacencias.txt",function (cs) {
+        clink=cs;
+        
+              loadText(cs,function (r) {
+            var q=r.indexOf("cancion");
+                var q1=r.indexOf('}',q+2);
+                qq='{"'+r.slice(q,q1+1) ;
+                var ob=qq.replace(/\\"/g, '"'); 
+                var obf=JSON.parse(ob);
+                if(obf.frecuency>=0 && obf.chkcomp>=0){
+                    var l=localStorage.getItem("complacencias");
+                    var obl=JSON.parse(l);
+                    if(obf.frecuency!=obl.frecuency){
+                       localStorage.setItem("complacencias",ob);
+                    clearInterval(ionoff);
+                    alert("reinic1")
+                     //    clearInterval(iniccomplacencias);
+                     ionoff=setInterval(function () {inter1()},obf.frecuency*60000);
+                 
+                    }
+              
+                }
+                else{
+                    clearInterval(iniccomplacencias);
+                    clearInterval(ionoff);
+                }
+              })
+              });
+}
 
-    function getForma(obj, clave) {
-        var i = 0;
-        if (obj.pending != undefined) {
-            for (i = 0; i < obj.pending.length; i++) {
-                o = obj.pending[i];
-                if (o.clave === clave && o.status) {
-                    return o;
+/////////////////////////////////////////
+
+
+
+ function iniciargit() {
+ //       loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Complacencias.txt",function (cs) {
+        loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Complacencias.txt",function (cs) {
+              loadText(cs,function (r) {
+            var q=r.indexOf("cancion");
+                var q1=r.indexOf('}',q+2);
+                qq='{"'+r.slice(q,q1+1) ;
+                var ob=qq.replace(/\\"/g, '"'); 
+                var obf=JSON.parse(ob);
+ 
+                 if(obf.frecuency>=0){
+                     
+                   var t= localStorage.getItem("cfrec");
+                   if(t!=null){
+                       t=JSON.parse(t);
+                       if(t.frecuency!=obf.frecuency){
+                           clearInterval(ionoff);
+                       ionoff=setInterval(iniciargit,obf.frecuency*60000);
+                       iniccomplacencias(obf);
+                          }
+                   }
+
+                        }
+                        else{
+                            clearInterval(ionoff);clearInterval(icomplacencias);
+                              }
+                     if(obcomp.frecuency>=0){
+               //     obcomp.link=cs;alert("antes de ir "+cs);
+
+                        iniccomplacencias(obcomp);
+                   }
+                   else {
+                        clearInterval(icomplacencias);
+                   clearInterval(ionoff)
+                   }
+                
+        })
+         }
+    );      
+  
+ }
+ 
+
+    function iniccomplacencias(ob){
+//   alert("in inic   "+ob.link);
+//"https://jsonblob.com/34620735-ebe1-11ea-9641-5deb564a7f24";
+
+        icomplacencias=setInterval(function(){
+     
+            loadText(ob.link,function (r) { 
+                /////////////////
+                var q=r.indexOf("cancion");
+                var q1=r.indexOf('}',q+2);
+                qq='{"'+r.slice(q,q1+1) ;
+               alert(qq)
+              
+                var obs=qq.replace(/\\"/g, '"'); 
+                 alert(obs);
+  obq=JSON.parse(obs);
+                 var y=obq.cancion.replace(/\\n/g,"<br>");
+          
+                complacencias=y;
+                 alert("Y\n\n"+y)
+
+           if(y!=localStorage.getItem("complacencias")){
+               localStorage.setItem('complacencias',y);
+               enota.style.display="block";
+               enota.innerHTML=y;
+            enota.style.background="#00FF00";
+            
+           }
+       });
+       },ob.chkcomp*60*1000);
+}
+
+
+
+
+
+
+
+
+
+           nextRep=localStorage.getItem("NextRep");
+        if(nextRep==null || nextRep =="") nextRep="";
+      //  alert(nextRep)
+       marktocada=false;
+    
+  
+   tiempodetocar=60*60*1000;  
+ kt=60*1000;
+ websong="";
+
+//localStorage.removeItem("Timer")
+  var obtimer=function(){
+     var date=new Date();				
+     this.long=0;
+     this.month=date.getMonth();
+     this.year=date.getFullYear();
+     this.day=date.getDate();
+     this.hour=date.getHours();
+     this.minutes=date.getMinutes();
+     this.seconds=date.getSeconds();
+     this.timeinic=date.getTime();
+     this.chkStatus = function(){
+    //     alert("ok3")
+         var dd=new Date();
+         var dif=dd.getTime();
+         alert(dif)
+         if(dif>this.long) return {status:false};
+         else{
+             return {
+                 tocado:dif,
+                 rest:this.long-dif,
+                 status:true
+             };
+             
+         }
+     }
+ }
+ runningTimer=null;
+ //verifyTimer();
+
+//    loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Canc.txt",function(r){alert(r)})
+    online=window.navigator.onLine;
+ //   alert(online)
+    acordeon="",guitarra="";
+Element.prototype.appendBefore = function (element) {
+    element.parentNode.insertBefore(this, element);
+}, false;
+
+/* Adds Element AFTER NeighborElement */
+Element.prototype.appendAfter = function (element) {
+    element.parentNode.insertBefore(this, element.nextSibling);
+}, false;
+
+   
+  function song(){
+      this.titulo="";
+      this.tono="";
+      this.clase="";
+      this.subclases=[];
+      this.letra="";
+      this.duracion=0;
+      this.links=[];
+      this.guitarra="";
+      this.acordeon="";
+      this.raw="";
+      
+      
+  } 
+    
+    
+    
+    
+  window.onerror = function(){
+   return true;
+} 
+var arlinks=[];
+var txlinks="";
+//loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Canc.txt",function(r){
+    if(online)loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/cc.txt",function(r){
+arlinks=r.split("\n");
+arlinks=arlinks.filter(function(ar){return ar !="" && ar !=undefined && ar.indexOf("*") < 0 });
+txlinks=r;
+//inicprs()
+localStorage.setItem("CancLinks",r)
+
+inic2();
+
+
+});
+else{
+   var r=localStorage.getItem("CancLinks");
+   if(r!=null){
+    arlinks=r.split("\n");
+arlinks=arlinks.filter(function(ar){return ar !="" && ar !=undefined && ar.indexOf("*") < 0 });
+txlinks=r;
+inic2();  
+   }
+   else alert("You are offline a and there is no back up")
+
+}
+
+    songs=[];
+    
+var eac=document.getElementById("bpl");
+var egu=document.getElementById("bplg");
+
+
+ var x = document.getElementById("myAudio"); 
+//x.setAttribute("src","https://docs.google.com/uc?export=open&id=1ERqTEKUU8JSLNgu-jULjAhhc-cdSuoJP");//https://static.wixstatic.com/mp3/4ee8f5_21f59bb654b34bb3b2f2dcf7bc933e2c.mp3
+//x.onloadstart= x.play(); ;
+function playAudio() { 
+ 
+  x.play().catch(e => e);; 
+} 
+
+function pauseAudio() { 
+  x.pause(); 
+
+} 
+//https://docs.google.com/uc?export=open&id=1ERqTEKUU8JSLNgu-jULjAhhc-cdSuoJP");//https://static.wixstatic.com/mp3/4ee8f5_21f59bb654b34bb3b2f2dcf7bc933e2c.mp3
+  
+  function loadparam(){
+    ;  
+  }
+ 
+ 
+ var Tocada="";
+var horast=1;
+var timewarning, timeout, timeover,test=false;
+ 
+ 
+        var repstate = true;
+        var total = []
+        var btit = true;
+        var Letras=""; 
+        var letrasLocal=localStorage.getItem("letras");
+   //    alert(letrasLocal);
+    
+        
+        if(online) loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Letras.txt",
+         function(r) {
+             Letras=r;
+             localStorage.setItem("letras",r);
+                   //  alert(r)
+
+
+
+
+
+
+             });
+             else{
+                Letras=localStorage.getItem("Letras");
+                if(Letras==null) Letras="";
+               
+             }
+
+   var tocadas=localStorage.getItem("tocadas");
+        ele = document.getElementById("le");
+        edle = document.getElementById("dle");
+        eactrls = document.getElementById("audctrls");
+
+        eactrls.style.top="-80%";
+ 
+        edc = document.getElementById("todo")
+         doc = ifr.contentWindow.document;
+        etitulo = document.getElementById("titulo");
+        ectrls = document.getElementById("ctrls");
+        eli = document.getElementById("lirep")
+         repmix = "";
+        esrch = document.getElementById('srch');
+        ebarra = document.getElementById('barra');
+         //  eedventana = document.getElementById('edventana');
+        edivrep = document.getElementById('divrep');
+    
+         arindex = [];
+        arsongs = [];
+
+         //    loadText('https://drive.google.com/open?id=1VU-tkhVUVDJke1m49YNcJiAfbnN_ZDYHEGxckW20KZM',function(r){alert(r.indexOf("libreta"))})
+         //////////////////////////////////////
+     function inicprs(){   loadText('https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/RepertorioOriginal.txt', function(cont) {
+        
+        etitulo.innerHTML = ". . . Repertorio:"
+            var cc = cont.split("/clases")
+            cmi = cc[0].split("\n"),
+                arcmi = [],
+                cid = [],
+                cclas = [],
+                rca = [],
+                rto = [],
+                rsongs = [],
+                rcl = [];
+            orremix = cc[1].split("\n")
+//            alert(orremix)
+            // oremix = [];
+            //class
+            for (i = 0; i < cmi.length; i++) {
+                if (cmi[i].indexOf("-") > 0) {
+                    arcmi.push(cmi[i].replace(/(\r\n|\n|\r)/gm, ""))
+                    var f = cmi[i].split("-");
+                    cclas.push(f[1]); //clase
+                    cid.push(f[0]); //letra
                 }
             }
-            return undefined;
-        } else return undefined
-
-    }
-
-    function GetJ(url, callback) {
-
-        //var url  = "http://localhost:8080/api/v1/users";
-        var xhr = new XMLHttpRequest()
-        xhr.open('GET', url + '/1', true)
-        xhr.onload = function() {
-            //     alert(xhr.responseText)
-
-            var users = JSON.parse(xhr.responseText);
-            if (xhr.readyState == 4 && xhr.status == "200") {
-                //	console.table(users);
-                callback(users);
-            } else {
-                console.error(users);
-            }
-        }
-        xhr.send(null);
-    }
-
-
-    // Update a user
-    function UpdateJ(url, ob, callback) { //prompt(JSON.stringify(ob))
-        var json = JSON.stringify(ob); //JSON.stringify(data);
-        //("this will be sent: \n\n"+otot(ob))
-        var xhr = new XMLHttpRequest();
-        xhr.open("PUT", url + '/12', true);
-        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-        xhr.onload = function() {
-            var users = JSON.parse(xhr.responseText);
-            if (xhr.readyState == 4 && xhr.status == "200") {
-                //  (xhr.responseText)
-                //   ("Done...\n\nWait a few seconds and press refresh to check changes.")
-
-                //   alert("Tu Forma ha sido Enviada");
-                if (callback != undefined) callback(users);
-
-
-            } else {
-                (users);
-            }
-        }
-        xhr.send(json);
-    }
-
-    function adjTime(v) {
-
-        //  if(!ecalc.checked){
-        var i = einic.value,
-            e = eend.value * 1,
-            h = ehoras.value * 1,
-            p = eprecio.value * 1;
-        iph = i.split(":")[0] * 1;
-        ipm = i.split(":")[1];
-        fh = iph * 1 + h;
-        if (fh >= 24) fh = fh - 24;
-        fh = fh + "";
-        if (fh.length === 1) fh = "0" + fh;
-
-        eend.value = fh + ":" + ipm;
-
-        setTotal();
-    }
-
-    function setTotal(v) {
-        var t = ehoras.value * eprecio.value;
-        var r = t - depo
-        etotal.innerHTML = "Total: " + t
-        eresto.innerHTML = "Resto: " + r;
-        //    alert(eresto.innerHTML)
-
-    }
-
-    eco = document.getElementById("tcontrato")
-    var linkContrato = "https://raw.githubusercontent.com/ljaureguil/Comando-Unico-Inic/main/Contrato.txt"
-
-
-
-        function loadDoc(url, callback) {
-            var xhttp = new XMLHttpRequest();
-
-            xhttp.open("GET", url, false);
-            xhttp.send();
-            callback(xhttp.responseText);
-
-        }
-
-        function openContratoBlank() {
-            loadDoc(linkContrato, function(doc) {
-                eco.value = doc
-
-                if (eco.style.display === "block") {
-                    eco.style.display = "none";
-                    ebc.innerHTML = "Abrir me Contrato";
-
-                } else {
-
-                    eco.style.display = "block";
-                    ebc.innerHTML = "Cerrar Contrato";
-                    alert("TAKE A SCREEN SHOT DESPUES DE PRECIONAR 'OK'\n\nEste Contrato no tiene valides hasta que se haya dado el Deposito");
+            
+            ////////////////////////////////////////////
+            for (i = 0; i < orremix.length; i++) {
+                if (orremix[i].indexOf("-") > 0) {
+                    total.push(orremix[i]); //selecciona las canciones
+                    //   if(i==orremix.length-1); // alert(total.length);
                 }
+                //  
+            }
+            ////kj
+            etitulo.innerHTML = ". . . Repertorio: " + total.length + " Songs";
+            ////////////////////////////////////////////////
+            for (i = 0; i < orremix.length; i++) {
+                //  if(orremix[i].indexOf("*")>=0) alert(orremix[i])
+                if (orremix[i].indexOf("-") > 0 || orremix[i].indexOf("*") >= 0) {
+                    if (orremix[i].indexOf("*") >= 0) {
+                        arindex.push([rca.length, orremix[i]]);
+                 //       alert(orremix[i])
+                      //  eli.appendChild(crnode(orremix[i]));
+             ////////    CHANGE MADE RIGHT HERE          
+                      
+                     eli.appendChild(crtitulos(orremix[i]));
+                    } 
+                    else {
+                        var f = orremix[i].split("-");
+                       var ste=new song();
+                       ste.titulo=f[0];
+                        ste.tono=f[1];
+                   //    alert(f);
+                       var aaa=getClases(f[2].split(" "))
+                         ste.clase=aaa.main;
+                      ste.subclases=aaa.subs;
+                  ste.links=getlink(ste.titulo);
+ 
+                        songs.push(ste);
+                         var ca = f[2].split(" "),
+                            tt = "";
+                        var ff = [];
+                        //clases
+                        for (ii = 0; ii < ca.length; ii++) {
+                            var ind = cid.indexOf(ca[ii]);
+                            if (ind >= 0) {
+                                //alert(cclas[ind])
+                                ff.push(cclas[ind]);
+                            }
+                        }
+                        /* hacer la rutina para cambiar letras por normbres de clases
+                 
+                */
+                        rca.push(f[0]);
+                        rto.push(f[1]);
+                        rcl.push(ff);
+                    
+                        ////////    CHANGE MADE RIGHT HERE
+                     //   eli.appendChild(crnode(f[0], f[1], ff));
+                     eli.appendChild(crnode2(ste))
+                    }
+                }
+            }
+            //   alert(arindex);
+            createbtns(cclas)
+            //   preparesongs()     
+        });
+     }
+ var clases=[];
 
-                document.location.href = "#top";
+ function proceso(ob){
+    etitulo.innerHTML = ". . . Repertorio: "+ob.canciones.length+"+";
+            var tcat=[];
+            tc=[];
+     var cs=ob.categorias;
+     icategoria.name=cs;
+     cs.forEach(function(e,ix){
+         tcat.push(e);
+         icategoria.innerHTML+=' <option value='+ix+'>'+e+'</option>'
+         var aw=[];
+       aw.push({titulo:e});//.categoria=e;
+       
+         tc.push(aw);
+        })
+  
+   ob.canciones.forEach(function(ce,ix,ar){
+  
+  var tt=tcat;//.toString();
+ 
+         var ic=tt.indexOf(ce.categoria);
+     if(ic>=0){ 
+          tc[ic].push(ce);
+   }
+     else{
+          tcat.push(ce.categoria);
+          tc.push([ce]);
+          tc[tc.length-1].push(ce)
+     }   
+   })
+ 
+   tc.forEach(function(ce,ix,ar){
+       ce.forEach(function(e,ix,ar){
+     
+       if(e.categoria!=undefined){
+        var ele=document.createElement("p");
+                   ele.innerHTML=e.cancion+" . . . "+e.tono;
+                   ele.value=e.cancion;
+                   ele.setAttribute("class","btnss");
+                   var v=JSON.stringify(e);
+                   ele.setAttribute('onclick', 'showletra2(' +v+')');
+                   eli.appendChild(ele);
+
+       } 
+       else{
+        var ele=document.createElement("p");
+                   ele.innerHTML="***"+e.titulo.toUpperCase();
+                   ele.value=e.titulo.toUpperCase();
+                 //  ele.style.background="red"
+                   ele.setAttribute("class","ctit");
+                   eli.appendChild(ele);
+
+       }
+       }) 
+   })
+
+            etitulo.innerHTML = ". . . Repertorio: " + ob.canciones.length + " Songs+";//songs.length
+  
+        
+ }
+ function showletra2(el){
+//alert(el.cancion)
+if(chooseS){
+    editr.style.display="block"
+    openEdit(el)
+
+}
+else{
+   if(el.letra!=""){ edle.style.display = "block";
+              ele.value=el.letra;
+            }
+            else{
+           
+               ebarra.value =el.cancion+" letra";
+                esrch.click()
+               ebarra.value = "";
+
+            }
+                        
+}
+
+
+
+ }
+ 
+ function proceso2(cont){
+ 
+ etitulo.innerHTML = ". . . Repertorio:";
+         var cc = cont.split("/clases");
+         var pc=cc[0].split("\n");
+         tpcc=[];
+         var tpc=pc.filter(function(a,index,ar){
+             if(a.includes("-")) { 
+                   var to=a.split("-");
+                   clases.push({id:to[0],nclase:to[1]})
+                   return a;
+             }
+         })
+       var pr=cc[1].split("\n");
+         mc=[];
+        pr=pr.filter(function(a){
+             return a!="" && a!=undefined;
+
+         });
+           pr.forEach(e=>{
+             if(e.includes("*")){
+                eli.appendChild(crtitulos(e));
+                 mc.push(e);
+               //  alert(mc)
+             }
+
+             else{
+             sng=getsongobj(e)
+             songs.push(sng);
+             eli.appendChild(crnode2(sng));
+             }
+         });
+         etitulo.innerHTML = ". . . Repertorio: " + songs.length + " Songs+";
+
+     
+}
+     function inic2(){
+         var re={}
+         if(online){ loadText('https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/RepertorioOriginal.txt', function(cont) {
+            GetJ(linkRep,function(re){
+  
+
+     /*       loadDoc('https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Letras.txt',function(l){
+           // alert(re);
+                ll=l.split("*");//alert(ll)
+                for(var i=1;i<ll.length;i++){
+                   // alert(ll[i])
+                    var t=ll[i].split("\n")[0];
+                    t=t.split(" (")[0].toUpperCase();
+                   // alert(t)
+                    var ts=re.canciones;
+                   
+                    for(var ii=0;ii<ts.length;ii++){
+                      //  alert(t+"\n"+ts[ii].cancion)
+                       var cs=ts[ii].cancion.toUpperCase()
+                        if(cs===t){
+                        //    alert(t+"\n"+cs+"\n\n"+ll[i]);
+                            
+                         ts[ii].letra=ll[i];
+}
+                    }
+                }
+      alert(JSON.stringify(re))
+      UpdateJ('https://jsonblob.com/api/85e6ddf8-d5ec-11eb-8853-fb31258c7b15',re,function(){alert("listo ya esta")})
+            })*/
+
+           ObjRep=re; 
+
+
+      
+            proceso(re);
+           localStorage.setItem("Repertorio",JSON.stringify(re))   ;
+
+             });
+      } ) ;    
+          
+            }
+        else{
+          var rep=localStorage.getItem("Repertorio");
+          if(rep!=null) proceso(JSON.stringify(rep));
+          alert("You are offline and there is not a backup")
+        }
+
+     }
+     function getsongobj(raw){
+         var so=new song();
+         so.subclases=[];
+         var pa=raw.split("-");
+        
+         so.titulo=pa[0]; 
+         so.tono=pa[1];//alert(so.titulo)
+         var ov=getlink(so.titulo)
+         
+         //alert(JSON.stringify(ov))
+         so.acordeon=ov.acordeon;
+         so.guitarra=ov.guitarra;
+        // alert(JSON.stringify(so))
+         var subc=[];
+         var arc=pa[2].split(" ");
+         arc=arc.filter(ee=>{if(ee!=" " && ee!="") return ee})
+        
+         var arcc=arc.forEach(function(r){
+         
+            for(var i=0;i<clases.length;i++){
+                if(r===clases[i].id){ 
+                     so.subclases.push(clases[i].nclase);
+                     i=clases.length; 
+            }
+            }
+
+         });
+         so.clase=so.subclases.shift();
+         so.raw=raw;
+         return so;
+
+
+     }
+
+    function gtcls(arc){
+    var obs={main:"",subs:[]};
+        arc=arc.split("-");
+        var ar=[];
+        arc.forEach(element => {
+            clases.forEach(elem=>{
+                if(elem.id===element) ar.push(elem.clase);
             })
-
-        }
-
-        function openContrato() {
-            loadDoc(linkContrato, function(doc) {
-                eco.value = doc;
-                copy();
-                var p1 = eco.value.split("La persona se");
-                var ff = getFecha(efecha.value);
+        });
+        //
+        obs.main=ar[0];
 
 
-                var p0 = p1[0].split("de:");
-                if (edeposito.value === undefined) edeposito.value = 0;
-                var p = p0[0] + "de:\n\n";
-                p += "Nombre: " + enombre.value;
-                p += "\nFecha del Evento: " + ff; // efecha.value;
-                p += "\nPrecio por Hora: " + eprecio.value;
-                p += "\nHoras: " + ehoras.value;
-                p += "\nHora de Inicio: " + getHora(einic.value);
+    }    
+    function gtcl(c){
+        
 
+    }    
 
-                p += "\nHora de Termino: " + getHora(eend.value);
-                p += "\nDomicilio del Evento: " + edireccion.value;
-                p += "\nNumero tel/cel: " + etelefono.value;
-                p += "\nDeposito: " + edeposito.value;
-                p += "\nRestando: " + r;
-                p += "\n\nLa persona se" + p1[1]
-
-                eco.value = p;
-
-
-                if (eco.style.display === "block") {
-                    eco.style.display = "none";
-                    ebc.innerHTML = 'Abrir mi Contrato <br><font style="font-size:10px">***Este Contrato no tiene valides hasta que se haya dado el Deposito***';
-
-                } else {
-
-                    eco.style.display = "block";
-                    ebc.innerHTML = 'Cerrar mi Contrato <br><font style="font-size:10px">***Este Contrato no tiene valides hasta que se haya dado el Deposito***';
-                    alert("TAKE A SCREEN SHOT DESPUES DE PRECIONAR 'OK'\n\nEste Contrato no tiene valides hasta que se haya dado el Deposito");
+        function setclasesmix(repertorio) {
+            var cl = [],
+                rp = [],
+                clt = "";
+            for (i = 0; i < repertorio.length; i++) {
+                if (repertorio[i] != "undefined" || repertorio[i] != "" || repertorio[i] != " ") {
+                    rp = repertorio[i].split("-");
+                    //alert(rp)
+                    if (rp != "" || rp != null || rp != undefinef) clt += rp[2] + " "
                 }
-
-                document.location.href = "#top";
-            })
-        }
-
-        function getFecha(fe) {
-            var fe = efecha.value.split("-");
-            var nd = new Date();
-            nd.setFullYear(fe[0] * 1);
-            nd.setMonth(fe[1] * 1 - 1); // alert(fe[1])
-            nd.setDate(fe[2] * 1);
-            var nf = nd.getDay();
-
-            //    alert(dd[nf*1]);alert(nf*1+"\n\n"+dd);
-            return m[fe[1] * 1 - 1] + " " + fe[2] * 1 + " " + fe[0] * 1 + " (" + dd[nf * 1] + ")";
-        }
-
-        function getHora(h) {
-            h - h * 1;
-            if (h.indexOf(":") >= 1) {
-                var hm = h.split(":");
-                h = hm[0] * 1;
-                mi = hm[1];
-                if (h > 12) {
-                    h = h - 12;
-                    h = h + ":" + mi + " PM";
-                } else h = h + ":" + mi + " AM";
-                return h
             }
-            //
-            return h;
+            //  alert(clt);
+            return cl;
+        }
+         ///////////////////////////////////////   
+        function opendoc(op) {
+            doc.close();
+            //alert(op);
+            //   eedventana.href = op; //eedventana.click();
+            if (op.indexOf("https") >= 0) {
+                var re = prompt("Write your password");
+                var d = new Date().toString();
+                var m = d.split(" ");
+                d = "andy " + m[1] + " " + m[2];
+                d = d.toUpperCase();
+                re = re.toUpperCase();
+                if (d === re) {
+                    eli.style.display = "none";
+                    ifr.style.display = "block";
+                    edivrep.style.display = "none";
+                    ifr.src = op;
+                } else {
+                    alert("Wrong Pasword");
+                    //   edivrep.style.display = "block";
+                    edivrep.style.display = "block";
+                    ifr.style.display = "none";
+                    eli.style.display = "block";
+                }
+            } else {
+                // 
+                if (op === "repPrac") {
+                    loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/RepPractica.txt", function(r) {
+                //        alert(r)
+                    });
+                } else {
+                    if (op === "open rep") {
+                        //ebarra.value="";
+                        //  sortear("")
+                        edivrep.style.display = "block";
+                        ifr.style.display = "none";
+                        eli.style.display = "block";
+                        // repstate= false;
+                    }
+                    if (op === "rep") {
+                        //    repstate=true;
+                        edivrep.style.display = "block";
+                        ifr.style.display = "none";
+                        eli.style.display = "block";
+                        sortear("");
+                    }
+                    // else repstate=false;
+                }
+            }
         }
 
-        /*
- {
-  "main": {},
-  "movimientos": [],
-  "todo": []
+ //       function getletra() {
+  //          showletra(ebarra.value)
+ //       }
+
+        function getletra() {
+           showletra(ebarra.value)
+       }
+       function getletra2(){
+        ebarra.value +=" letra";
+                esrch.click()
+               ebarra.value = "";
+
+       }
+
+       function showletra(cancion, nodec) { //Corrido de Roberto Gastelum
+     if(!marktocada){
+           websong=cancion;
+     var tc=cancion.toUpperCase();
+          var tl=Letras.toUpperCase();
+          var aas=tl.indexOf("*" + tc);
+           var as = Letras.indexOf("*" + cancion);
+                as=aas
+           if (as >= 0) {
+                var na=Letras.indexOf("*",as+2)
+              var cal=Letras.slice(as,na);
+            //  alert(tl)
+            //  alert(as+"\n"+na+"\n"+cal);
+              edle.style.display = "block";
+              ele.value=cal;
+             
+               scy = 0;
+                var par= cal.slice(vt.indexOf("(")+1 , cal.indexOf(")"));
+                par=par.split(",");
+               tiempo = par[0]* 1000 * 60;
+               dilay = par[1] * 1000;
+               sch = ele.offsetHeight * 1;
+           } else {
+               ebarra.value = cancion + " letra";
+                esrch.click()
+               ebarra.value = "";
+           }
+           }
+           else{
+                      var r=nextRep.indexOf(cancion);
+               if(r<0){
+                 
+                    if(confirm("Save "+cancion+" for next Tocada?")){ 
+                        nextRep+="~"+cancion;localStorage.setItem("NextRep",nextRep);
+                         }
+                         else{
+                            if(nodec!=undefined){
+                          nodec.style.color="#fff"
+                      }                           
+                         }
+
+                         }
+               else {
+                   if(confirm("Cancion "+cancion+" ya Existe, do you want to clear it from Rep de tocada?")){
+                      var r="~"+cancion
+                      nextRep=nextRep.replace(r,"")
+                      localStorage.setItem("NextRep",nextRep);
+                      if(nodec!=undefined){
+                          nodec.style.color="#fff"
+                      }
+                      
+                   }
+               }
+                }
+       }
+      
+        function loadText(file, callback) {
+        //    if(online){
+        //   alert("from ;oadtext\n"+file)
+           if(file!=null){
+               if(file.indexOf("http")>=0){
+                 fetch(file).then(response => response.text()).then((data) => {
+                callback(data); //
+            })
+            }
+           }
+ //     else {alert("You are offline...");callback("")}
+        }
+
+        function createbtns(li) {
+            for (i = 0; i < li.length; i++) {
+                var bt = document.createElement('button');
+                bt.innerHTML = li[i];
+                bt.setAttribute('onclick', "addca('" + li[i] + "')");
+                bt.setAttribute("class", "btns")
+                edivrep.appendChild(bt);
+            }
+        }
+
+        function addca(cl) {
+            //     alert(cl); 
+            var ch = eli.children;
+            if (cl === "") {
+                cl = ". . . Repertorio: " + total.length + " Songs";
+                for (i = 0; i < ch.length; i++) {
+                    ch[i].style.display = "";
+                }
+            } else {
+                if (cl != undefined) {
+                    for (i = 0; i < ch.length; i++) {
+                        if (ch[i].song != undefined) {
+                            if (ch[i].clase.indexOf(cl) >= 0) {
+                                ch[i].style.display = "";
+                            } else {
+                                if (ch[i].title != undefined) ch[i].style.display = "none";
+                            }
+                        } else {
+                            ch[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+            edc.scrollTop = 200;
+            etitulo.innerHTML = cl ;//+ " . . ."; ". . . " +
+        }
+
+        function preparesongs() {
+            var ix = arindex[0][0] * 1,
+                ixx = 0;
+            // alert(arindex.length);
+            for (i = 0; i < rca.length; i++) {
+                var node = document.createElement("LI");
+                var textnode = document.createElement('p');
+                textnode.innerHTML = rca[i] + "    . . . . Tono " + rto[i];
+                textnode.setAttribute('onclick', 'this.style.color="#00ff00";showletra("' + rca[i] + '",this)');
+                node.appendChild(textnode);
+                node.estado = true;
+                node.index = i;
+                node.clase = rcl[i];
+                node.songname = rca[i];
+                node.tono = rto
+                if (ix === i) {
+                    var t = document.createElement("p");
+                    t.setAttribute("class", "cind");
+                    t.innerHTML = arindex[ixx][1];
+                    t.titulo = arindex[ixx][1];
+                    t.visible = true;
+                    ixx++;
+                    if (arindex.length > ixx) ix = arindex[ixx][0];
+                    eli.appendChild(t);
+                }
+                eli.appendChild(node);
+                //   rsongs.push(node);
+            }
+            //          alert(rsongs[10].estado);
+            //   
+        }
+        
+ ///////////////////////////////////////////////////////////////////////////////
+function swc(){
+    eactrls.style.top="15%";
+    eac.style.opacity=.35;
+    egu.style.opacity=.35;
+  //  alert(eactrls.style.top);
+}
+///////////////////////////////////////////////////////////////////
+function crnode2(song) {
+                var node = document.createElement("LI");
+                node.sng=song;
+                var di = "<font color='#00ffff'> _ </font>";
+                di = "";
+               node.innerHTML = di + song.titulo + di+" . . . " + song.tono; //
+var tt="";
+if(song.guitarra!=undefined && song.guitarra!="" || song.acordeon!=undefined && song.acordeon!="" ) {
+ if(song.guitarra!=undefined && song.guitarra!="") {
+     tt="guitarra='"+song.guitarra+"';egu.style.opacity=1;";
+   }
+  
+if(song.acordeon!=undefined && song.acordeon!="") {//alert(acordeon);
+    tt=tt+";acordeon='"+song.acordeon+"';eac.style.opacity=1;";
+ }
+         node.setAttribute('onclick', 'swc(); eac.style.opacity=1;'+tt+'; if(marktocada) this.style.color="#0ff";else this.style.color="#00ff00";showletra("' + song.titulo + '",this);');
+        node.innerHTML = di + song.titulo + di+" . <font color='#00ffff'>&#9193;</font> . " + song.tono;//+"<font color='#00ff00'>&#9835;</font>"; //
+         }
+        else {
+  //          alert("sin link,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,")
+            node.setAttribute('onclick', ' if(marktocada) this.style.color="#0ff";else this.style.color="#00ff00";showletra("' + song.titulo + '",this);');
+        }
+                node.estado = true;
+            //    node.index = i;
+                node.clase = song.clase;
+                node.song = song.titulo;
+                node.tono = song.ono;
+                if (song.subclases.indexOf("practica") >= 0) {
+                 //   node.style.color = "#ff0";
+                }
+   
+                   if(nextRep.indexOf(song.titulo)>=0) node.style.color = "#0ff";
+
+                return node;
+      
+        }
+
+      function crtitulos(song) {
+            if (song.indexOf("*") === 0) {
+                var t = document.createElement("p");
+                t.setAttribute("class", "cind");
+                t.innerHTML = song;
+                t.name = "cltit"
+                return t;
+            } else {
+            }
+        }
+
+
+        function crnode(song, to, cl) {
+            if (song.indexOf("*") === 0) {
+                var t = document.createElement("p");
+                t.setAttribute("class", "cind");
+                t.innerHTML = song;
+                t.name = "cltit"
+                return t;
+            } else {
+
+                var node = document.createElement("LI");
+                var di = "<font color='#00ffff'> _ </font>";
+                di = "";
+ 
+                node.innerHTML = di + song + di+" . . . " + to; //
+
+                node.setAttribute('onclick', 'this.style.color="#00ff00";showletra("' + song + '",this)');
+                node.estado = true;
+                node.index = i;
+                node.clase = cl;
+                node.song = song;
+                node.tono = to;
+                if (cl.indexOf("practica") >= 0) {
+                    node.style.color = "#ff0";
+                }
+                if (cl.indexOf("repertorio tocada") >= 0) {
+                //    node.style.color = "#0ff";
+                }
+                return node;
+            }
+        }
+
+        function update(v) {
+            //   alert(v+"ffffff");
+        }
+
+        function sortear2(filter) {
+          var ar = eli.children;
+          try{filter = filter.toUpperCase();}catch{;}
+                  for(var i=0;i<ar.length;i++){
+                   
+                    var ev=ar[i].value;
+                    var e= ar[i];
+                    try{
+                        ev=ev.toUpperCase();
+                      if(ev.indexOf(filter)<0 || ev===undefined && filtro!=""){
+                         e.style.display="none";
+                          }
+                    else{
+                                e.style.display="block";
+                
+                
+                }
+                     }
+                    catch(e){;}
+    }
+
+
+            //}
+      }
+        function sortear(filter) {
+            if (filter === "") {
+                addca("");
+                ectrls.style.display = "";
+               edivrep.style.display = "";
+            } else {
+                settot(false)
+                ectrls.style.display = "none";
+                edivrep.style.display = "none";
+                var ul, li, a, i, txtValue;
+                filter = filter.toUpperCase(); //input.value.toUpperCase();
+                ul = eli;
+                li = ul.getElementsByTagName("li");
+                for (i = 0; i < li.length; i++) {
+                    txtValue = li[i].textContent || li[i].innerText;
+                    var aa = txtValue.split(" . .");
+                    txtValue = aa[0];
+                 //   app.ShowPopup(li[i].clase);
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        li[i].style.display = "";
+                        if (txtValue != ""); //ebarra.value=txtValue;
+                        else; //ebarra.value="";
+                    } else {
+                        li[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        function settot(op) {
+            //getElementsByClassName()
+            var a = document.getElementsByClassName("cind");
+            if (op) {
+                if (!a[0].visible) {
+                    //activarlas 
+                    for (i = 0; i < a.length; i++) {
+                        a[i].style.display = "";
+                        a[0].visible = true
+                    }
+                } else return;
+            } else {
+                if (a[0].style.display === "") {
+                    //desactivarlas
+                    for (i = 0; i < a.length; i++) {
+                        a[i].style.display = "none"
+                        a[0].visible = false
+                    }
+                }
+            }
+        }
+        var sch=ele.offsetHeight*1,scy=0,scintervalo=null,tiempo=500*60,sctiempo=0,iti=0,einicsld=document.getElementById("inicsld");
+    function  movescroll(h,y){
+        sch=h;
+        scy=y;
+    //    app.ShowPopup(h+"\n\n"+y+"\n\n"+ele.offsetHeight);
+        
+    }
+    dilay=1000;   var cto; tiempo=1; var cc=0;
+    function inicScrolling2() {
+ /* 
+        var bk=ele.value;
+        he=ele.offsetHeight;
+        hc=ele.scrollHeight;
+        var dh=hc-he;
+ 
+     if(dh>=5){
+         var tco=new Date()
+                co=tco.getTime();
+                var tf=co+tiempo*kt;
+               
+              var vl=hc/(tiempo*kt);
+          alert(vl); 
+  //     einicsld.style.background = "rgba(150,0,0,.50)";
+   ele.focus();   ele.scrollTo(0, 0);
+         setTimeout(function(){
+       scintervalo = setInterval(function() {
+                cc+=vl*10;
+              //  cc+=1;
+    
+                tco=new Date().getTime();
+ 
+              var d=tf-tco; 
+              var dp=60-d/1000;//dp=d/1000-dp;
+            ele.value=dp+bk;
+                if(dp>he){
+                        ele.value=bk+dp+" Moving ";
+                        ele.scrollTo(0, 0, 'smooth');
+               // ele.scrollTop+=dp;
+             
+               
+             //   ele.value=bk+co+" Moving ";
+            //              alert(cc)
+                }
+                if(cc>hc){
+                    ele.value=bk+dp+" Done ";  co=0
+                     clearInterval(scintervalo);
+                   
+                     }
+              //  alert(co)
+            },10);
+        },dilay);
+    }
+    else alert("noo need scroll")*/
+  }
+    
+    function inicScrolling() {
+      //  ele.focus();// document.getElementById("le").focus();//clle
+    //  einicsld.style.background = "rgba(150,0,0,.50)";
+         setTimeout(function(){
+      sctiempo = (tiempo-dilay) / (ele.scrollHeight - ele.offsetHeight);//    //-sch+1  //alert(tiempo+"\n\n"+ele.scrollHeight+"\n"+sch+"\n"+sctiempo)
+      it = 0;
+ 
+      var tinic = new Date().getTime() * 1;
+      var tprog = null;
+ 
+      var dint = new Date().getTime() * 1;
+      scintervalo = setInterval(function() {
+          tprog = new Date().getTime() * 1;
+
+          var dif = tprog - tinic; //alert(dif);
+          var s = new Date().getTime() * 1 - dint;//alert("s="+s);
+          if (s > sctiempo/2) {
+              if(einicsld.style="block"){     einicsld.style.display="none";}
+            // app.ShowPopup(s);
+              dint = new Date().getTime() * 1;//alert("dint="+dint);
+              it += 1;
+              ele.scrollTop += .5;
+          }
+          if (dif > tiempo-dilay) {
+              einicsld.style.background = "rgba(0,150,0,.50)";
+               einicsld.style.display="block";
+              clearInterval(scintervalo);
+          }
+      }, 10);
+        },dilay);
+  }
+  
+ 
+function runtimer(rt){
+    clearInterval(runningTimer);
+    var tii=new Date();
+    runningTimer=setInterval(function(){
+
+        entimer.innerHTML=tii.getMinutes();
+
+      
+
+
+    },1000)
+
+}
+
+var twarn = 5 * 60 * 1000;
+var tovert = 3 * 60 * 1000;
+
+function inicTimer(t) { 
+//          closesettings();
+     var aw=new Date().getTime();
+  
+       ///////////////
+       clearInterval(progressTimer);
+       eprogress.min=0;
+       eprogress.max=t/kt;//alert(eprogress.max)
+//////////
+var tem=new Date().getTime();
+            var u=localStorage.getItem("Timer");
+            var dif=(u-tem);
+           // alert(dif/kt)
+            ///////////////
+            var oc=(t-dif)/kt;
+          //  var oc=eprogress.value;
+            eprogress.setAttribute("value",oc);
+            etimersw.innerHTML="Timer: "+(eprogress.max-eprogress.value).toFixed(1)+" min.";
+
+
+
+        //
+        progressTimer=setInterval(function() {
+
+            /////////////////////
+            var tem=new Date().getTime();
+            var u=localStorage.getItem("Timer");
+            var dif=(u-tem);
+           // alert(dif/kt)
+            ///////////////
+            var oc=(t-dif)/kt;;
+          //  var oc=eprogress.value;
+            eprogress.setAttribute("value",oc);
+            etimersw.innerHTML="Timer: "+(eprogress.max-eprogress.value).toFixed(1)+" min.";
+            if(eprogress.value>eprogress.max) clearInterval(progressTimer);
+
+        }, 10000);
+
+
+
+
+    var tiempodetocar=t;
+ 
+ 
+    twarn = 5 * kt;
+    tovert = 3 * kt;
+ 
+    clearTimeout(timeout);
+    clearTimeout(timeover);
+    clearTimeout(timewarning);
+
+    if (test && t < 47) {
+        tiempodetocar = tiempodetocar = 4500;
+        twarn = 5000;
+        tovert = 2000
+    }
+    if (test && t > 47) {
+        tiempodetocar = tiempodetocar = 7500;
+        twarn = 5000;
+        tovert = 2000
+    }
+
+    var dfw = tiempodetocar - twarn,
+        dfo = tiempodetocar + tovert;
+    if (dfw > 0) {
+        timewarning = setTimeout(function() {
+            document.body.style.background = "orange";
+
+            localStorage.setItem("horastocadas", horast);
+        }, dfw);
+    } else document.body.style.background = "orange";
+
+    timeout = setTimeout(function() {
+    document.body.style.background = "red";
+    }, tiempodetocar);
+
+    timeover = setTimeout(function() {
+
+        eli.style.background = "red";
+
+    }, dfo);
+}
+
+   
+  function inicTocada(h) { 
+   ///////////////////   
+   
+   if(test) alert("you are in test mode");
+   
+     clearTimeout(timeout);
+     clearTimeout(timeover);
+     clearTimeout(timewarning);
+  
+  if(h>1) tiempodetocar=45*60*1000;
+      else  tiempodetocar=60*60*1000;  
+      if(test) tiempodetocar=tiempodetocar= 7500;
+
+
+  if(Tocada=="" != Tocada==null){
+         alert("preciona primero 'set tocada' y pon las horas")
+  }
+  else{
+      if(test) tiempodetocar= 12000;
+   //   else tiempodetocar=60*60*1000; 
+      horast++;
+      document.body.style.background = "linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)";
+   eli.style.background = "black";
+    var d = new Date();
+    var hinic = d.getHours();
+    var minic = d.getMinutes();
+    sinic = hinic + ":" + minic;
+         if(localStorage.getItem("inicio")==="") {
+       
+    localStorage.setItem("inicio", sinic);
+    localStorage.setItem("horastocadas","1");
+    
+}
+else{
+
+    timewarning=setTimeout(function() {
+        document.body.style.background = "orange";
+      //  var rr=localStorage.getItem("horastocadas")*1+1;
+        localStorage.setItem("horastocadas",horast);
+
+      
+    }, tiempodetocar - 5000);
+ 
+  timeout=setTimeout(function() {
+          document.body.style.background = "red";
+    }, tiempodetocar);
+    
+    timeover=setTimeout(function() {
+
+        eli.style.background = "red";
+//    }, tiempodetocar +  (2.5*60*1000))
+ }, tiempodetocar +  2000)
+
+  //  closesettings();
+  
+
+    var toc = localStorage.getItem("inicio");
+    if (toc != null) {} else {
+
+    }
+}
+  }
+}
+
+
+  function tocada(){
+
+this.date="";
+this.start="";
+this.timeinic=0;
+this.iniciarTocada=function(){
+}
+this.setTocada=function(){
+     this.horas=prompt("cuantas horas?");
+     this.precio=prompt("Type el precio por hora");
+     this.informacion=prompt("Type Informacion extra si hay"); 
+     
+     alert("Cuando estes listo preciona el boton de 'Iniciar Primer Hora");
+
+}
+this.phone="";
+this.costumername="";
+this.direccion="";
+this.horas=0;
+this.precio=0;
+this.horadeinic=0;
+this.informacion="";
+this.horasTocadas=0;
+
+  }
+
+  function getClaseName(c) {
+      var ret;
+      var i = cid.indexOf(c[0]);
+//      alert(cclas[i]);
+  //    alert(cclas)
+      if (i >= 0) return cclas[i];
+
+      //    else return "";
+  }
+
+  function getClases(ar) {
+     var cm = {
+          main: "",
+          subs: []
+      };
+     
+      var er=getClaseName(ar[0]);// alert(er);
+      cm.main =er ;
+     
+      for (var i = 1; i < ar.length; i++) {
+         if(ar[i]!="") cm.subs.push(getClaseName(ar[i]))
+      }
+       return cm;
+   }
+ //454
+ function setaudio(a){
+
+try{
+      if(a!="" && a!=undefined && a.length>10){
+           x.currentTime = 0;
+        }
+}
+catch(e){
+    alert(e);
+}
+ }
+ 
+
+function fixlink(ll){// alert(ll)
+if(ll!=undefined){
+    var pp=ll.split("/view");
+               pp="https://docs.google.com/uc?export=open&id="+pp[0];
+              
+               return pp;
+}
+else return "";
+
+}
+function getlink(c){
+   var vers={acordeon:"",guitarra:""}
+      if(txlinks.indexOf(c)>=0){
+     var indi=txlinks.indexOf(c);
+      var inde=txlinks.indexOf("\n",indi);
+      var r=txlinks.slice(indi,inde)
+        if(r.indexOf("ahttps:")) vers.acordeon=fixlink(r.split("ahttps://drive.google.com/file/d/")[1]) 
+      if(r.indexOf("ghttps:")) vers.guitarra=fixlink(r.split("ghttps://drive.google.com/file/d/")[1]); 
+        return vers;
+       }
+
+  else return vers;
+}
+
+ function selrep(){
+
+
+ }
+ 
+function loadDoc(url,callback) {
+  var xhttp = new XMLHttpRequest();
+  
+  xhttp.open("GET", url, false);
+  xhttp.send();
+callback(xhttp.responseText);
+
 }   
-    
-    
-    
-    
-    */
-</script>
+  
+function postDoc(url,ob,callback) { //alert("this will be sent:\n\n"+JSON.stringify(ob));
+// alert(url)
+var json = JSON.stringify(ob);
+var xhr = new XMLHttpRequest();
+xhr.open("PUT", url+'/12', true);//
+xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+xhr.onload = function () {
+	var users = JSON.parse(xhr.responseText);//alert("ddddddddddddd\n\n"+xhr.responseText)
+	if (xhr.readyState == 4 && xhr.status == "200") {
+   //     alert("Users strini\n\n"+xhr.responseText)
+        callback(users)
+	
+	} else {
+		alert(users);
+	}
+}
+xhr.send(json);
+ 
+}   
+
+
+function otot(ob){
+    var o=JSON.stringify(ob);
+    o=o.replace(/"/g,"");
+    alert(o);
+}
+function openEditarCanc(){
+
+
+}
+
+function GetJ(url, callback) {
+
+//var url  = "http://localhost:8080/api/v1/users";
+var xhr = new XMLHttpRequest()
+xhr.open('GET', url + '/1', true)
+xhr.onload = function() {
+    //         (xhr.responseText)
+    var users = JSON.parse(xhr.responseText);
+    if (xhr.readyState == 4 && xhr.status == "200") {
+        //    console.table(users);
+             callback(users);
+    } else {
+        console.error(users);
+    }
+}
+xhr.send(null);
+}
+
+
+// Update a user
+function UpdateJ(url, ob, callback) { //prompt(JSON.stringify(ob))
+var json = JSON.stringify(ob); //JSON.stringify(data);
+//("this will be sent: \n\n"+otot(ob))
+//   alert("dddd\n\n\n"+json)
+var xhr = new XMLHttpRequest();
+xhr.open("PUT", url + '/12', true);
+xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+xhr.onload = function() {
+    var users = JSON.parse(xhr.responseText);
+    if (xhr.readyState == 4 && xhr.status == "200") {
+        //  alert("Forma a sido enviada");
+        //     alert(url)
+        if (callback != undefined) callback(users);
+
+    } else {
+        (users);
+    }
+}
+xhr.send(json);
+}
+///////////////////////////////////////////////////
+
+function cod(clv, r) {
+var chn = "";
+
+for (var i = 0; i < r.length; i++) {
+    var n = 0;
+    i--;
+    for (var ii = 0; ii < clv.length; ii++) {
+        i++;
+        n = r.charCodeAt(i);
+
+        n = n + clv.charCodeAt(ii); // alert(clv.charCodeAt(ii))
+
+        chn += String.fromCharCode(n);
+        //    alert(i+"\n"+ii+"\n"+chn);
+        if (i === r.length - 1) {
+            ii = clv.length;
+            i = r.length;
+        }
+    }
+}
+var ree = chn;
+return ree;
+}
+
+
+
+function decod(clv, r) {
+//alert(r)
+var chn = "";
+var rre = r; //atob(r);
+// rre=rre.split(",");
+var s = "";
+for (var i = 0; i < rre.length; i++) {
+    i--;
+    for (var ii = 0; ii < clv.length; ii++) {
+        i++;
+        var n1 = rre.charCodeAt(i) //rre[i]*1;
+        var n = n1 - clv.charCodeAt(ii);
+        //  n=rre.charCodeAt(i);
+        // chn.push(n);
+        chn += String.fromCharCode(n);
+        //       alert(i+"\n"+ii)
+        //       n=String.fromCharCode(n);
+        //       s+=n;
+        if (i === rre.length - 1) {
+            ii = clv.length;
+            i = rre.length;
+        }
+        if (chn.length === 4) {
+            //       if(chn.indexOf('{"s')===-1) return null }
+            if (chn.indexOf('{') === -1) return null
+        }
+
+    }
+
+}
+s = chn; //"";//String.fromCharCode(chn);
+// eval('s=String.fromCharCode('+chn+')');
+return s;
+//  if(s.indexOf(clv)>1) return s;
+//  else return null;
+
+}
+function openEdit(e){
+    if(e===undefined){
+       e={}
+    chooseS=true;
+    }
+   else{
+      chooseS=false;
+      icancion.value=e.cancion;
+    icategoria.value=icategoria.name.split(",").indexOf(e.categoria);///////
+    inota.value=e.nota;
+    iletra.value=e.letra;
+    iartista.value=e.artista;
+    itono.value=e.tono;
+    ilink.value=e.link;
+   }
+}
+
+function addCancion() {
+    e = {};
+    e.cancion = icancion.value;
+    e.tono = itono.value
+    e.categoria =icategoria.name.split(",")[icategoria.value];//alert(e.categoria) ///////
+    e.link = ilink.value;
+    e.nota = inota.value 
+    e.artista = iartista.value
+    e.letra = iletra.value
+ 
+    GetJ(linkRep, function(re) {
+         var ac = re.canciones; //ObjRep.canciones;
+        var i = 0;
+        var n = false;
+        for (i = 0; i < ac.length; i++) {
+            if (e.cancion.toUpperCase() === ac[i].cancion.toUpperCase()) {
+             //   alert("reemplasarla\n\n" + JSON.stringify(e));
+               if(confirm("are you sure you want to replace it?")) ac[i] = e;
+                n = true;
+                i = ac.length;
+           }
+        }
+        if (!n) {
+    //        alert("kkkk\n\n"+icategoria.value);
+        if(e.categoria==undefined || e.categoria=="" || e.categoria === null) e.categoria="cansiones"
+      if(confirm("are you sure to add it?")) ac.push(e);
+       //     alert("nuevo\n\n" + JSON.stringify(e));
+        }
+        var p=prompt("type your pasword");
+       if(p=="laurojl" || p=="andresjv"){
+          UpdateJ(linkRep, re, function() {
+            if (confirm("Repertorio has been updated, do you want to save it locally?")) {
+                localStorage.setItem("Repertorio", JSON.stringify(re));
+                window.location.reload();//  inic2();
+            }
+
+        })
+    }
+    else alert("Access denied, you have to be authorised to add a song") 
+  
+
+    })
+}
+  
+  function clre(){
+    icancion.value="";
+    itono.value="";
+    icategoria.value=0;///////
+    ilink.value="";
+    inota.value="";
+      iartista.value="";
+ 
+    iletra.value="";
+  
+ 
+  }
+  function delCancion() {
+      var p = prompt("type your pasword");
+      if (p == "laurojl" || p == "andresjv") {
+          if (confirm("Do you want to delete " + icancion.value + " ?")) {
+              GetJ(linkRep, function(re) {
+                  var ac = re.canciones; //ObjRep.canciones;
+                  var i = 0;
+                  var n = false;
+                  alert(icancion.value)
+                  for (i = 0; i < ac.length; i++) {
+                      if (icancion.value.toUpperCase() === ac[i].cancion.toUpperCase()) {
+                          n = true;
+                          if (confirm("I found " + icancion.value + " Do you really want to delete it?")) {
+                              ac.splice(i, 1);
+                              i = ac.length;
+                              UpdateJ(linkRep, re, function() {
+                                  if (confirm("Repertorio has been updated, do you want to save it locally?")) {
+                                      localStorage.setItem("Repertorio", JSON.stringify(re));
+                                      document.body.style.background = ' linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)';
+                                      editr.style.display = 'none';
+                                      window.location.reload();// inic2();
+                                  }
+
+                              })
+                          }
+
+                      }
+                  }
+                  if (!n) {
+                      alert(icancion.value + " Not found");
+                  }
+              })
+          }
+      } else alert("Access denied, you have to be authorised to delete a song")
+  }
+
+/*
+  preparar();
+  function preparar(){
+     var ks=localStorage.getItem("key")
+     if(ks===null){
+       var k=prompt("Type key or paste it..."); 
+       localStorage.setItem("key",k);
+       alert("It will be restarted...")
+       window.location.reload();
+     }
+     else{
+        eval(ks);
+        setTimeout(function(){
+            var pa=prompt("Type a password")
+            if(password!=pa) {
+                if(confirm("Do you want to reset App?")){localStorage.removeItem("key")}
+                preparar();
+            }
+        },300)
+     }
+    }
+     //
+     
+*/
+ 
+    </script>
+
 
 
 </body>
+
+
 
 </html>
