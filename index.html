@@ -37,15 +37,15 @@
 
         .btnss{
             font-size: 18px;
-            color:rgb(205, 201, 211);
+            color:white;
             margin:3%;
 
         }
         .ctit{
            
             font-size: 30px;
-            color:#7bc4da;
-            background:#3f0101;
+            color:white;
+            background:#a30303;
             border-style:solid;
             border-color:#ffffff
 
@@ -1057,8 +1057,8 @@ var timewarning, timeout, timeover,test=false;
                    ele.innerHTML=e.cancion+" . . . "+e.tono;
                    ele.value=e.cancion;
                    ele.setAttribute("class","btnss");
-                   var v=JSON.stringify(e);
-                   ele.setAttribute('onclick', 'showletra2(' +v+')');
+                   var v=JSON.stringify(e);//alert(ele)
+                   ele.setAttribute('onclick', 'this.style.color="#0e0";showletra2(' +v+')');
                    eli.appendChild(ele);
 
        } 
@@ -1079,14 +1079,13 @@ var timewarning, timeout, timeover,test=false;
         
  }
  function showletra2(el){
-//alert(el.cancion)
 if(chooseS){
     editr.style.display="block"
     openEdit(el)
 
 }
 else{
-   if(el.letra!=""){ edle.style.display = "block";
+    if(el.letra!=""){ edle.style.display = "block";
               ele.value=el.letra;
               websong=el.cancion;
             }
