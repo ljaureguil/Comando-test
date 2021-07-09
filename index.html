@@ -88,20 +88,29 @@
             background: blue;
             font-size: 20px;
             font-weight: bold;
+            margin:10px;
+        }
+        .cmsgs{
+            color:white;
+             margin:6px;
+            border-style: solid; 
+       
+            font-size: 22px;
+             width: 95%;
+             height:90%;
+             border-radius: 10px;
+           box-shadow: inset 5px -5px 10px #d7d7f3, inset -5px 5px 10px #5eee95;
         }
        #complac {
-            overflow:auto;
-            height:12%;
-            background: #00FF00;
-            color: #fff;
+
+                overflow: auto;
+            height:16%;
+            background: white;
             font-size:20px;
-            width:94%;
-            border-radius:10px;
-             box-shadow: inset 5px -5px 20px #000020, inset -5px 5px 20px #000088;
-               -webkit-text-stroke: 0.3px #f00;
-                -webkit-text-fill-color: #000;
+            width:100%;
+            border-radius:5px;
             display:none;
-            
+  
         }
         #dle {
             color: white;
@@ -341,7 +350,8 @@ progress[value] {
         <button class="btnse" onclick="delCancion()">Delete Sont</button>
 
     </div>
-<button class="btns" id="complac" onclick='this.style.background="blue";this.innerHTML="Complacencias";this.style.display="none"'>. *Complacencias* .</button>
+
+<div class="btns" id="complac" ></div>
 
 
 <div id="dle">
@@ -448,10 +458,10 @@ alert(ss);
 alert("local storage\n\n"+decod("ljaureguil",ss));
 
 */
-
+var linkp='https://jsonblob.com/api/dd638cf7-de79-11eb-80f0-055ac14c8156';
 linkRep='https://jsonblob.com/api/e86e9eca-db67-11eb-bf92-631e03f93a7b';
 
-
+msdelay=null;
 ObjRep={};
  var arn="a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,x,y,z,_,0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,x,y,z,_,0,1,2,3,4,5,6,7,8,9";
  arn=arn.split(",");
@@ -560,20 +570,27 @@ function getObj(l,callback) {
           });
  
 }
+getPet();
+function getPet(){
+    GetJ(linkp,function(r){
+          while (complac.firstChild) {
+        complac.removeChild(complac.firstChild);
+    } 
+   if(r.peticiones.length>0){
+       complac.style.display="block";
+      for(var i=0;i<r.peticiones.length;i++){
+          complac.appendChild(crnota(r.peticiones[i]));
+      }
+   }
+   else complac.style.display="none";
+
+    })
+}
 
  function a() {
-   // alert("llega a inter2...khlkjhlk..........")
-  //  loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Complacencias.txt",function (cs) {
-   //     clink=cs;
-               getObj(clink,function (r) {
+                getObj(clink,function (r) {
                   obf=r; 
-                
-                   //key para settings
-                   /////////////https://jsonblob.com/009e2126-f6c3-11ea-9625-efa12eeddf48  
-                // alert(cob.chkStatus)
- 
-  //alert(JSON.stringify(obf));
-         if(obf.recPos){ 
+            if(obf.recPos){ 
           getPos(function(t){
               var o={};
       //   getObj(clink,function(fr){
@@ -607,14 +624,8 @@ function getObj(l,callback) {
          //    alert(JSON.stringify(obf));
          postDoc(clink,obf,function(){;})//alert(JSON.stringify(fr));
     
-          // }
-         //  );
     })
-}       
-                 
-                 
-             //       postDoc(clink,obf)
-               //  }
+}     
                        
          if(obf.hideNota){ 
                      enota.style.display="none";
@@ -720,43 +731,50 @@ function getObj(l,callback) {
               })
          //     });
  }
-function inter1() {
+ leido=null;
+function crnota(ms) {
+    var p = document.createElement("button");
+    p.setAttribute("class", "cmsgs");
+    // p.setAttribute("onclick",function(){alert("ok");this.style.opacity=.3});
+    // p.setAttribute("style","")
+    p.style.background = "rgb(" + Math.random() * 128 + "," + Math.random() * 128 + "," + Math.random() * 128 + ")"
 
-
-    alert("llega a interrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr1..........")
-    loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Complacencias.txt",function (cs) {
-        clink=cs;
+    p.addEventListener('touchstart', function() {
+    
+          msdelay = setTimeout(function() { 
+              this.e=p;
+          var c=confirm("delate "+this.e.innerHTML)
+               if(c){
+                this.e.blur();
+            complac.removeChild(this.e);
+          GetJ(linkp,function(r){ //alert(JSON.stringify(r));
+                r.cumplidas.push(this.e.innerHTML);
+                r.peticiones.splice(r.peticiones.indexOf(this.e.innerHTML), 1);
+                
+         //       alert(JSON.stringify(r));
+               UpdateJ(linkp,r,function(){getPet()});
+               
+                
+                });
+            
+         /*      */   }
+                else {this.e.style.opacity=.25; this.e.blur();}
         
-              loadText(cs,function (r) {
-            var q=r.indexOf("cancion");
-                var q1=r.indexOf('}',q+2);
-                qq='{"'+r.slice(q,q1+1) ;
-                var ob=qq.replace(/\\"/g, '"'); 
-                var obf=JSON.parse(ob);
-                if(obf.frecuency>=0 && obf.chkcomp>=0){
-                    var l=localStorage.getItem("complacencias");
-                    var obl=JSON.parse(l);
-                    if(obf.frecuency!=obl.frecuency){
-                       localStorage.setItem("complacencias",ob);
-                    clearInterval(ionoff);
-                    alert("reinic1")
-                     //    clearInterval(iniccomplacencias);
-                     ionoff=setInterval(function () {inter1()},obf.frecuency*60000);
-                 
-                    }
-              
-                }
-                else{
-                    clearInterval(iniccomplacencias);
-                    clearInterval(ionoff);
-                }
-              })
-              });
+        
+        }, 800)
+
+
+    },true)
+    p.addEventListener('touchend', function() {
+        this.e=p;
+         clearTimeout(msdelay);
+         this.e.blur();
+    },true);
+    /* */
+    p.innerHTML = ms;
+    return p;
+
 }
-
-/////////////////////////////////////////
-
-
 
  function iniciargit() {
  //       loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Complacencias.txt",function (cs) {
