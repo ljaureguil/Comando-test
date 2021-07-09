@@ -105,9 +105,10 @@
 
                 overflow: auto;
             height:16%;
-            background: white;
+          
             font-size:20px;
             width:100%;
+            border-style:solid;
             border-radius:5px;
             display:none;
   
@@ -426,10 +427,6 @@ loadDoc("https://raw.githubusercontent.com/ljaureguil/MyLib/master/geoloc.js",fu
    // alert(JSON.stringify(r));
     document.getElementById("aar").innerHTML=r;
     });
-  function showobj(){
-    //  alert("gggg");
- GetJ("https://jsonblob.com/api/e17b5980-1d62-11eb-ab21-2fc49933500c",function(r){alert(JSON.stringify(r))});
-  }
 
   chooseS=false;
  //localStorage.removeItem("key");
@@ -440,23 +437,17 @@ var enc=cod("ljaureguil","linkGit='https://raw.githubusercontent.com/ljaureguil/
 var res=decod("ljaureguil",enc);
 iletra.value=enc;
 localStorage.setItem("keyRep",enc);
-
 eval(res)
-
 alert(linkRep)
-
 GetJ(linkRep,function(r){r.prim=enc;
      UpdateJ(linkRep,r,function(){alert("chk...");
      
      })
 });
  //linkRep='https://jsonblob.com/api/e86e9eca-db67-11eb-bf92-631e03f93a7b';
-
 var ss=localStorage.getItem("keyRep")
 alert(ss);
-
 alert("local storage\n\n"+decod("ljaureguil",ss));
-
 */
 var linkp='https://jsonblob.com/api/dd638cf7-de79-11eb-80f0-055ac14c8156';
 linkRep='https://jsonblob.com/api/e86e9eca-db67-11eb-bf92-631e03f93a7b';
@@ -490,77 +481,11 @@ var progressTimer=undefined,timerset=0;
      //   iniciargit();//elim
         csob="";
         cob={};
-        clink="";
-        inter1=undefined;
+       inter1=undefined;
         inter2=undefined;
 
     ionoff=undefined;//=setInterval("iniciargit()",1*60000);
-    loadObj();
 
-    function loadObj() {
-    loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Complacencias.txt", function(cs) {
-        clink = cs;
-        loadText(cs, function(r) {
-             var obf = null;
-            if (r[0] === "{") {
-                obf = JSON.parse(r);
-            } else { // alert(r);
-                var q = r.indexOf("cancion");
-                var q1 = r.indexOf('}', q + 2);
-                qq = '{"' + r.slice(q, q1 + 1);
-                var ob = qq.replace(/\\"/g, '"');
-                obf = JSON.parse(ob); //
-            }
-            obf.fecha = new Date().toString();
-            cob = obf;
-            if (cob.chkStatus) {
-                cob.timerset = timerset;
-                cob.timeLeftglobal = localStorage.getItem("Timer");
-                cob.nota = emsg.value;
-                cob.chkStatus = false;
-                cob.timeSetTemporal = eprogress.max;
-                cob.timeLeft = eprogress.max - eprogress.value;
-                cob.timeRunning = eprogress.value + " of " + eprogress.max;
-                postDoc(cs, cob, function(t) {;
-                })
-            }
-            if (obf.setTimerTo > 0) {
-                remotetimer = obf.setTimerTo;
-                timerset = remotetimer;
-                obf.setTimerTo = 0;
-                obf.timerset = timerset;
-
-                postDoc(clink, obf)
-            }
-
-            if (cob.frecuency >= 0 && cob.chkcomp >= 0) {
-                a();
-
-                ionoff = setInterval(function() {
-                    loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Complacencias.txt", function(cs) {
-                        clink = cs;
-                    })
-                }, cob.frecuency * 60000);
-
-                iniccomplacencias = setInterval(function() {
-                    a();
-                }, cob.chkcomp * 60000);
-
-            }
-        })
-    });
-
-
-    getPos(function(t) {
-        getObj(clink, function(fr) {
-            t.fecha = new Date().toString();
-
-            fr.pos = t; //alert(JSON.stringify(t));
-            postDoc(clink, fr, function() {;
-            }); //alert(JSON.stringify(fr));
-        });
-    })
-}/**/
 function getObj(l,callback) {
        //"https://jsonblob.com/api/jsonBlob/2cf859d7-eec6-11ea-b1f3-6f02c0e4fe61"
        loadText(l,function (r) {
@@ -570,13 +495,20 @@ function getObj(l,callback) {
           });
  
 }
+
 getPet();
+chkpet=setInterval(getPet,15000);
+
 function getPet(){
     GetJ(linkp,function(r){
-          while (complac.firstChild) {
+        var lo=localStorage.getItem("peticiones");
+           while (complac.firstChild) {
         complac.removeChild(complac.firstChild);
     } 
+    
    if(r.peticiones.length>0){
+       
+       localStorage.setItem("peticiones",r.peticiones.toString());
        complac.style.display="block";
       for(var i=0;i<r.peticiones.length;i++){
           complac.appendChild(crnota(r.peticiones[i]));
@@ -585,152 +517,10 @@ function getPet(){
    else complac.style.display="none";
 
     })
+   
 }
 
- function a() {
-                getObj(clink,function (r) {
-                  obf=r; 
-            if(obf.recPos){ 
-          getPos(function(t){
-              var o={};
-      //   getObj(clink,function(fr){
-        obf.pos=t;
-        var d=new Date();
-        o.name=obf.tempName;
-        o.fecha=d;
-        o.created=d.toString();
-        o.latitude=t.latitude;
-        o.longitude=t.longitude;
-        o.nota=obf.tempName;
-        
-        
-        dd=d.toString();
-        dd=dd.split(" GM");
-        dd=dd[0]; 
-        var lo= harversin(p0,t);
-      //  var n=dd+"_"+obf.tocadas.length;
-      var y=d.getYear()+""; // alert("**************\n\n"+JSON.stringify(obf));
-       y=(y[y.length-2]+y[y.length-1])*1;
-     y=arn[y];
-    // alert(y);
-        
-        var n=y+arn[d.getMonth()*1]+arn[d.getHours()*1]+arn[d.getMinutes()]+arn[d.getSeconds()]+"-"+obf.tocadas.length;
-   //    alert(n);
-        if(obf.tempName!="") n=obf.tempName+" ("+n+")";
-      //  var o={name:n,fecha:dd,descripcion:lo};
-        obf.tempName=""; 
-        obf.tocadas.push(o);
-        obf.recPos=false;
-         //    alert(JSON.stringify(obf));
-         postDoc(clink,obf,function(){;})//alert(JSON.stringify(fr));
-    
-    })
-}     
-                       
-         if(obf.hideNota){ 
-                     enota.style.display="none";
-                     obf.hideNota=false;
-                     obf.stNota=false;
-//
-                    postDoc(clink,obf)
-                 }
-        
-             if(obf.resetTimer){
-             
-                 obf.resetTimer=false;
-                                  postDoc(clink,obf) 
-                 
-             }
-                
-                
-                
-                if(obf.chkStatus){
-                    cob=r;
-                   cob.timerset=timerset;
-                   cob.timeSetglobal= localStorage.getItem("Timer");
-                
-   
 
-                   cob.nota=emsg.value;
-                   cob.chkStatus=false;
-                   cob.timeSetTemporal=eprogress.max;
-                   cob.timeLeft=eprogress.max-eprogress.value;
-                   cob.timeRunning=eprogress.value+" of " + eprogress.max;
-                 if(enota.style.display==="block") cob.stNota=true;
-                  else cob.stNota=false;
-
-                   postDoc(clink,cob,function(t){})
-        /*            */
-                 }
-          
-                 if(obf.setTimerTo>0){ 
-                      remotetimer=obf.setTimerTo;
-                     obf.setTimerTo=0;
-                     obf.timerset=remotetimer;
-                 //  alert("ddddddddddddddddddddd"+clink)
-                     postDoc(clink,obf)
-                 }
-
-
-
-             /////////////////////////////////////////////////////      
-                   if(r.timer!=undefined && r.tiempo != undefined){
-                   var ls=localStorage.getItem("Timer")
-                   alert(ls)
-
-                    if(r.timer && ls !=null && ls !="" && ls !=0 ){
-                        setTimer.tiempo;
-
-                    }
-                    else r.tiempo=ls;
-                    }
-
-                    var l=localStorage.getItem("complacencias");
-                    
-                    if(l===null){
-                         l=JSON.stringify(obf);
-                         localStorage.setItem("complacencias",l);
-                     } 
- 
-                if(obf.frecuency>=0 && obf.chkcomp>=0){
-                 
-                    var obl=JSON.parse(l);
-         //              alert(obf.cancion+"\n\n"+obl.cancion)
-                     if(obf.cancion!=obl.cancion){
-                        enota.style.display="block";
-                     enota.innerHTML=obf.cancion;
-                    enota.style.background="#00FF00";
-                    localStorage.setItem("complacencias",JSON.stringify(obf));
-                        }
-                        if(obf.chkcomp!=obl.chkcomp){
-
-                       localStorage.setItem("complacencias",JSON.stringify(obf));
-                    clearInterval(iniccomplacencias);
-                    iniccomplacencias=setInterval(function () {a();},obf.chkcomp*60000);
-                 
-                    }
-
-
-                    
-                    if(obf.frecuency!=obl.frecuency){
-                      localStorage.setItem("complacencias",JSON.stringify(obf));
-                    clearInterval(ionoff);
-                    //
-                     ionoff=setInterval(function () {
-                        loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Complacencias.txt",function (cs) {
-                       clink=cs;});
-
-                     },obf.frecuency*60000);
-                 
-                    }
-                 }
-                else{
-                    clearInterval(iniccomplacencias);
-                    clearInterval(ionoff);
-                }
-              })
-         //     });
- }
  leido=null;
 function crnota(ms) {
     var p = document.createElement("button");
@@ -776,53 +566,8 @@ function crnota(ms) {
 
 }
 
- function iniciargit() {
- //       loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Complacencias.txt",function (cs) {
-        loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Complacencias.txt",function (cs) {
-              loadText(cs,function (r) {
-            var q=r.indexOf("cancion");
-                var q1=r.indexOf('}',q+2);
-                qq='{"'+r.slice(q,q1+1) ;
-                var ob=qq.replace(/\\"/g, '"'); 
-                var obf=JSON.parse(ob);
- 
-                 if(obf.frecuency>=0){
-                     
-                   var t= localStorage.getItem("cfrec");
-                   if(t!=null){
-                       t=JSON.parse(t);
-                       if(t.frecuency!=obf.frecuency){
-                           clearInterval(ionoff);
-                       ionoff=setInterval(iniciargit,obf.frecuency*60000);
-                       iniccomplacencias(obf);
-                          }
-                   }
-
-                        }
-                        else{
-                            clearInterval(ionoff);clearInterval(icomplacencias);
-                              }
-                     if(obcomp.frecuency>=0){
-               //     obcomp.link=cs;alert("antes de ir "+cs);
-
-                        iniccomplacencias(obcomp);
-                   }
-                   else {
-                        clearInterval(icomplacencias);
-                   clearInterval(ionoff)
-                   }
-                
-        })
-         }
-    );      
-  
- }
- 
-
     function iniccomplacencias(ob){
-//   alert("in inic   "+ob.link);
-//"https://jsonblob.com/34620735-ebe1-11ea-9641-5deb564a7f24";
-
+    /*    
         icomplacencias=setInterval(function(){
      
             loadText(ob.link,function (r) { 
@@ -849,6 +594,7 @@ function crnota(ms) {
            }
        });
        },ob.chkcomp*60*1000);
+      */ 
 }
 
 
