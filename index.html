@@ -347,8 +347,8 @@ progress[value] {
         <input  id="inota"  type="text" class="ced">Nota<br><br>
         Letra
         <textarea id="iletra"   type="text" class="ced"></textarea><br>
-        <button class="btnse" onclick="document.body.style.background=' linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)';editr.style.display='none';addCancion()">ADD NEW SONG</button>
-        <button class="btnse" onclick="delCancion()">Delete Sont</button>
+        <button class="btnse" onclick="document.body.style.background=' linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)';editr.style.display='none';addCancion()">ADD/REPLASE SONG</button>
+        <button class="btnse" onclick="delCancion()">Delete Song</button>
 
     </div>
 
@@ -395,7 +395,7 @@ progress[value] {
 
     <div id="ctrls">
  
-            <button class="btns" onclick="eactrls.style.top='-80%';x.src='';sortear2('');edc.scrollTop = 0;">Repertorio Mix.</button>
+            <button class="btns" onclick="eactrls.style.top='-80%';x.src='';edc.scrollTop = 0;sortear2('');if(confirm('Are you sure, App will Restart')) window.location.reload(); ">Refresh App.</button>
             <button class="btns" onclick="document.body.style.background=' linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)';openEdit();editr.style.display='block';//openEditarCanc()">Editar Canciones</button>
 
     </div>
@@ -500,6 +500,7 @@ getPet();
 chkpet=setInterval(getPet,15000);
 
 function getPet(){
+
     GetJ(linkp,function(r){
         var lo=localStorage.getItem("peticiones");
            while (complac.firstChild) {
@@ -525,8 +526,6 @@ function getPet(){
 function crnota(ms) {
     var p = document.createElement("button");
     p.setAttribute("class", "cmsgs");
-    // p.setAttribute("onclick",function(){alert("ok");this.style.opacity=.3});
-    // p.setAttribute("style","")
     p.style.background = "rgb(" + Math.random() * 128 + "," + Math.random() * 128 + "," + Math.random() * 128 + ")"
 
     p.addEventListener('touchstart', function() {
@@ -540,11 +539,7 @@ function crnota(ms) {
           GetJ(linkp,function(r){ //alert(JSON.stringify(r));
                 r.cumplidas.push(this.e.innerHTML);
                 r.peticiones.splice(r.peticiones.indexOf(this.e.innerHTML), 1);
-                
-         //       alert(JSON.stringify(r));
                UpdateJ(linkp,r,function(){getPet()});
-               
-                
                 });
             
          /*      */   }
@@ -584,7 +579,6 @@ function crnota(ms) {
           
                 complacencias=y;
                  alert("Y\n\n"+y)
-
            if(y!=localStorage.getItem("complacencias")){
                localStorage.setItem('complacencias',y);
                enota.style.display="block";
@@ -1142,6 +1136,18 @@ function openEdit(e){
    }
 }
 
+setPosition();
+function setPosition(){
+    GetJ(linkp,function(r){
+  getPos(function(o){
+      o.date=new Date().toDateString();
+     r.position=o;  
+     UpdateJ(linkp,r);
+    
+})/**/
+})
+}
+
 function addCancion() {
     e = {};
     e.cancion = icancion.value;
@@ -1211,8 +1217,9 @@ function addCancion() {
                       if (icancion.value.toUpperCase() === ac[i].cancion.toUpperCase()) {
                           n = true;
                           if (confirm("I found " + icancion.value + " Do you really want to delete it?")) {
+                                re.trash.push(ac[i]);
                               ac.splice(i, 1);
-                              i = ac.length;
+                                i = ac.length;
                               UpdateJ(linkRep, re, function() {
                                   if (confirm("Repertorio has been updated, do you want to save it locally?")) {
                                       localStorage.setItem("Repertorio", JSON.stringify(re));
