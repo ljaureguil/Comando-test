@@ -95,21 +95,22 @@
              margin:6px;
             border-style: solid; 
        
-            font-size: 22px;
-             width: 95%;
-             height:90%;
+            font-size: 20px;
+             width: 60%;
+            // height:90%;
              border-radius: 10px;
-           box-shadow: inset 5px -5px 10px #d7d7f3, inset -5px 5px 10px #5eee95;
+           box-shadow: inset 3px -3px 6px #d7d7f3, inset -3px 3px 6px #5eee95;
         }
        #complac {
 
                 overflow: auto;
-            height:16%;
-          
+            height:26%;
+            background:rgb(14, 100, 11); 
+                color:white;
             font-size:20px;
             width:100%;
             border-style:solid;
-            border-radius:5px;
+            border-radius:2px;
             display:none;
   
         }
@@ -331,6 +332,25 @@ progress[value] {
     font-size: 18px;
     margin:10px;
 }
+#bcom{
+    margin:7px;
+    display: none;
+  //  width: 20%;
+    border-radius: 50px;
+    background-color: #f00;
+     color:white;
+   //  font-weight: bold;
+     font-size: 15px;
+     box-shadow: inset 2px -2px 4px #d7d7f3, inset -2px 2px 4px #5eee95;
+  animation: aler .75s linear 1s infinite alternate;
+}
+
+
+@keyframes aler {
+
+  from {opacity:.1;}
+  to {opacity:1;}
+}
     </style>
 
     <div id="editr" >
@@ -353,7 +373,7 @@ progress[value] {
     </div>
 
 <div class="btns" id="complac" ></div>
-
+<button id="bcom" onclick="showpet()">Complacencias</button>
 
 <div id="dle">
 
@@ -424,31 +444,11 @@ progress[value] {
  <script id="aar"></script>
 <script>//https://raw.githubusercontent.com/ljaureguil/Geo/main/geopos.js
 loadDoc("https://raw.githubusercontent.com/ljaureguil/MyLib/master/geoloc.js",function(r){
-   // alert(JSON.stringify(r));
     document.getElementById("aar").innerHTML=r;
     });
 
   chooseS=false;
- //localStorage.removeItem("key");
- /*
- 
-var enc=cod("ljaureguil","linkGit='https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Complacencias.txt';linkc='https://jsonblob.com/api/dd1dc37f-6728-11eb-82c8-83376f2319bc';linkRep='https://jsonblob.com/api/e86e9eca-db67-11eb-bf92-631e03f93a7b';pass=['andresjv','danieljv','laurojl'];")
- alert(enc)
-var res=decod("ljaureguil",enc);
-iletra.value=enc;
-localStorage.setItem("keyRep",enc);
-eval(res)
-alert(linkRep)
-GetJ(linkRep,function(r){r.prim=enc;
-     UpdateJ(linkRep,r,function(){alert("chk...");
-     
-     })
-});
- //linkRep='https://jsonblob.com/api/e86e9eca-db67-11eb-bf92-631e03f93a7b';
-var ss=localStorage.getItem("keyRep")
-alert(ss);
-alert("local storage\n\n"+decod("ljaureguil",ss));
-*/
+
 var linkp='https://jsonblob.com/api/dd638cf7-de79-11eb-80f0-055ac14c8156';
 linkRep='https://jsonblob.com/api/e86e9eca-db67-11eb-bf92-631e03f93a7b';
 
@@ -459,14 +459,7 @@ ObjRep={};
 p0={latitude: 37.8148543,longitude: -121.2896501}
 remotetimer=0;
 timerset=0;
-//localstorage.removeItem("app")
-//AppBk=localStorage.getItem("app");
-//alert(AppBk);
 var progressTimer=undefined,timerset=0;
-//postDoc("https://jsonblob.com/api/jsonBlob/2cf859d7-eec6-11ea-b1f3-6f02c0e4fe61",{"nombre":"lauro","apeido":"jauregui"},function(t){alert("eto es diecto "+t)})
-//linkRep='https://jsonblob.com/api/e86e9eca-db67-11eb-bf92-631e03f93a7b';
-  
-  //  linkRep='https://jsonblob.com/api/85e6ddf8-d5ec-11eb-8853-fb31258c7b15'
      icomplacencias=undefined;
      emsg = document.getElementById("mmsg");
      enota = document.getElementById("complac");
@@ -477,8 +470,6 @@ var progressTimer=undefined,timerset=0;
         complacencias="";
         complacenciasonoff=true;
         complacenciaslink="";
-       // var arcs=[]
-     //   iniciargit();//elim
         csob="";
         cob={};
        inter1=undefined;
@@ -495,6 +486,13 @@ function getObj(l,callback) {
           });
  
 }
+function showpet(){
+    if(complac.style.display=="none"){complac.style.display="block"}
+    else{
+
+        complac.style.display="none";
+    }
+}
 
 getPet();
 chkpet=setInterval(getPet,15000);
@@ -508,14 +506,17 @@ function getPet(){
     } 
     
    if(r.peticiones.length>0){
-       
+       bcom.style.display="block";
+
        localStorage.setItem("peticiones",r.peticiones.toString());
-       complac.style.display="block";
+ //      complac.style.display="block";
       for(var i=0;i<r.peticiones.length;i++){
           complac.appendChild(crnota(r.peticiones[i]));
       }
    }
-   else complac.style.display="none";
+   else {
+	   complac.style.display="none";
+   bcom.style.display="none"}
 
     })
    
@@ -541,12 +542,9 @@ function crnota(ms) {
                 r.peticiones.splice(r.peticiones.indexOf(this.e.innerHTML), 1);
                UpdateJ(linkp,r,function(){getPet()});
                 });
-            
-         /*      */   }
-                else {this.e.style.opacity=.25; this.e.blur();}
-        
-        
-        }, 800)
+   }
+                else {this.e.style.opacity=.25; this.e.blur();}       
+        }, 10)
 
 
     },true)
@@ -562,54 +560,15 @@ function crnota(ms) {
 }
 
     function iniccomplacencias(ob){
-    /*    
-        icomplacencias=setInterval(function(){
-     
-            loadText(ob.link,function (r) { 
-                /////////////////
-                var q=r.indexOf("cancion");
-                var q1=r.indexOf('}',q+2);
-                qq='{"'+r.slice(q,q1+1) ;
-               alert(qq)
-              
-                var obs=qq.replace(/\\"/g, '"'); 
-                 alert(obs);
-  obq=JSON.parse(obs);
-                 var y=obq.cancion.replace(/\\n/g,"<br>");
-          
-                complacencias=y;
-                 alert("Y\n\n"+y)
-           if(y!=localStorage.getItem("complacencias")){
-               localStorage.setItem('complacencias',y);
-               enota.style.display="block";
-               enota.innerHTML=y;
-            enota.style.background="#00FF00";
-            
-           }
-       });
-       },ob.chkcomp*60*1000);
-      */ 
+   
 }
-
-
-
-
-
-
-
-
 
            nextRep=localStorage.getItem("NextRep");
         if(nextRep==null || nextRep =="") nextRep="";
-      //  alert(nextRep)
        marktocada=false;
-    
-  
    tiempodetocar=60*60*1000;  
  kt=60*1000;
  websong="";
-
-//localStorage.removeItem("Timer")
   var obtimer=function(){
      var date=new Date();				
      this.long=0;
@@ -637,11 +596,7 @@ function crnota(ms) {
      }
  }
  runningTimer=null;
- //verifyTimer();
-
-//    loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Canc.txt",function(r){alert(r)})
-    online=window.navigator.onLine;
- //   alert(online)
+   online=window.navigator.onLine;
     acordeon="",guitarra="";
 Element.prototype.appendBefore = function (element) {
     element.parentNode.insertBefore(this, element);
@@ -667,16 +622,12 @@ Element.prototype.appendAfter = function (element) {
       
       
   } 
-    
-    
-    
-    
+
   window.onerror = function(){
    return true;
 } 
 var arlinks=[];
 var txlinks="";
-//loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Canc.txt",function(r){
     if(online)loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/cc.txt",function(r){
 arlinks=r.split("\n");
 arlinks=arlinks.filter(function(ar){return ar !="" && ar !=undefined && ar.indexOf("*") < 0 });
@@ -704,11 +655,7 @@ inic2();
     
 var eac=document.getElementById("bpl");
 var egu=document.getElementById("bplg");
-
-
  var x = document.getElementById("myAudio"); 
-//x.setAttribute("src","https://docs.google.com/uc?export=open&id=1ERqTEKUU8JSLNgu-jULjAhhc-cdSuoJP");//https://static.wixstatic.com/mp3/4ee8f5_21f59bb654b34bb3b2f2dcf7bc933e2c.mp3
-//x.onloadstart= x.play(); ;
 function playAudio() { 
  
   x.play().catch(e => e);; 
@@ -718,37 +665,23 @@ function pauseAudio() {
   x.pause(); 
 
 } 
-//https://docs.google.com/uc?export=open&id=1ERqTEKUU8JSLNgu-jULjAhhc-cdSuoJP");//https://static.wixstatic.com/mp3/4ee8f5_21f59bb654b34bb3b2f2dcf7bc933e2c.mp3
-  
   function loadparam(){
     ;  
   }
  
- 
  var Tocada="";
 var horast=1;
-var timewarning, timeout, timeover,test=false;
- 
- 
+var timewarning, timeout, timeover,test=false; 
         var repstate = true;
         var total = []
         var btit = true;
         var Letras=""; 
-        var letrasLocal=localStorage.getItem("letras");
-   //    alert(letrasLocal);
-    
-        
+        var letrasLocal=localStorage.getItem("letras");       
         if(online) loadText("https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/Letras.txt",
          function(r) {
              Letras=r;
              localStorage.setItem("letras",r);
-                   //  alert(r)
-
-
-
-
-
-
+ 
              });
              else{
                 Letras=localStorage.getItem("Letras");
@@ -773,8 +706,6 @@ var timewarning, timeout, timeover,test=false;
         arindex = [];
         arsongs = [];
 
-         //    loadText('https://drive.google.com/open?id=1VU-tkhVUVDJke1m49YNcJiAfbnN_ZDYHEGxckW20KZM',function(r){alert(r.indexOf("libreta"))})
-         //////////////////////////////////////
   var clases=[];
 
  function proceso(ob){
@@ -1241,30 +1172,6 @@ function addCancion() {
       } else alert("Access denied, you have to be authorised to delete a song")
   }
 
-/*
-  preparar();
-  function preparar(){
-     var ks=localStorage.getItem("key")
-     if(ks===null){
-       var k=prompt("Type key or paste it..."); 
-       localStorage.setItem("key",k);
-       alert("It will be restarted...")
-       window.location.reload();
-     }
-     else{
-        eval(ks);
-        setTimeout(function(){
-            var pa=prompt("Type a password")
-            if(password!=pa) {
-                if(confirm("Do you want to reset App?")){localStorage.removeItem("key")}
-                preparar();
-            }
-        },300)
-     }
-    }
-     //
-     
-*/
  
     </script>
 
