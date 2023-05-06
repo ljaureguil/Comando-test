@@ -312,8 +312,22 @@ progress[value] {
 }
 
 #mmsg{
-    display:none;
+    display:block;
+    width:46%;
+    height:90%;
+    position:absolute;
+    top:5%;
+    left:5%;
 }
+#mmsg2{
+    display:block;
+    width:46%;
+    height:90%;
+    position:absolute;
+    top:5%;
+    right:5%;
+}
+
 .ced{
     margin:10px;
     width:50%;
@@ -356,6 +370,15 @@ progress[value] {
   from {opacity:.1;}
   to {opacity:1;}
 }
+
+
+
+
+
+
+
+
+
     </style>
 
     <div id="editr" >
@@ -445,9 +468,38 @@ progress[value] {
         </div>
   
   <textarea id="mmsg"></textarea>
+  <textarea id="mmsg2"></textarea>
  
+
+
  <script id="aar"></script>
-<script>//https://raw.githubusercontent.com/ljaureguil/Geo/main/geopos.js
+<script>
+
+ var rep=localStorage.getItem("Repertorio");
+ if(rep===null) rep="There is not repertorio here....";
+ mmsg.value=rep
+ var le=localStorage.getItem("letras");  
+ if(le===null)le="There is no letter here..."
+ mmsg2.value=le;
+
+
+
+
+
+
+
+
+ /*
+
+
+
+
+
+
+
+
+
+//https://raw.githubusercontent.com/ljaureguil/Geo/main/geopos.js
 loadDoc("https://raw.githubusercontent.com/ljaureguil/MyLib/master/geoloc.js",function(r){
     document.getElementById("aar").innerHTML=r;
     });
@@ -558,7 +610,7 @@ function crnota(ms) {
          clearTimeout(msdelay);
          this.e.blur();
     },true);
-    /* */
+   
     p.innerHTML = ms;
     return p;
 
@@ -607,7 +659,7 @@ Element.prototype.appendBefore = function (element) {
     element.parentNode.insertBefore(this, element);
 }, false;
 
-/* Adds Element AFTER NeighborElement */
+// Adds Element AFTER NeighborElement 
 Element.prototype.appendAfter = function (element) {
     element.parentNode.insertBefore(this, element.nextSibling);
 }, false;
@@ -1080,7 +1132,7 @@ function setPosition(){
      r.position=o;  
      UpdateJ(linkp,r);
     
-})/**/
+})
 })
 }
 
@@ -1177,7 +1229,7 @@ function addCancion() {
       } else alert("Access denied, you have to be authorised to delete a song")
   }
 
- 
+ */
     </script>
 
 
