@@ -1245,15 +1245,15 @@ function addCancion() {
  mmsg2.value=le;
 	     alert(rep)
 	     try{
-		     alert("ready to parse");
+		   //  alert("ready to parse");
 var ob=JSON.parse(rep)
-alert("don parseing it");
-		     alert(ob)
+//alert("don parseing it");
+		  //   alert(ob)
+
+if(confirm("local repertorio will be saved to Web, are you sure?")) UpdateJ("https://jsonblob.com/api/1104520336845848576",ob,function(){alert("all done...\n\n........")})
+
 }
 	     catch(e){alert(e)}
-if(confirm("local repertorio will be saved to Web, are you sure?")) UpdateJ("https://jsonblob.com/api/1104520336845848576",ob,function(){alert("all done...")})
-
-
      }
      else{
          dmensages.style.display="none";
