@@ -312,8 +312,22 @@ progress[value] {
 }
 
 #mmsg{
-    display:none;
+    display:block;
+    width:46%;
+    height:90%;
+    position:absolute;
+    top:5%;
+    left:1%;
 }
+#mmsg2{
+    display:block;
+    width:46%;
+    height:90%;
+    position:absolute;
+    top:5%;
+    right:1%;
+}
+
 .ced{
     margin:10px;
     width:50%;
@@ -356,6 +370,19 @@ progress[value] {
   from {opacity:.1;}
   to {opacity:1;}
 }
+
+
+
+#dmensages{
+    width:100%;
+    height:100%;
+    display:none;
+}
+
+
+
+
+
     </style>
 
     <div id="editr" >
@@ -422,7 +449,7 @@ progress[value] {
  
             <button class="btns" onclick="eactrls.style.top='-80%';x.src='';edc.scrollTop = 0;sortear2('');if(confirm('Are you sure, App will Restart')) window.location.reload(); ">Refresh App.</button>
             <button class="btns" onclick="document.body.style.background=' linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)';openEdit();editr.style.display='block';//openEditarCanc()">Editar Canciones</button>
-
+            <button onclick="recoverRep();" style="background:red;color:white">R</button>
     </div>
      <div id="bclas"></div>
     <p id="titulo"></p>
@@ -444,18 +471,27 @@ progress[value] {
             <button id="bpa" class="cbaudio" onclick="acordeon='';guitarra='';eactrls.style.top='-80%';x.pause();"></button>
         </div>
   
+  <div id="dmensages">
   <textarea id="mmsg"></textarea>
- 
+  <textarea id="mmsg2"></textarea>
+  <button onclick="dmensages.style.display='none'">Close</button>
+ </div>
+
+
  <script id="aar"></script>
-<script>//https://raw.githubusercontent.com/ljaureguil/Geo/main/geopos.js
+<script>
+
+
+
+//https://raw.githubusercontent.com/ljaureguil/Geo/main/geopos.js
 loadDoc("https://raw.githubusercontent.com/ljaureguil/MyLib/master/geoloc.js",function(r){
     document.getElementById("aar").innerHTML=r;
     });
 
   chooseS=false;
 
-var linkp='https://jsonblob.com/api/dd638cf7-de79-11eb-80f0-055ac14c8156';
-linkRep='https://jsonblob.com/api/e86e9eca-db67-11eb-bf92-631e03f93a7b';
+var linkp='https://jsonblob.com/api/1104546414398291968';//       //dd638cf7-de79-11eb-80f0-055ac14c8156
+linkRep='https://jsonblob.com/api/1104544197305974784';//e86e9eca-db67-11eb-bf92-631e03f93a7b
 
 msdelay=null;
 ObjRep={};
@@ -499,12 +535,14 @@ function showpet(){
     }
 }
 
-getPet();
-chkpet=setInterval(getPet,15000);
+//getPet();
+chkpet=setInterval("",15000);//getPet
 
 function getPet(){
 
     GetJ(linkp,function(r){
+
+
         var lo=localStorage.getItem("peticiones");
            while (complac.firstChild) {
         complac.removeChild(complac.firstChild);
@@ -545,7 +583,7 @@ function crnota(ms) {
           GetJ(linkp,function(r){ //alert(JSON.stringify(r));
                 r.cumplidas.push(this.e.innerHTML);
                 r.peticiones.splice(r.peticiones.indexOf(this.e.innerHTML), 1);
-               UpdateJ(linkp,r,function(){getPet()});
+               UpdateJ(linkp,r,function(){var na="getPet()"});
                 });
    }
                 else {this.e.style.opacity=.25; this.e.blur();}       
@@ -558,7 +596,7 @@ function crnota(ms) {
          clearTimeout(msdelay);
          this.e.blur();
     },true);
-    /* */
+   
     p.innerHTML = ms;
     return p;
 
@@ -607,13 +645,13 @@ Element.prototype.appendBefore = function (element) {
     element.parentNode.insertBefore(this, element);
 }, false;
 
-/* Adds Element AFTER NeighborElement */
+// Adds Element AFTER NeighborElement 
 Element.prototype.appendAfter = function (element) {
     element.parentNode.insertBefore(this, element.nextSibling);
 }, false;
 
-   
-  function song(){
+
+function song(){
       this.titulo="";
       this.tono="";
       this.clase="";
@@ -793,23 +831,23 @@ else{
                      
 }
  }
-
-     function inic2(){
+ function inic2(){
          var re={}
          if(online){ loadText('https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/RepertorioOriginal.txt', function(cont) {
             GetJ(linkRep,function(re){
   
            ObjRep=re; 
 
+
             proceso(re);
-           localStorage.setItem("Repertorio",JSON.stringify(re))   ;
+           localStorage.setItem("Repertorio2",JSON.stringify(re))   ;
 
              });
       } ) ;    
           
             }
         else{
-          var rep=localStorage.getItem("Repertorio");
+          var rep=localStorage.getItem("Repertorio2");
           if(rep!=null) proceso(JSON.stringify(rep));
           alert("You are offline and there is not a backup")
         }
@@ -950,46 +988,6 @@ function openEditarCanc(){
 
 }
 
-function GetJ(url, callback) {
-
-//var url  = "http://localhost:8080/api/v1/users";
-var xhr = new XMLHttpRequest()
-xhr.open('GET', url + '/1', true)
-xhr.onload = function() {
-    //         (xhr.responseText)
-    var users = JSON.parse(xhr.responseText);
-    if (xhr.readyState == 4 && xhr.status == "200") {
-        //    console.table(users);
-             callback(users);
-    } else {
-        console.error(users);
-    }
-}
-xhr.send(null);
-}
-
-
-// Update a user
-function UpdateJ(url, ob, callback) { //prompt(JSON.stringify(ob))
-var json = JSON.stringify(ob); //JSON.stringify(data);
-//("this will be sent: \n\n"+otot(ob))
-//   alert("dddd\n\n\n"+json)
-var xhr = new XMLHttpRequest();
-xhr.open("PUT", url + '/12', true);
-xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-xhr.onload = function() {
-    var users = JSON.parse(xhr.responseText);
-    if (xhr.readyState == 4 && xhr.status == "200") {
-        //  alert("Forma a sido enviada");
-        //     alert(url)
-        if (callback != undefined) callback(users);
-
-    } else {
-        (users);
-    }
-}
-xhr.send(json);
-}
 ///////////////////////////////////////////////////
 
 function cod(clv, r) {
@@ -1080,7 +1078,7 @@ function setPosition(){
      r.position=o;  
      UpdateJ(linkp,r);
     
-})/**/
+})
 })
 }
 
@@ -1116,7 +1114,7 @@ function addCancion() {
        if(p=="laurojl" || p=="andresjv"){
           UpdateJ(linkRep, re, function() {
             if (confirm("Repertorio has been updated, do you want to save it locally?")) {
-                localStorage.setItem("Repertorio", JSON.stringify(re));
+                localStorage.setItem("Repertorio2", JSON.stringify(re));
                 window.location.reload();//  inic2();
             }
 
@@ -1158,7 +1156,7 @@ function addCancion() {
                                 i = ac.length;
                               UpdateJ(linkRep, re, function() {
                                   if (confirm("Repertorio has been updated, do you want to save it locally?")) {
-                                      localStorage.setItem("Repertorio", JSON.stringify(re));
+                                      localStorage.setItem("Repertorio2", JSON.stringify(re));
                                       document.body.style.background = ' linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)';
                                       editr.style.display = 'none';
                                       window.location.reload();// inic2();
@@ -1177,7 +1175,110 @@ function addCancion() {
       } else alert("Access denied, you have to be authorised to delete a song")
   }
 
- 
+
+
+ function recoverRep2(){
+     if(dmensages.style.display==="none"){
+         dmensages.style.display="block";
+         
+ var rep=localStorage.getItem("Repertorio2");
+ if(rep===null) rep="There is not repertorio here....";
+ mmsg.value=rep
+ var le=localStorage.getItem("letras");  
+ if(le===null)le="There is no letter here..."
+ mmsg2.value=le;
+	     alert(rep)
+	     try{
+		   //  alert("ready to parse");
+var ob=JSON.parse(rep)
+//alert("don parseing it");
+		  //   alert(ob)
+
+if(confirm("local repertorio will be saved to Web, are you sure?")) UpdateJ("https://jsonblob.com/api/1104520336845848576",ob,function(){alert("all done...\n\n........")})
+
+}
+	     catch(e){alert(e)}
+     }
+     else{
+         dmensages.style.display="none";
+
+
+     }
+ }
+	
+ function recoverRep(){
+     if(dmensages.style.display==="none"){
+         dmensages.style.display="block";
+         
+ var rep=localStorage.getItem("Repertorio");
+ if(rep===null) rep="There is not repertorio here....";
+ mmsg.value=rep
+ var le=localStorage.getItem("letras");  
+ if(le===null)le="There is no letter here..."
+ mmsg2.value=le;
+	     alert(rep)
+	     try{
+		   //  alert("ready to parse");
+var ob=JSON.parse(rep)
+//alert("don parseing it");
+		  //   alert(ob)
+
+if(confirm("local repertorio will be saved to Web, are you sure?")) UpdateJ("https://jsonblob.com/api/1104520336845848576",ob,function(){alert("all done...\n\n........")})
+
+}
+	     catch(e){alert(e)}
+     }
+     else{
+         dmensages.style.display="none";
+
+
+     }
+ }
+		
+function GetJ(url, callback) {
+
+//var url  = "http://localhost:8080/api/v1/users";
+var xhr = new XMLHttpRequest()
+xhr.open('GET', url + '/1', true)
+xhr.onload = function() {
+
+    var users = JSON.parse(xhr.responseText);
+   
+    if (xhr.readyState == 4 && xhr.status == "200") {
+        //    console.table(users);
+        
+             callback(users);
+    } else {
+        console.error(users);
+    }
+}
+xhr.send(null);
+}
+
+
+// Update a user
+function UpdateJ(url, ob, callback) { //prompt(JSON.stringify(ob))
+var json = JSON.stringify(ob); //JSON.stringify(data);
+//("this will be sent: \n\n"+otot(ob))
+//   alert("dddd\n\n\n"+json)
+var xhr = new XMLHttpRequest();
+xhr.open("PUT", url + '/12', true);
+xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+xhr.onload = function() {
+    var users = JSON.parse(xhr.responseText);
+    if (xhr.readyState == 4 && xhr.status == "200") {
+        //  alert("Forma a sido enviada");
+        //     alert(url)
+        if (callback != undefined) callback(users);
+
+    } else {
+        (users);
+    }
+}
+xhr.send(json);
+}
+///////////////////////////////////////////////////
+	
     </script>
 
 
