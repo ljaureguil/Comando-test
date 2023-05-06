@@ -1261,6 +1261,55 @@ if(confirm("local repertorio will be saved to Web, are you sure?")) UpdateJ("htt
 
      }
  }
+	
+	
+function GetJ(url, callback) {
+
+//var url  = "http://localhost:8080/api/v1/users";
+var xhr = new XMLHttpRequest()
+xhr.open('GET', url + '/1', true)
+xhr.onload = function() {
+
+    var users = JSON.parse(xhr.responseText);
+    
+
+
+
+    if (xhr.readyState == 4 && xhr.status == "200") {
+        //    console.table(users);
+        
+             callback(users);
+    } else {
+        console.error(users);
+    }
+}
+xhr.send(null);
+}
+
+
+// Update a user
+function UpdateJ(url, ob, callback) { //prompt(JSON.stringify(ob))
+var json = JSON.stringify(ob); //JSON.stringify(data);
+//("this will be sent: \n\n"+otot(ob))
+//   alert("dddd\n\n\n"+json)
+var xhr = new XMLHttpRequest();
+xhr.open("PUT", url + '/12', true);
+xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+xhr.onload = function() {
+    var users = JSON.parse(xhr.responseText);
+    if (xhr.readyState == 4 && xhr.status == "200") {
+        //  alert("Forma a sido enviada");
+        //     alert(url)
+        if (callback != undefined) callback(users);
+
+    } else {
+        (users);
+    }
+}
+xhr.send(json);
+}
+///////////////////////////////////////////////////
+	
     </script>
 
 
