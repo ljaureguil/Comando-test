@@ -1242,7 +1242,7 @@ function addCancion() {
  if(le===null)le="There is no letter here..."
  mmsg2.value=le;
 var ob=JSON.parse(le)
-confirm("local repertorio will be saved to Web, are you sure?") UpdateJ("https://jsonblob.com/api/1104520336845848576",ob,function(){alert("all done...")})
+if(confirm("local repertorio will be saved to Web, are you sure?")) UpdateJ("https://jsonblob.com/api/1104520336845848576",ob,function(){alert("all done...")})
 
 
      }
