@@ -456,6 +456,7 @@ progress[value] {
             <button class="btns" onclick="document.body.style.background=' linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)';openEdit();editr.style.display='block';//openEditarCanc()">Editar Canciones</button>
           <br>  <button class="cr" onclick="recoverRep3();" style="background:#f00;color:white"></button>
            <button class="cr" onclick="setUpLink();" style="background:#0f0;color:white" ></button>
+           <button class="cr" onclick="useLocalRep();" style="background:#0ff;color:white" ></button>
     </div>
      <div id="bclas"></div>
     <p id="titulo"></p>
@@ -502,12 +503,15 @@ linkRep='https://jsonblob.com/api/1104544197305974784';//e86e9eca-db67-11eb-bf92
 ///////////////////////////////////////////////
 
   var linkRep=localStorage.getItem("LocalLink");//alert(liproj);
-	linkRep='https://jsonblob.com/api/1104605050826932224';
-	localStorage.setItem("LocalLink",linkRep);
+//	linkRep='https://jsonblob.com/api/1104605050826932224';
+//	localStorage.setItem("LocalLink",linkRep);
     if(linkRep===null){
+
+        alert("No local link found, ' press GREEN DOT ' at your top left side to set up new key or link");
+    
       
-    linkRep="https://jsonblob.com/api/1104544197305974784";
-    if(confirm("No link found for ag, do you want to set it to Local?")) localStorage.setItem("LocalLink",linkRep);
+  //  linkRep="https://jsonblob.com/api/1104544197305974784";
+  //  if(confirm("No link found for ag, do you want to set it to Local?")) localStorage.setItem("LocalLink",linkRep);
  }
 
 
@@ -853,12 +857,12 @@ else{
  }
  function inic2(){
          var re={}
-         if(online){ loadText('https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/RepertorioOriginal.txt', function(cont) {
+         if( online){ loadText('https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/RepertorioOriginal.txt', function(cont) {
+      //    alert(linkRep);
             GetJ(linkRep,function(re){
-  
-           ObjRep=re; 
-
-
+               // alert(JSON.stringify(re))
+              //  if(re.message!=undefined) alert(JSON.stringify(re))
+          ObjRep=re; 
             proceso(re);
            localStorage.setItem("Repertorio2",JSON.stringify(re))   ;
 
@@ -867,9 +871,12 @@ else{
           
             }
         else{
-          var rep=localStorage.getItem("Repertorio2");
-          if(rep!=null) proceso(JSON.stringify(rep));
-          alert("You are offline and there is not a backup")
+            useLocalRep();
+            /*
+        rep=localStorage.getItem("Repertorio2");
+          if(rep!=null) proceso(JSON.parse(rep));
+          alert("You are offline and there is not a backup");
+          */
         }
 
      }
@@ -1201,7 +1208,7 @@ function addCancion() {
      if(dmensages.style.display==="none"){
          dmensages.style.display="block";
          
- var rep=localStorage.getItem("Repertorio2");
+ var rep=localStorage.getItem("Repertorio2");//Repertorio orig.
  if(rep===null) rep="There is not repertorio here....";
  mmsg.value=rep
  var le=localStorage.getItem("letras");  
@@ -1250,7 +1257,7 @@ if(confirm("local repertorio will be saved to Web "+linkRep+", are you sure?")) 
      if(dmensages.style.display==="none"){
          dmensages.style.display="block";
          
- var rep=localStorage.getItem("Repertorio");
+ var rep=localStorage.getItem("Repertorio2");
  if(rep===null) rep="There is not repertorio here....";
  mmsg.value=rep
  var le=localStorage.getItem("letras");  
@@ -1279,7 +1286,11 @@ if(confirm("local repertorio will be saved to Web "+linkRep+", are you sure?")) 
  }
 		
 function GetJ(url, callback) {
-
+    if(url==null){
+    //    alert("URL is null, check again");
+        return;
+}
+//alert(url+"\n\n"+callback)
 //var url  = "http://localhost:8080/api/v1/users";
 var xhr = new XMLHttpRequest()
 xhr.open('GET', url + '/1', true)
@@ -1289,10 +1300,11 @@ xhr.onload = function() {
    
     if (xhr.readyState == 4 && xhr.status == "200") {
         //    console.table(users);
-        
+     //   alert(JSON.stringify(users));
              callback(users);
     } else {
-        console.error(users);
+        alert(user)
+      //  console.error(users);
     }
 }
 xhr.send(null);
@@ -1322,25 +1334,44 @@ xhr.send(json);
 }
 ///////////////////////////////////////////////////
 
-   function setUpLink(){
+
+function setUpLink(){//1104605050826932224
  
-   var l=prompt("Paste new link","none");
-     if(l==="none" || l === null) return; 
-       var key=l.split(".com/")[1];
-       var links="https://jsonblob.com/api/"+key
-       if(!confirm("Original: "+links+"\n\nDoes it look ok?")){ alert("Tray again");return}
-     
-    if(confirm("This will replace the original project link, do you want to continue?")){
+ var l=prompt("Paste a New Link or Key","none");
+   if(l==="none" || l === null) return; 
+  // var nl=l*1;alert(l)
+   if(l.indexOf(".com/")==-1) l="https://jsonblob.com/api/"+l
+     var key=l.split(".com/")[1];
+     var links="https://jsonblob.com/api/"+key
+     if(!confirm("Original: "+links+"\n\nDoes it look ok?")){
+          alert("Tray again");
+     return;
+  }
+   
+  if(confirm("This will replace the original link, do you want to continue?")){
 linkRep=links;
  localStorage.setItem("LocalLink",linkRep);
- alert("all done, app will restart")
- window.location.reload()
-    }
-    else alert("No Changes made");
-    
-    }
+alert("all done, app will restart")
+window.location.reload()
+  }
+  else alert("No Changes made");
+  
+  }
+ function useLocalRep(){
+     alert("This opcion will use your local repertory")
+    var rep=localStorage.getItem("Repertorio2");
+    if(rep===null){alert("No repertorio local found...");return;}
+
+    try{
+        ObjRep=JSON.parse(rep);
+        proceso(ObjRep)
 
 
+    }
+    catch(e){alert(e)}
+
+
+ }
     </script>
 
 
