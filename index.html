@@ -379,7 +379,12 @@ progress[value] {
     display:none;
 }
 
-
+.cr{
+    width:15px;
+    height:15px;
+    border-radius:100px;
+    border-style.solid;
+}
 
 
 
@@ -449,7 +454,8 @@ progress[value] {
  
             <button class="btns" onclick="eactrls.style.top='-80%';x.src='';edc.scrollTop = 0;sortear2('');if(confirm('Are you sure, App will Restart')) window.location.reload(); ">Refresh App.</button>
             <button class="btns" onclick="document.body.style.background=' linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)';openEdit();editr.style.display='block';//openEditarCanc()">Editar Canciones</button>
-            <button onclick="recoverRep();" style="background:red;color:white">R</button>
+          <br>  <button class="cr" onclick="recoverRep3();" style="background:#f00;color:white"></button>
+           <button class="cr" onclick="setUpLink();" style="background:#0f0;color:white" ></button>
     </div>
      <div id="bclas"></div>
     <p id="titulo"></p>
@@ -493,6 +499,18 @@ loadDoc("https://raw.githubusercontent.com/ljaureguil/MyLib/master/geoloc.js",fu
 var linkp='https://jsonblob.com/api/1104546414398291968';//       //dd638cf7-de79-11eb-80f0-055ac14c8156
 linkRep='https://jsonblob.com/api/1104544197305974784';//e86e9eca-db67-11eb-bf92-631e03f93a7b
 
+///////////////////////////////////////////////
+
+  var linkRep=localStorage.getItem("LocalLink");//alert(liproj)
+    if(linkRep===null){
+      
+    linkRep="https://jsonblob.com/api/1104544197305974784";
+    if(confirm("No link found for ag, do you want to set it to Local?")) localStorage.setItem("LocalLink",linkRep);
+ }
+
+
+
+/////////////////////////////////////////////
 msdelay=null;
 ObjRep={};
  var arn="a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,x,y,z,_,0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,x,y,z,_,0,1,2,3,4,5,6,7,8,9";
@@ -1193,7 +1211,8 @@ function addCancion() {
 var ob=JSON.parse(rep)
 //alert("don parseing it");
 		  //   alert(ob)
-
+          //ESTE LINK SOLO ES DE BACK UP PARA SER TRANSFERIDO A OTRO 
+          alert("Make sure nothis is in the backup repertorio web")
 if(confirm("local repertorio will be saved to Web, are you sure?")) UpdateJ("https://jsonblob.com/api/1104520336845848576",ob,function(){alert("all done...\n\n........")})
 
 }
@@ -1204,6 +1223,25 @@ if(confirm("local repertorio will be saved to Web, are you sure?")) UpdateJ("htt
 
 
      }
+ }
+ function recoverRep3(){
+    if(dmensages.style.display==="none"){
+         dmensages.style.display="block";
+     var rep=localStorage.getItem("Repertorio2");
+ if(rep===null){ rep="There is not repertorio here...."; return}
+ mmsg.value=rep;
+ 	     try{
+              alert(rep)
+var ob=JSON.parse(rep)
+		     
+alert("Before continue make sure this link "+linkRep+" is teh right one, because it will be rewrite it.")
+
+if(confirm("local repertorio will be saved to Web "+linkRep+", are you sure?")) UpdateJ(linkRep,ob,function(){alert("all done...\n\n........")})
+
+}
+	     catch(e){alert(e)}
+    }
+         else dmensages.style.display="none";
  }
 	
  function recoverRep(){
@@ -1220,11 +1258,13 @@ if(confirm("local repertorio will be saved to Web, are you sure?")) UpdateJ("htt
 	     try{
 		   //  alert("ready to parse");
 var ob=JSON.parse(rep)
-//alert("don parseing it");
-		  //   alert(ob)
+
 alert(rep);
 		     
-if(confirm("local repertorio will be saved to Web, are you sure?")) UpdateJ("https://jsonblob.com/api/1109204769125449728",ob,function(){alert("all done...\n\n........")})
+//if(confirm("local repertorio will be saved to Web, are you sure?")) UpdateJ("https://jsonblob.com/api/1109204769125449728",ob,function(){alert("all done...\n\n........")})
+alert("Before continue make sure this link "+linkRep+" is teh right one, because it will be rewrite it.")
+
+if(confirm("local repertorio will be saved to Web "+linkRep+", are you sure?")) UpdateJ(linkRep,ob,function(){alert("all done...\n\n........")})
 
 }
 	     catch(e){alert(e)}
@@ -1279,7 +1319,26 @@ xhr.onload = function() {
 xhr.send(json);
 }
 ///////////////////////////////////////////////////
-	
+
+   function setUpLink(){
+ 
+   var l=prompt("Paste new link","none");
+     if(l==="none" || l === null) return; 
+       var key=l.split(".com/")[1];
+       var links="https://jsonblob.com/api/"+key
+       if(!confirm("Original: "+links+"\n\nDoes it look ok?")){ alert("Tray again");return}
+     
+    if(confirm("This will replace the original project link, do you want to continue?")){
+linkRep=links;
+ localStorage.setItem("LocalLink",linkRep);
+ alert("all done, app will restart")
+ window.location.reload()
+    }
+    else alert("No Changes made");
+    
+    }
+
+
     </script>
 
 
