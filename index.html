@@ -313,8 +313,8 @@ progress[value] {
 
 #mmsg{
     display:block;
-    width:46%;
-    height:90%;
+    width:96%;
+    height:60%;
     position:absolute;
     top:5%;
     left:1%;
@@ -1234,6 +1234,7 @@ if(confirm("local repertorio will be saved to Web, are you sure?")) UpdateJ("htt
      }
  }
  function recoverRep3(){
+    if(confirm("This option will copy local repertory to Web, do you wanto to continue?")){
     if(dmensages.style.display==="none"){
          dmensages.style.display="block";
      var rep=localStorage.getItem("Repertorio2");
@@ -1245,15 +1246,17 @@ var ob=JSON.parse(rep)
 		     
 alert("Before continue make sure this link "+linkRep+" is teh right one, because it will be rewrite it.")
 
-if(confirm("local repertorio will be saved to Web "+linkRep+", are you sure?")) UpdateJ(linkRep,ob,function(){alert("all done...\n\n........")})
+if(confirm("local repertorio will be saved to Web "+linkRep+", are you sure?")) UpdateJ(linkRep,ob,function(){alert("all done...\n\n........");window.location.reload();})
 
 }
 	     catch(e){alert(e)}
     }
          else dmensages.style.display="none";
+    } 
  }
 	
  function recoverRep(){
+     if(confirm("This option will copy local repertory to Web, do you wanto to continue?")){
      if(dmensages.style.display==="none"){
          dmensages.style.display="block";
          
@@ -1271,9 +1274,9 @@ var ob=JSON.parse(rep)
 alert(rep);
 		     
 //if(confirm("local repertorio will be saved to Web, are you sure?")) UpdateJ("https://jsonblob.com/api/1109204769125449728",ob,function(){alert("all done...\n\n........")})
-alert("Before continue make sure this link "+linkRep+" is teh right one, because it will be rewrite it.")
+alert("Before continue make sure this link "+linkRep+" is the right one, because it will be rewrite it.")
 
-if(confirm("local repertorio will be saved to Web "+linkRep+", are you sure?")) UpdateJ(linkRep,ob,function(){alert("all done...\n\n........")})
+if(confirm("local repertorio will be saved to Web "+linkRep+", are you sure?")) UpdateJ(linkRep,ob,function(){alert("all done...\n\n........");window.location.reload();})
 
 }
 	     catch(e){alert(e)}
@@ -1282,6 +1285,7 @@ if(confirm("local repertorio will be saved to Web "+linkRep+", are you sure?")) 
          dmensages.style.display="none";
 
 
+     }
      }
  }
 		
@@ -1336,7 +1340,7 @@ xhr.send(json);
 
 
 function setUpLink(){//1104605050826932224
- 
+ if(confirm("This option is for set up new Link or Key, Do you want to continue?")){
  var l=prompt("Paste a New Link or Key","none");
    if(l==="none" || l === null) return; 
   // var nl=l*1;alert(l)
@@ -1355,10 +1359,10 @@ alert("all done, app will restart")
 window.location.reload()
   }
   else alert("No Changes made");
-  
+  }
   }
  function useLocalRep(){
-     alert("This opcion will use your local repertory")
+     if(confirm("This opcion will use your local repertory")){
     var rep=localStorage.getItem("Repertorio2");
     if(rep===null){alert("No repertorio local found...");return;}
 
@@ -1370,7 +1374,7 @@ window.location.reload()
     }
     catch(e){alert(e)}
 
-
+     }
  }
     </script>
 
