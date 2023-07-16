@@ -501,12 +501,16 @@ var linkp='https://jsonblob.com/api/1104546414398291968';//       //dd638cf7-de7
 linkRep='https://jsonblob.com/api/1104544197305974784';//e86e9eca-db67-11eb-bf92-631e03f93a7b
 
 ///////////////////////////////////////////////
+GetJ("https://jsonblob.com/api/1104520336845848576",function(ob){
 
+
+})
   var linkRep=localStorage.getItem("LocalLink");//alert(liproj);
 //	linkRep='https://jsonblob.com/api/1104605050826932224';
 //	localStorage.setItem("LocalLink",linkRep);
     if(linkRep===null){
-
+        localStorage.setItem("LocalLink","https://jsonblob.com/api/1104520336845848576");
+        linkRep="https://jsonblob.com/api/1104520336845848576"
         alert("No local link found, ' press GREEN DOT ' at your top left side to set up new key or link");
     
       
@@ -631,6 +635,8 @@ function crnota(ms) {
 }
 
            nextRep=localStorage.getItem("NextRep");
+
+         //  alert(nexRep)
         if(nextRep==null || nextRep =="") nextRep="";
        marktocada=false;
    tiempodetocar=60*60*1000;  
@@ -863,6 +869,7 @@ else{
                // alert(JSON.stringify(re))
               //  if(re.message!=undefined) alert(JSON.stringify(re))
           ObjRep=re; 
+          alert(JSON.stringify(re))
             proceso(re);
            localStorage.setItem("Repertorio2",JSON.stringify(re))   ;
 
@@ -1376,6 +1383,22 @@ window.location.reload()
 
      }
  }
+
+ function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+}
+
+
+
     </script>
 
 
