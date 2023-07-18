@@ -379,14 +379,6 @@ progress[value] {
     display:none;
 }
 
-.cr{
-    width:15px;
-    height:15px;
-    border-radius:100px;
-    border-style.solid;
-}
-
-
 
     </style>
 
@@ -452,11 +444,20 @@ progress[value] {
 
     <div id="ctrls">
  
-            <button class="btns" onclick="eactrls.style.top='-80%';x.src='';edc.scrollTop = 0;sortear2('');if(confirm('Are you sure, App will Restart')) window.location.reload(); ">Refresh App.</button>
+         <select id=opcs class=btns oninput="doOps(this.value)">
+            <option>Choose an Option</option>
+            <option>Use Local Repertory</option>
+            <option>Use default Repertory</option>
+            <option>Use Web Repertory</option>
+            <option>Set Up new link</option> 
+             <option>Recover Rep Local to Web</option>                                                  
+            <option>Restart App</option>
+        </select>
+        
+        
+        
             <button class="btns" onclick="document.body.style.background=' linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)';openEdit();editr.style.display='block';//openEditarCanc()">Editar Canciones</button>
-          <br>  <button class="cr" onclick="recoverRep3();" style="background:#f00;color:white"></button>
-           <button class="cr" onclick="setUpLink();" style="background:#0f0;color:white" ></button>
-           <button class="cr" onclick="useLocalRep();" style="background:#0ff;color:white" ></button>
+ 
     </div>
      <div id="bclas"></div>
     <p id="titulo"></p>
@@ -498,24 +499,21 @@ loadDoc("https://raw.githubusercontent.com/ljaureguil/MyLib/master/geoloc.js",fu
   chooseS=false;
 
 var linkp='https://jsonblob.com/api/1104546414398291968';//       //dd638cf7-de79-11eb-80f0-055ac14c8156
-linkRep='https://jsonblob.com/api/1104544197305974784';//e86e9eca-db67-11eb-bf92-631e03f93a7b
 
-///////////////////////////////////////////////
+///////////////////////////////////////////////https://jsonblob.com/api/1104520336845848576
 GetJ("https://jsonblob.com/api/1104520336845848576",function(ob){
-
+    if(ob.message=="Blob does not exist")
+alert("For now default repertory will be used.\n\n\nRepertory in web doesn't exist, you need to set up a new link and send local rep to web.\n\n"+JSON.stringify(ob))
 
 })
   var linkRep=localStorage.getItem("LocalLink");//alert(liproj);
-//	linkRep='https://jsonblob.com/api/1104605050826932224';
+
 //	localStorage.setItem("LocalLink",linkRep);
     if(linkRep===null){
         localStorage.setItem("LocalLink","https://jsonblob.com/api/1104520336845848576");
         linkRep="https://jsonblob.com/api/1104520336845848576"
         alert("No local link found, ' press GREEN DOT ' at your top left side to set up new key or link");
-    
-      
-  //  linkRep="https://jsonblob.com/api/1104544197305974784";
-  //  if(confirm("No link found for ag, do you want to set it to Local?")) localStorage.setItem("LocalLink",linkRep);
+   
  }
 
 
@@ -863,30 +861,18 @@ else{
  }
  function inic2(){
          var re={}
-         if( online){ loadText('https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/RepertorioOriginal.txt', function(cont) {
-      //    alert(linkRep);
-            GetJ(linkRep,function(re){
-               // alert(JSON.stringify(re))
-              //  if(re.message!=undefined) alert(JSON.stringify(re))
-          ObjRep=re; 
-     //     alert(JSON.stringify(re))
-            proceso(re);
-           localStorage.setItem("Repertorio2",JSON.stringify(re))   ;
+ //        if( online){ loadText('https://raw.githubusercontent.com/ljaureguil/Comando-Unico/master/RepertorioOriginal.txt', function(cont) {
+            if( online){ loadText('https://raw.githubusercontent.com/ljaureguil/Comando-test/master/Repertorio.txt', function(cont) {
+ 
+            GetJ(linkRep,function(re){ ObjRep=re; proceso(re);
+           localStorage.setItem("Repertorio2",JSON.stringify(re));
 
              });
       } ) ;    
           
             }
-        else{
-            useLocalRep();
-            /*
-        rep=localStorage.getItem("Repertorio2");
-          if(rep!=null) proceso(JSON.parse(rep));
-          alert("You are offline and there is not a backup");
-          */
-        }
-
-     }
+        else useLocalRep();
+   }
 
     function gtcls(arc){
     var obs={main:"",subs:[]};
@@ -1241,17 +1227,19 @@ if(confirm("local repertorio will be saved to Web, are you sure?")) UpdateJ("htt
      }
  }
  function recoverRep3(){
-    if(confirm("This option will copy local repertory to Web, do you wanto to continue?")){
-    if(dmensages.style.display==="none"){
-         dmensages.style.display="block";
-     var rep=localStorage.getItem("Repertorio2");
+    var ps=prompt("type password");
+    if(ps==="Lauro"){ 
+       dmensages.style.display="block";
+       var rep=localStorage.getItem("Repertorio2");
  if(rep===null){ rep="There is not repertorio here...."; return}
+    if(confirm("This option will copy local repertory to Web, do you wanto to continue?")){
+  
  mmsg.value=rep;
  	     try{
               alert(rep)
 var ob=JSON.parse(rep)
 		     
-alert("Before continue make sure this link "+linkRep+" is teh right one, because it will be rewrite it.")
+alert("Before continue make sure this link "+linkRep+" is the right one, because it will be rewrite it.")
 
 if(confirm("local repertorio will be saved to Web "+linkRep+", are you sure?")) UpdateJ(linkRep,ob,function(){alert("all done...\n\n........");window.location.reload();})
 
@@ -1260,7 +1248,9 @@ if(confirm("local repertorio will be saved to Web "+linkRep+", are you sure?")) 
     }
          else dmensages.style.display="none";
     } 
- }
+}
+
+ 
 	
  function recoverRep(){
      if(confirm("This option will copy local repertory to Web, do you wanto to continue?")){
@@ -1308,7 +1298,7 @@ xhr.open('GET', url + '/1', true)
 xhr.onload = function() {
 
     var users = JSON.parse(xhr.responseText);
-   
+   if(xhr.status == "404") callback(users)
     if (xhr.readyState == 4 && xhr.status == "200") {
         //    console.table(users);
      //   alert(JSON.stringify(users));
@@ -1381,7 +1371,7 @@ window.location.reload()
     }
     catch(e){alert(e)}
 
-     }
+    }
  }
 
  function download(filename, text) {
@@ -1396,7 +1386,33 @@ window.location.reload()
 
     document.body.removeChild(element);
 }
+//////////////////////////////////////////////////////////////
 
+function doOps(op){
+     if(op==="Use Local Repertory"){useLocalRep();}
+
+       if(op==="Show Local Rep JSON"){
+        
+       }
+       if(op==="Show Web Rep JSON"){
+
+}
+
+
+    if(op==="Recover Rep Local to Web"){recoverRep3()}
+ /*   if(op==="Use Web Repertory"){useLocalRep();}
+   if(op==="Set Up new link"){setUpLink();}
+   if(op===""){}
+   if(op===""){}
+   */
+   if(op==="Restart App"){
+    //   eactrls.style.top='-80%';x.src='';
+    //   edc.scrollTop = 0;sortear2('');
+       if(confirm('Are you sure, App will Restart')) window.location.reload();
+     }
+
+
+}
 
 
     </script>
